@@ -18,14 +18,29 @@ import Suite
 	public var user: SpotDocument<SpotUser>?
 	public var fbUser: User?
 	public var userDefaults = UserDefaults.standard
+	public var currentUserID: String? { fbUser?.uid }
+	
+	var rawUserJSON: [String: Any] = [:]
 	
 	let userDefaultsKey = "firespotter_stored_user"
 	
 	init() {
 		fbUser = Auth.auth().currentUser
-		if let data = userDefaults.data(forKey: userDefaultsKey), let user = try? SpotUser.loadJSON(data: data) {
-			self.user = SpotDocument(user, collection: FirestoreManager.instance.users)
+		if let data = userDefaults.data(forKey: userDefaultsKey), let json = try? JSONSerialization.jsonObject(with: data) as? JSONDictionary, let user = try? SpotUser.loadJSON(data: data) {
+			self.user = SpotDocument(user, collection: FirestoreManager.instance.users, json: json)
 		}
+	}
+	
+	public subscript(key: String) -> Any? {
+		get { user?[key] }
+		set {
+			user?[key] = newValue
+			saveUserDefaults()
+		}
+	}
+	
+	func saveUserDefaults() {
+		try? userDefaults.set(self.user?.jsonPayload.jsonData, forKey: userDefaultsKey)
 	}
 	
 	public var isSignedIn: Bool {
@@ -37,14 +52,6 @@ import Suite
 		}
 	}
 	
-	func createUser() async {
-		guard let fb = fbUser else { return }
-		let user = SpotUser(id: fb.uid)
-		
-		self.user = try? await FirestoreManager.instance.users.save(user)
-		try? userDefaults.set(self.user?.subject.asJSONData(), forKey: userDefaultsKey)
-	}
-	
 	public func signOut() async {
 		user = nil
 		fbUser = nil
@@ -52,10 +59,12 @@ import Suite
 		objectWillChange.send()
 	}
 	
-	func store(user: User, completion: @escaping () -> Void) {
-		self.fbUser = user
+	func store(user fbUser: User, completion: @escaping () -> Void) {
+		self.fbUser = fbUser
 		Task {
-			await self.createUser()
+			self.user = await FirestoreManager.instance.users[fbUser.uid]
+			saveUserDefaults()
+
 			self.objectWillChange.send()
 			completion()
 		}

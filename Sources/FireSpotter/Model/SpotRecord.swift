@@ -8,7 +8,8 @@
 import Foundation
 
 public protocol SpotRecord: Codable, Identifiable, Equatable {
+	var id: String { get set }
 	static var minimalRecord: Self { get }
 
-	static func newRecord() -> Self
+	@MainActor static func newRecord() -> Self
 }

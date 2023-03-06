@@ -25,7 +25,7 @@ public struct SpotMeta: SpotRecord {
 	
 	public static var minimalRecord = SpotMeta(id: "")
 
-	public static func newRecord() -> Self { fatalError("SpotMeta.newRecord() should never be called") }
+	@MainActor public static func newRecord() -> Self { fatalError("SpotMeta.newRecord() should never be called") }
 }
 
 extension SpotDocument where Subject == SpotMeta {

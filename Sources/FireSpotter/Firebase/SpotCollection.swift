@@ -12,6 +12,8 @@ import FirebaseFirestoreSwift
 public class SpotCollection<Element: SpotRecord>: ObservableObject where Element.ID == String {
 	public let base: CollectionReference
 	
+	var cache: [String: SpotDocument<Element>] = [:]
+	
 	init(_ collection: CollectionReference, kind: Element.Type) {
 		base = collection
 	}
@@ -23,16 +25,21 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		return SpotDocument(element, collection: self)
 	}
 	
-	@discardableResult func save(_ element: Element) async throws -> SpotDocument<Element> {
-		guard let raw = try? await base.document(element.id).getDocument(as: Element.self) else {
-			return try append(element)
+	@discardableResult func save(_ element: Element, json: [String: Any]? = nil) async throws -> SpotDocument<Element> {
+		if let cached = cache[element.id] {
+			cached.subject = element
+			try await save(cached)
+			return cached
 		}
 		
-		if raw != element {
-			try base.document(element.id).setData(from: element)
-		}
-		
-		return SpotDocument(element, collection: self)
+		let doc = SpotDocument(element, collection: self)
+		cache[element.id] = doc
+		try await save(doc)
+		return doc
+	}
+	
+	func save(_ doc: SpotDocument<Element>) async throws {
+		try await base.document(doc.id).setData(doc.jsonPayload)
 	}
 	
 	public var isEmpty: Bool {
@@ -41,16 +48,20 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		}
 	}
 	
-	public func new() -> SpotDocument<Element> {
-		.init(Element.newRecord(), collection: self)
+	@MainActor public func new() -> SpotDocument<Element> {
+		let new = SpotDocument(Element.newRecord(), collection: self)
+		cache[new.id] = new
+		return new
 	}
 
 
 	subscript(id: String, default: Element) -> SpotDocument<Element> {
 		get async {
 			if let current = await self[id] { return current }
-			
-			return SpotDocument(`default`, collection: self)
+			let new = SpotDocument(`default`, collection: self)
+			new.id = id
+			cache[id] = new
+			return new
 		}
 	}
 	
@@ -64,7 +75,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 				}
 				let doc = try Element.loadJSON(dictionary: json)
 
-				return SpotDocument(doc, collection: self)
+				return SpotDocument(doc, collection: self, json: json)
 			} catch {
 				print("Failed to get document: \(error)")
 				return nil
