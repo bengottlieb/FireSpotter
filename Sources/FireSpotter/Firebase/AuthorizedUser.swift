@@ -26,9 +26,21 @@ import Suite
 	
 	init() {
 		fbUser = Auth.auth().currentUser
-		if let data = userDefaults.data(forKey: userDefaultsKey), let json = try? JSONSerialization.jsonObject(with: data) as? JSONDictionary, let user = try? SpotUser.loadJSON(data: data) {
-			self.user = SpotDocument(user, collection: FirestoreManager.instance.users, json: json)
+		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, let user = try? SpotUser.loadJSON(dictionary: json) {
+			let newUser = FirestoreManager.instance.users.document(from: user, json: json)
+			self.user = newUser
+			Task { @MainActor in
+				if await newUser.update() {
+					saveUserDefaults()
+					objectWillChange.send()
+				}
+			}
 		}
+	}
+	
+	public func save() {
+		user?.save()
+		saveUserDefaults()
 	}
 	
 	public subscript(key: String) -> Any? {
@@ -41,6 +53,7 @@ import Suite
 	
 	func saveUserDefaults() {
 		try? userDefaults.set(self.user?.jsonPayload.jsonData, forKey: userDefaultsKey)
+		userDefaults.synchronize()
 	}
 	
 	public var isSignedIn: Bool {

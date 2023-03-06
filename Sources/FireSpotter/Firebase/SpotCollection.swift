@@ -38,6 +38,18 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		return doc
 	}
 	
+	public func document(from element: Element, json: JSONDictionary) -> SpotDocument<Element> {
+		if let cached = cache[element.id] {
+			cached.subject = element
+			cached.json = json
+			return cached
+		}
+		
+		let new = SpotDocument(element, collection: self, json: json)
+		cache[element.id] = new
+		return new
+	}
+	
 	func save(_ doc: SpotDocument<Element>) async throws {
 		try await base.document(doc.id).setData(doc.jsonPayload)
 	}

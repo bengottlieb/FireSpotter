@@ -29,6 +29,21 @@ public class SpotDocument<Subject: SpotRecord>: ObservableObject where Subject.I
 		set { json[key] = newValue }
 	}
 	
+	@MainActor public func update() async -> Bool {
+		do {
+			guard let raw = try await collection.base.document(id).getDocument().data() else { return false }
+			
+			if !raw.isEqual(to: json) {
+				subject = try Subject.loadJSON(dictionary: raw)
+				json = raw
+				return true
+			}
+		} catch {
+			print("Failed to update \(self): \(error)")
+		}
+		return false
+	}
+	
 	var jsonPayload: [String: Any] {
 		var base = json
 		let raw = (try? subject.asJSON()) ?? [:]
