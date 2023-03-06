@@ -11,10 +11,10 @@ import FirebaseFirestoreSwift
 import Journalist
 
 public class SpotDocument<Subject: SpotRecord>: ObservableObject where Subject.ID == String {
-	@Published var subject: Subject
+	@Published public var subject: Subject
 	let collection: SpotCollection<Subject>
 	
-	init(_ subject: Subject, collection: SpotCollection<Subject>) {
+	public init(_ subject: Subject, collection: SpotCollection<Subject>) {
 		self.subject = subject
 		self.collection = collection
 	}

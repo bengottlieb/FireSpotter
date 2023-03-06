@@ -40,6 +40,11 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 			try await base.limit(to: 1).count.query.getDocuments().count == 0
 		}
 	}
+	
+	public func new() -> SpotDocument<Element> {
+		.init(Element.newRecord(), collection: self)
+	}
+
 
 	subscript(id: String, default: Element) -> SpotDocument<Element> {
 		get async {

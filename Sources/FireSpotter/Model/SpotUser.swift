@@ -15,4 +15,5 @@ public struct SpotUser: SpotRecord {
 	
 	
 	public static var minimalRecord = SpotUser(id: "")
+	public static func newRecord() -> Self { fatalError("SpotUser.newRecord() should never be called") }
 }

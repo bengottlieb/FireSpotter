@@ -9,4 +9,6 @@ import Foundation
 
 public protocol SpotRecord: Codable, Identifiable, Equatable {
 	static var minimalRecord: Self { get }
+
+	static func newRecord() -> Self
 }
