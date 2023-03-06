@@ -1,6 +1,5 @@
 //
 //  FirebaseCollectionKind.swift
-//  PGRGuide
 //
 //  Created by Ben Gottlieb on 3/5/23.
 //
