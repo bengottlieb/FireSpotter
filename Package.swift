@@ -26,15 +26,17 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/bengottlieb/suite", from: "1.0.79"),
+		.package(url: "https://github.com/bengottlieb/journalist", from: "1.0.5"),
 	],
 	targets: [
 		// Targets are the basic building blocks of a package. A target can define a module or a test suite.
 		// Targets can depend on other targets in this package, and on products in packages which this package depends on.
 		.target(name: "FireSpotter", dependencies: [
 			.product(name: "Suite", package: "Suite"),
+			.product(name: "Journalist", package: "Journalist"),
 		], resources: [
-			.copy("info.plist"),
-			.copy("roots.pem"),
+			.copy("Resources/info.plist"),
+			.copy("Resources/roots.pem"),
 		]),
 		.binaryTarget(name: "FBLPromises", path: "Frameworks/FirebaseAnalytics/FBLPromises.xcframework"),
 		.binaryTarget(name: "FirebaseAnalytics", path: "Frameworks/FirebaseAnalytics/FirebaseAnalytics.xcframework"),

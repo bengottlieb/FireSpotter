@@ -9,7 +9,7 @@ import Suite
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-public class SpotCollection<Element: FirebaseCollectionElement>: ObservableObject where Element.ID == String {
+public class SpotCollection<Element: SpotRecord>: ObservableObject where Element.ID == String {
 	public let base: CollectionReference
 	
 	init(_ collection: CollectionReference, kind: Element.Type) {
@@ -35,13 +35,28 @@ public class SpotCollection<Element: FirebaseCollectionElement>: ObservableObjec
 		return SpotDocument(element, collection: self)
 	}
 	
+	public var isEmpty: Bool {
+		get async throws {
+			try await base.limit(to: 1).count.query.getDocuments().count == 0
+		}
+	}
+
+	subscript(id: String, default: Element) -> SpotDocument<Element> {
+		get async {
+			if let current = await self[id] { return current }
+			
+			return SpotDocument(`default`, collection: self)
+		}
+	}
 	
 	subscript(id: String) -> SpotDocument<Element>? {
 		get async {
 			do {
 				let raw = try await base.document(id).getDocument()
 				
-				guard let json = raw.data() else { return nil }
+				guard let json = raw.data() else {
+					return nil
+				}
 				let doc = try Element.loadJSON(dictionary: json)
 
 				return SpotDocument(doc, collection: self)

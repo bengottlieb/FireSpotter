@@ -7,9 +7,12 @@
 
 import Foundation
 
-public struct SpotUser: Codable, Identifiable, Equatable {
+public struct SpotUser: SpotRecord {
 	public var id: String = UUID().uuidString
 	public var firstName: String?
 	public var lastName: String?
 	public var emailAddress: String?
+	
+	
+	public static var minimalRecord = SpotUser(id: "")
 }

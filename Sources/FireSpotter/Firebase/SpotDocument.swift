@@ -10,7 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Journalist
 
-public class SpotDocument<Subject: FirebaseCollectionElement>: ObservableObject where Subject.ID == String {
+public class SpotDocument<Subject: SpotRecord>: ObservableObject where Subject.ID == String {
 	@Published var subject: Subject
 	let collection: SpotCollection<Subject>
 	
