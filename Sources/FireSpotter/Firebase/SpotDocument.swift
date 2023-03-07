@@ -11,10 +11,10 @@ import FirebaseFirestoreSwift
 import Journalist
 import Suite
 
-public class SpotDocument<Subject: SpotRecord>: ObservableObject where Subject.ID == String {
+public class SpotDocument<Subject: SpotRecord>: ObservableObject, Identifiable where Subject.ID == String {
 	@Published public var subject: Subject
 	@Published public var json: [String: Any]
-	var id: String {
+	public var id: String {
 		get { subject.id }
 		set {
 			subject.id = newValue
@@ -27,6 +27,12 @@ public class SpotDocument<Subject: SpotRecord>: ObservableObject where Subject.I
 	public subscript(key: String) -> Any? {
 		get { json[key] }
 		set { json[key] = newValue }
+	}
+	
+	func merge(_ newJSON: JSONDictionary) {
+		json.merge(newJSON) { value1, value2 in
+			value2
+		}
 	}
 	
 	@MainActor public func update() async -> Bool {

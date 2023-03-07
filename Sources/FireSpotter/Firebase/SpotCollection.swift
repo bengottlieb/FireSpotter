@@ -61,11 +61,22 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	}
 	
 	@MainActor public func new() -> SpotDocument<Element> {
-		let new = SpotDocument(Element.newRecord(), collection: self)
+		try! document(from: Element.newRecord().asJSON())
+	}
+
+	func document(from json: JSONDictionary) throws -> SpotDocument<Element> {
+		let element = try Element.loadJSON(dictionary: json)
+		
+		if let cached = cache[element.id] {
+			cached.subject = element
+			cached.merge(json)
+			return cached
+		}
+		
+		let new = SpotDocument(element, collection: self, json: json)
 		cache[new.id] = new
 		return new
 	}
-
 
 	subscript(id: String, default: Element) -> SpotDocument<Element> {
 		get async {
@@ -81,13 +92,8 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		get async {
 			do {
 				let raw = try await base.document(id).getDocument()
-				
-				guard let json = raw.data() else {
-					return nil
-				}
-				let doc = try Element.loadJSON(dictionary: json)
-
-				return SpotDocument(doc, collection: self, json: json)
+				guard let data = raw.data() else { return nil }
+				return try document(from: data)
 			} catch {
 				print("Failed to get document: \(error)")
 				return nil
