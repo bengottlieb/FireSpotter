@@ -65,12 +65,16 @@ import Suite
 	}
 	
 	public var isSignedIn: Bool {
-		get { fbUser != nil }
+		get { !user.id.isEmpty }
 		set {
 			if isSignedIn, !newValue {
 				Task { await signOut() }
 			}
 		}
+	}
+	
+	public static var sample: AuthorizedUser {
+		AuthorizedUser()
 	}
 	
 	public func signOut() async {

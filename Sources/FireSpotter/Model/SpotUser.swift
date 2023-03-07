@@ -15,7 +15,7 @@ public struct SpotUser: SpotRecord {
 	
 	
 	public static var minimalRecord = SpotUser(id: "")
-	public static var emptyUser = SpotDocument(SpotUser.minimalRecord, collection: FirestoreManager.instance.users)
+	public static var emptyUser = SpotDocument(SpotUser(id: ""), collection: FirestoreManager.instance.users)
 	
 	@MainActor public static func newRecord() -> Self { fatalError("SpotUser.newRecord() should never be called") }
 }
