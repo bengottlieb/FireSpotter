@@ -15,7 +15,10 @@ import Suite
 	
 	enum AuthorizationError: Error { case unknown, noIdentityToken, badIdentityToken }
 	
-	public var user: SpotDocument<SpotUser>?
+	public var user: SpotDocument<SpotUser> = SpotUser.emptyUser { didSet {
+		setupUserCancellable()
+	}}
+	private var userCancellable: AnyCancellable?
 	public var fbUser: User?
 	public var userDefaults = UserDefaults.standard
 	public var currentUserID: String? { fbUser?.uid }
@@ -34,30 +37,35 @@ import Suite
 					saveUserDefaults()
 					objectWillChange.send()
 				}
+				self.setupUserCancellable()
 			}
 		}
 	}
 	
+	func setupUserCancellable() { userCancellable = user.objectWillChange.sink {
+		self.objectWillChange.send()
+	}}
+	
 	public func save() {
-		user?.save()
+		user.save()
 		saveUserDefaults()
 	}
 	
 	public subscript(key: String) -> Any? {
-		get { user?[key] }
+		get { user[key] }
 		set {
-			user?[key] = newValue
+			user[key] = newValue
 			saveUserDefaults()
 		}
 	}
 	
 	func saveUserDefaults() {
-		try? userDefaults.set(self.user?.jsonPayload.jsonData, forKey: userDefaultsKey)
+		try? userDefaults.set(self.user.jsonPayload.jsonData, forKey: userDefaultsKey)
 		userDefaults.synchronize()
 	}
 	
 	public var isSignedIn: Bool {
-		get { user != nil }
+		get { fbUser != nil }
 		set {
 			if isSignedIn, !newValue {
 				Task { await signOut() }
@@ -66,7 +74,7 @@ import Suite
 	}
 	
 	public func signOut() async {
-		user = nil
+		user = SpotUser.emptyUser
 		fbUser = nil
 		userDefaults.removeObject(forKey: userDefaultsKey)
 		objectWillChange.send()
@@ -75,7 +83,7 @@ import Suite
 	func store(user fbUser: User, completion: @escaping () -> Void) {
 		self.fbUser = fbUser
 		Task {
-			self.user = await FirestoreManager.instance.users[fbUser.uid]
+			self.user = await FirestoreManager.instance.users[fbUser.uid] ?? SpotUser.emptyUser
 			saveUserDefaults()
 
 			self.objectWillChange.send()
@@ -94,10 +102,10 @@ import Suite
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.user?.subject.firstName = cred?.fullName?.givenName
-						self.user?.subject.lastName = cred?.fullName?.familyName
-						self.user?.subject.emailAddress = cred?.email
-						self.user?.save()
+						self.user.subject.firstName = cred?.fullName?.givenName
+						self.user.subject.lastName = cred?.fullName?.familyName
+						self.user.subject.emailAddress = cred?.email
+						self.user.save()
 						continuation.resume()
 					}
 				} else {
@@ -115,8 +123,8 @@ import Suite
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.user?.subject.emailAddress = email
-						self.user?.save()
+						self.user.subject.emailAddress = email
+						self.user.save()
 						continuation.resume()
 					}
 				} else {
@@ -134,8 +142,8 @@ import Suite
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.user?.subject.emailAddress = email
-						self.user?.save()
+						self.user.subject.emailAddress = email
+						self.user.save()
 						continuation.resume()
 					}
 				} else {
