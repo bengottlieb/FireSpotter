@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SpotUser: SpotRecord {
-	public var id: String = UUID().uuidString
+	public var id = String.id(for: SpotUser.self)
 	public var firstName: String?
 	public var lastName: String?
 	public var emailAddress: String?

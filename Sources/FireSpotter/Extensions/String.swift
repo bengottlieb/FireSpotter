@@ -8,6 +8,15 @@
 import Suite
 
 extension String {
+	public static func id(prefix: String) -> String {
+		let id = UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased()
+		return prefix + "-" + id
+	}
+		
+	public static func id(for record: any SpotRecord.Type) -> String {
+		.id(prefix: String(describing: record))
+	}
+	
 	static func randomNonce(length: Int = 32) -> String {
 		precondition(length > 0)
 		let charset: [Character] = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")

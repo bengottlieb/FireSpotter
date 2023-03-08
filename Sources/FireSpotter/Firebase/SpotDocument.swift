@@ -28,7 +28,7 @@ public class SpotDocument<Subject: SpotRecord>: ObservableObject, Identifiable w
 	public func childCollection<Element: SpotRecord>(at name: String, of elem: Element.Type) -> SpotCollection<Element> {
 		FirestoreManager.instance.collection(at: path + "/" + name, of: elem)
 	}
-
+	
 	public subscript(key: String) -> Any? {
 		get { json[key] }
 		set { json[key] = newValue }
@@ -64,7 +64,7 @@ public class SpotDocument<Subject: SpotRecord>: ObservableObject, Identifiable w
 		}
 		return base
 	}
-
+	
 	init(_ subject: Subject, collection: SpotCollection<Subject>, json: [String: Any]? = nil) {
 		self.subject = subject
 		self.collection = collection
@@ -72,6 +72,10 @@ public class SpotDocument<Subject: SpotRecord>: ObservableObject, Identifiable w
 	}
 	
 	public func save() {
-		Task { await report { try await self.collection.save(self) } }
+		Task { await self.saveAsync() }
+	}
+	
+	public func saveAsync() async {
+		await report { try await self.collection.save(self) }
 	}
 }
