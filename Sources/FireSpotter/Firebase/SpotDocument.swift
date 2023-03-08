@@ -23,6 +23,11 @@ public class SpotDocument<Subject: SpotRecord>: ObservableObject, Identifiable w
 	}
 	
 	let collection: SpotCollection<Subject>
+	public var path: String { collection.path + "/" + subject.id }
+	
+	public func childCollection<Element: SpotRecord>(at name: String, of elem: Element.Type) -> SpotCollection<Element> {
+		FirestoreManager.instance.collection(at: path + "/" + name, of: elem)
+	}
 
 	public subscript(key: String) -> Any? {
 		get { json[key] }

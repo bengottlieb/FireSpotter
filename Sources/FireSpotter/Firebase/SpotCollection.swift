@@ -13,6 +13,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	public let base: CollectionReference
 	
 	var cache: [String: SpotDocument<Element>] = [:]
+	var path: String { base.path }
 	
 	init(_ collection: CollectionReference, kind: Element.Type) {
 		base = collection

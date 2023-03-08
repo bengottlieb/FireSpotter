@@ -36,6 +36,11 @@ public class FirestoreManager {
 		}
 	}
 	
+	public func collection<Element: SpotRecord>(at path: String, of: Element.Type) -> SpotCollection<Element> {
+		let col = db.collection(path)
+		return SpotCollection(col, kind: Element.self)
+	}
+	
 	public subscript<Element: SpotRecord>(kind: FirebaseCollectionKind<Element>) -> SpotCollection<Element> {
 		let col = db.collection(kind.name)
 		return SpotCollection(col, kind: Element.self)
