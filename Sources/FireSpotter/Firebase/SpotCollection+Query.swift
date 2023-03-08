@@ -10,6 +10,25 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 public extension SpotCollection {
+	var syncAll: [SpotDocument<Element>] {
+		allCache ?? []
+	}
+	
+	@MainActor var all: [SpotDocument<Element>] {
+		get async {
+			do {
+				let results = try await base.getDocuments().documents
+				allCache = try results.map { try document(from: $0.data() ) }
+				objectWillChange.send()
+				print("Fetched \(results.count) / \(allCache?.count ?? 0) for \(path)")
+				return allCache ?? []
+			} catch {
+				print("Failed to fetch documents: \(error)")
+				return []
+			}
+		}
+	}
+	
 	func documents(where field: String, isEqualTo target: Any) async throws -> [SpotDocument<Element>] {
 		
 		let results = try await base.whereField(field, isEqualTo: target).getDocuments().documents

@@ -1,5 +1,5 @@
 //
-//  AuthorizationScreen.swift
+//  CredentialsScreen.swift
 //  ArtesisMVP
 //
 //  Created by Ben Gottlieb on 3/2/23.
@@ -7,16 +7,19 @@
 
 import SwiftUI
 
-public struct AuthorizationScreen: View {
+public struct CredentialsScreen: View {
 	let showSignInWithApple: Bool
 	@State private var isRegistering = false
 	@State private var isCommunicating = false
 	@State private var email = CommandLine.string(for: "preloadedEmail") ?? ""
 	@State private var password = CommandLine.string(for: "preloadedPassword") ?? ""
 	@EnvironmentObject var authorizedUser: AuthorizedUser
-
-	public init(showSignInWithApple: Bool = false) {
+	let allowAccountCreation: Bool
+	
+	public init(showSignInWithApple: Bool = false, allowAccountCreation: Bool = true) {
 		self.showSignInWithApple = showSignInWithApple
+		self.allowAccountCreation = allowAccountCreation
+		if !allowAccountCreation { isRegistering = false }
 	}
 	
 	public var body: some View {
@@ -24,11 +27,13 @@ public struct AuthorizationScreen: View {
 			Text("Credentials")
 				.font(.title)
 			
-			Picker("Action", selection: $isRegistering) {
-				Text("Create Account").tag(true)
-				Text("Sign In").tag(false)
+			if allowAccountCreation {
+				Picker("Action", selection: $isRegistering) {
+					Text("Create Account").tag(true)
+					Text("Sign In").tag(false)
+				}
+				.pickerStyle(.segmented)
 			}
-			.pickerStyle(.segmented)
 			
 			if isRegistering {
 				RegisterUserView(isCommunicating: $isCommunicating, email: $email, password: $password, showSignInWithApple: showSignInWithApple)
@@ -37,11 +42,12 @@ public struct AuthorizationScreen: View {
 			}
 		}
 		.padding(.horizontal)
+		.frame(maxWidth: 400)
 	}
 }
 
-struct AuthorizationScreen_Previews: PreviewProvider {
+struct CredentialsScreen_Previews: PreviewProvider {
 	static var previews: some View {
-		AuthorizationScreen()
+		CredentialsScreen()
 	}
 }

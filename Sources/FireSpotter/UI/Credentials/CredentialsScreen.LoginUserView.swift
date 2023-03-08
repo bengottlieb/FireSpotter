@@ -1,5 +1,5 @@
 //
-//  AuthorizationScreen.LoginUserView.swift
+//  CredentialsScreen.LoginUserView.swift
 //  ArtesisMVP
 //
 //  Created by Ben Gottlieb on 3/2/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Suite
 
-extension AuthorizationScreen {
+extension CredentialsScreen {
 	@MainActor struct LoginUserView: View {
 		@Binding var isCommunicating: Bool
 		@Binding var email: String
@@ -55,6 +55,8 @@ extension AuthorizationScreen {
 				Button("Sign In") {
 					signIn()
 				}
+				.keyboardShortcut("\n", localization: .automatic)
+				.frame(height: 50)
 				.buttonStyle(FullWidthButtonStyle())
 				.disabled(!validCredentials || isCommunicating)
 
@@ -67,9 +69,9 @@ extension AuthorizationScreen {
 	}
 }
 
-struct AuthorizationScreen_LoginUserView_Previews: PreviewProvider {
+struct CredentialsScreen_LoginUserView_Previews: PreviewProvider {
 	static var previews: some View {
-		AuthorizationScreen.LoginUserView(isCommunicating: .constant(false), email: .constant(""), password: .constant(""), showSignInWithApple: false)
+		CredentialsScreen.LoginUserView(isCommunicating: .constant(false), email: .constant(""), password: .constant(""), showSignInWithApple: false)
 	}
 }
 

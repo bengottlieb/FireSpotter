@@ -14,8 +14,10 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	
 	var cache: [String: SpotDocument<Element>] = [:]
 	var path: String { base.path }
+	var allCache: [SpotDocument<Element>]?
 	
 	init(_ collection: CollectionReference, kind: Element.Type) {
+		print("Creating collection at \(collection.path) for \(String(describing: Element.self))")
 		base = collection
 	}
 	
@@ -62,7 +64,10 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	}
 	
 	@MainActor public func new() -> SpotDocument<Element> {
-		try! document(from: Element.newRecord().asJSON())
+		objectWillChange.send()
+		let new = try! document(from: Element.newRecord().asJSON())
+		allCache?.append(new)
+		return new
 	}
 
 	func document(from json: JSONDictionary) throws -> SpotDocument<Element> {
@@ -79,7 +84,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		return new
 	}
 
-	subscript(id: String, default: Element) -> SpotDocument<Element> {
+	public subscript(id: String, default: Element) -> SpotDocument<Element> {
 		get async {
 			if let current = await self[id] { return current }
 			let new = SpotDocument(`default`, collection: self)
@@ -89,7 +94,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		}
 	}
 	
-	subscript(id: String) -> SpotDocument<Element>? {
+	public subscript(id: String) -> SpotDocument<Element>? {
 		get async {
 			do {
 				let raw = try await base.document(id).getDocument()
