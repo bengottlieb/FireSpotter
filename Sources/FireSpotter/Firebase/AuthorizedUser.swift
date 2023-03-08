@@ -142,7 +142,7 @@ import Suite
 		let _: Void = try await withCheckedThrowingContinuation { continuation in
 			Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
 				if let error {
-					print("*** Sign In error: \(error)")
+					print("*** Sign In error: \(error) \n\n\((error as NSError).userInfo)")
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {

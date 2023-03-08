@@ -39,15 +39,10 @@ extension AuthorizationScreen {
 		var body: some View {
 			VStack {
 				TextField("Email", text: $email)
-					.textContentType(.emailAddress)
-					.autocapitalization(.none)
-					.autocorrectionDisabled()
-					.keyboardType(.URL)
+					.addTextContentType(.emailAddress)
 
 				TextField("Password", text: $password)
-					.textContentType(.password)
-					.autocapitalization(.none)
-					.autocorrectionDisabled()
+					.addTextContentType(.password)
 
 				if let displayedError {
 					Text(displayedError.localizedDescription)
