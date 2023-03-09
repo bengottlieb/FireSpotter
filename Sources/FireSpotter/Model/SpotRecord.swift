@@ -11,5 +11,5 @@ public protocol SpotRecord: Codable, Identifiable, Equatable where ID == String 
 	var id: String { get set }
 	static var minimalRecord: Self { get }
 
-	@MainActor static func newRecord() -> Self
+	@MainActor static func newRecord(withID id: String) -> Self
 }

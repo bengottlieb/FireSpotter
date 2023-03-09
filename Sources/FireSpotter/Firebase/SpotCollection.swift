@@ -63,9 +63,9 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		}
 	}
 	
-	@MainActor public func new() -> SpotDocument<Element> {
+	@MainActor public func new(withID id: String) -> SpotDocument<Element> {
 		objectWillChange.send()
-		let new = try! document(from: Element.newRecord().asJSON())
+		let new = try! document(from: Element.newRecord(withID: id).asJSON())
 		allCache?.append(new)
 		return new
 	}
