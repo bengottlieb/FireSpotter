@@ -42,9 +42,14 @@ import Suite
 		}
 	}
 	
-	func setupUserCancellable() { userCancellable = user.objectWillChange.sink {
-		self.objectWillChange.send()
-	}}
+	func setupUserCancellable() {
+		userCancellable = user.objectWillChange
+			.receive(on: RunLoop.main)
+			.sink {
+				self.objectWillChange.send()
+			}
+		
+	}
 	
 	public func save() {
 		user.save()
@@ -80,6 +85,11 @@ import Suite
 	public func signOut() async {
 		user = SpotUser.emptyUser
 		fbUser = nil
+		do {
+			try Auth.auth().signOut()
+		} catch {
+			print("Failed to sign out of Firebase: \(error)")
+		}
 		userDefaults.removeObject(forKey: userDefaultsKey)
 		objectWillChange.send()
 	}

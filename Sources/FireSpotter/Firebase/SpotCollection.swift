@@ -21,7 +21,11 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		base = collection
 	}
 	
-	@discardableResult func append(_ element: Element) throws -> SpotDocument<Element> {
+	public func remove(_ element: Element) async throws {
+		try await base.document(element.id).delete()
+	}
+	
+	@discardableResult public func append(_ element: Element) throws -> SpotDocument<Element> {
 		let doc = base.document(element.id)
 		try doc.setData(from: element)
 		

@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 import Journalist
 import Suite
 
-public class SpotDocument<Subject: SpotRecord>: ObservableObject, Identifiable where Subject.ID == String {
+public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Identifiable where Subject.ID == String {
 	@Published public var subject: Subject
 	@Published public var json: [String: Any]
 	public var id: String {
@@ -20,6 +20,10 @@ public class SpotDocument<Subject: SpotRecord>: ObservableObject, Identifiable w
 			subject.id = newValue
 			json["id"] = newValue
 		}
+	}
+	
+	public static func ==(lhs: SpotDocument, rhs: SpotDocument) -> Bool {
+		lhs.subject.id == rhs.subject.id
 	}
 	
 	let collection: SpotCollection<Subject>
