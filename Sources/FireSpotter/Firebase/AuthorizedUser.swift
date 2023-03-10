@@ -96,8 +96,9 @@ import Suite
 	
 	func store(user fbUser: User, completion: @escaping () -> Void) {
 		self.fbUser = fbUser
-		Task {
-			self.user = await FirestoreManager.instance.users[fbUser.uid] ?? SpotUser.emptyUser
+		let users = FirestoreManager.instance.users
+		Task { @MainActor in 
+			self.user = await users[fbUser.uid] ?? SpotDocument(SpotUser.newRecord(withID: fbUser.uid), collection: users)
 			saveUserDefaults()
 
 			self.objectWillChange.send()

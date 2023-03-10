@@ -21,7 +21,7 @@ public class FirestoreManager {
 	var kinds: [String: FirebaseCollectionInfo] = ["meta": try! .init(firebaseMetaCollectionKind)]
 	
 	init() {
-		Task {
+		Task { @MainActor in
 			try await register(kind: firebaseUserCollectionKind)
 		}
 	}
