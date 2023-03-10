@@ -82,4 +82,12 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 	public func saveAsync() async {
 		await report { try await self.collection.save(self) }
 	}
+	
+	public func delete() async {
+		do {
+			try await collection.remove(self)
+		} catch {
+			print("Failed to delete \(self)")
+		}
+	}
 }
