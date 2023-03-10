@@ -26,7 +26,7 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 		lhs.subject.id == rhs.subject.id
 	}
 	
-	let collection: SpotCollection<Subject>
+	public let collection: SpotCollection<Subject>
 	public var path: String { collection.path + "/" + subject.id }
 	
 	public func childCollection<Element: SpotRecord>(at name: String, of elem: Element.Type) -> SpotCollection<Element> {

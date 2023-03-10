@@ -27,11 +27,24 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	
 	@MainActor public func remove(_ element: Element) async throws {
 		try await base.document(element.id).delete()
+		uncache(element)
+		objectWillChange.send()
+	}
+	
+	@MainActor public func move(_ doc: SpotDocument<Element>, toID id: String) async throws {
+		if doc.id == id { return }
+		try await remove(doc.subject)
+		doc.id = id
+		try await save(doc)
+		cache[id] = doc
+		allCache?.append(doc)
+	}
+	
+	@MainActor public func uncache(_ element: Element) {
 		if let index = allCache?.firstIndex(where: { $0.id == element.id }) {
 			allCache?.remove(at: index)
 		}
 		cache.removeValue(forKey: element.id)
-		objectWillChange.send()
 	}
 	
 	@discardableResult public func append(_ element: Element) throws -> SpotDocument<Element> {
