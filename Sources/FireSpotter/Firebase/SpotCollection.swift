@@ -26,12 +26,12 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	}
 	
 	@MainActor public func remove(_ element: Element) async throws {
-		objectWillChange.send()
 		try await base.document(element.id).delete()
 		if let index = allCache?.firstIndex(where: { $0.id == element.id }) {
 			allCache?.remove(at: index)
 		}
 		cache.removeValue(forKey: element.id)
+		objectWillChange.send()
 	}
 	
 	@discardableResult public func append(_ element: Element) throws -> SpotDocument<Element> {
