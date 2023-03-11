@@ -19,23 +19,34 @@ public extension SpotCollection {
 
 		base.addSnapshotListener { querySnapshot, error in
 			Task { @MainActor in
-				guard let documents = querySnapshot?.documents else {
-					print("No documents")
+				guard let changes = querySnapshot?.documentChanges else {
+					print("No changes")
 					return
 				}
 				
-				print("Received \(documents.count) new records")
-				for document in documents {
-					let data = document.data()
-					if let current = self.cache[document.documentID] {
-						current.loadChanges(data)
-					} else if let current = self.allCache?.first(where: { $0.id == document.documentID }) {
-						current.loadChanges(data)
-					} else if self.allCache != nil, let element = try? Element.loadJSON(dictionary: data) {
-						let new = SpotDocument(element, collection: self, json: data)
-						self.allCache?.append(new)
+				print("Received \(changes.count) changes")
+				for change in changes {
+					let id = change.document.documentID
+					switch change.type {
+					case .added, .modified:
+						let data = change.document.data()
+						if let current = self.cache[id] {
+							current.loadChanges(data)
+						} else if let current = self.allCache?.first(where: { $0.id == id }) {
+							current.loadChanges(data)
+						} else if self.allCache != nil, let element = try? Element.loadJSON(dictionary: data) {
+							let new = SpotDocument(element, collection: self, json: data)
+							self.allCache?.append(new)
+						}
+
+					case .removed:
+						if let index = self.allCache?.firstIndex(where: { $0.id == id }) {
+							self.allCache?.remove(at: index)
+						}
+						self.cache.removeValue(forKey: id)
 					}
 				}
+				self.objectWillChange.send()
 			}
 		}
 		
