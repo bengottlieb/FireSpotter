@@ -14,6 +14,35 @@ public extension SpotCollection {
 		allCache ?? []
 	}
 	
+	func listen() -> SpotCollection<Element> {
+		if isListening { return self }
+
+		base.addSnapshotListener { querySnapshot, error in
+			Task { @MainActor in
+				guard let documents = querySnapshot?.documents else {
+					print("No documents")
+					return
+				}
+				
+				print("Received \(documents.count) new records")
+				for document in documents {
+					let data = document.data()
+					if let current = self.cache[document.documentID] {
+						current.loadChanges(data)
+					} else if let current = self.allCache?.first(where: { $0.id == document.documentID }) {
+						current.loadChanges(data)
+					} else if self.allCache != nil, let element = try? Element.loadJSON(dictionary: data) {
+						let new = SpotDocument(element, collection: self, json: data)
+						self.allCache?.append(new)
+					}
+				}
+			}
+		}
+		
+		isListening = true
+		return self
+	}
+	
 	@MainActor var all: [SpotDocument<Element>] {
 		get async {
 			do {

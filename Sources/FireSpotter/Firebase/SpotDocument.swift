@@ -90,4 +90,9 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 			print("Failed to delete \(self)")
 		}
 	}
+	
+	public func loadChanges(_ json: [String: Any]) {
+		objectWillChange.send()
+		self.json = json
+	}
 }

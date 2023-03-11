@@ -15,6 +15,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	var cache: [String: SpotDocument<Element>] = [:]
 	var path: String { base.path }
 	var allCache: [SpotDocument<Element>]?
+	var isListening = false
 	
 	init(_ collection: CollectionReference, kind: Element.Type) {
 		print("Creating collection at \(collection.path) for \(String(describing: Element.self))")

@@ -14,6 +14,10 @@ import Suite
 	public static let instance = AuthorizedUser()
 	
 	enum AuthorizationError: Error { case unknown, noIdentityToken, badIdentityToken }
+	public struct Notifications {
+		public static let didSignIn = Notification.Name("AuthorizedUser.didSignIn")
+		public static let didSignOut = Notification.Name("AuthorizedUser.didSignOut")
+	}
 	
 	public var user: SpotDocument<SpotUser> = SpotUser.emptyUser { didSet {
 		setupUserCancellable()
@@ -38,6 +42,7 @@ import Suite
 					objectWillChange.send()
 				}
 				self.setupUserCancellable()
+				if self.isSignedIn { Notifications.didSignIn.notify() }
 			}
 		}
 	}
@@ -92,6 +97,7 @@ import Suite
 		}
 		userDefaults.removeObject(forKey: userDefaultsKey)
 		objectWillChange.send()
+		Notifications.didSignOut.notify()
 	}
 	
 	func store(user fbUser: User, completion: @escaping () -> Void) {
@@ -103,6 +109,7 @@ import Suite
 
 			self.objectWillChange.send()
 			completion()
+			Notifications.didSignIn.notify()
 		}
 	}
 	
@@ -121,6 +128,7 @@ import Suite
 						self.user.subject.lastName = cred?.fullName?.familyName
 						self.user.subject.emailAddress = cred?.email
 						self.user.save()
+						Notifications.didSignIn.notify()
 						continuation.resume()
 					}
 				} else {
