@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol SpotRecord: Codable, Identifiable, Equatable where ID == String {
+public protocol SpotRecord: Codable, Identifiable, Equatable, Sendable where ID == String {
 	var id: String { get set }
 	static var minimalRecord: Self { get }
 

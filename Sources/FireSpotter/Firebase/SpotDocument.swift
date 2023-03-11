@@ -11,9 +11,9 @@ import FirebaseFirestoreSwift
 import Journalist
 import Suite
 
-public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Identifiable where Subject.ID == String {
-	@Published public var subject: Subject
-	@Published public var json: [String: Any]
+public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Identifiable where Subject.ID == String {	
+	public var subject: Subject { willSet { objectWillChange.sendOnMain() }}
+	public var json: [String: Any] { willSet { objectWillChange.sendOnMain() }}
 	public var id: String {
 		get { subject.id }
 		set {

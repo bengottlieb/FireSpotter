@@ -13,7 +13,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	public let base: CollectionReference
 	
 	var cache: [String: SpotDocument<Element>] = [:]
-	var path: String { base.path }
+	public var path: String { base.path }
 	var allCache: [SpotDocument<Element>]?
 	var isListening = false
 	
