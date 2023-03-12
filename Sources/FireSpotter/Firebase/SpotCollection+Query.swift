@@ -31,9 +31,9 @@ public extension SpotCollection {
 					case .added, .modified:
 						let data = change.document.data()
 						if let current = self.cache[id] {
-							current.loadChanges(data)
+							await current.loadChanges(data)
 						} else if let current = self.allCache?.first(where: { $0.id == id }) {
-							current.loadChanges(data)
+							await current.loadChanges(data)
 						} else if self.allCache != nil, let element = try? Element.loadJSON(dictionary: data) {
 							let new = SpotDocument(element, collection: self, json: data)
 							self.allCache?.append(new)
@@ -41,8 +41,12 @@ public extension SpotCollection {
 
 					case .removed:
 						if let index = self.allCache?.firstIndex(where: { $0.id == id }) {
+							if let manager = FirestoreManager.instance.recordManager, let obj = self.allCache?[index], await !manager.shouldDelete(object: obj.subject) { return }
 							self.allCache?.remove(at: index)
+						} else if let manager = FirestoreManager.instance.recordManager, let obj = self.cache[id], await !manager.shouldDelete(object: obj.subject) {
+							return
 						}
+
 						self.cache.removeValue(forKey: id)
 					}
 				}

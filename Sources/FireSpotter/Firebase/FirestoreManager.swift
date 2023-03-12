@@ -15,6 +15,7 @@ public class FirestoreManager {
 	public var checkSchemas = true
 	
 	public enum CollectionKind: String { case users }
+	public var recordManager: SpotRecordManager?
 	
 	var cache: [String: AnySpotCollection] = [:]
 	let db = Firestore.firestore()

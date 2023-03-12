@@ -113,6 +113,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 
 	public subscript(id: String, default: Element) -> SpotDocument<Element> {
 		get async {
+			assert(id.isNotEmpty, "Cannot create an element wiith an empty ID")
 			if let current = await self[id] { return current }
 			let new = SpotDocument(`default`, collection: self)
 			new.id = id
@@ -124,6 +125,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	public subscript(id: String) -> SpotDocument<Element>? {
 		get async {
 			do {
+				if id.isEmpty { return nil }
 				let raw = try await base.document(id).getDocument()
 				guard let data = raw.data() else { return nil }
 				return try document(from: data)

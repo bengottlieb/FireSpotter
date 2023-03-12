@@ -91,8 +91,9 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 		}
 	}
 	
-	public func loadChanges(_ json: [String: Any]) {
-		objectWillChange.send()
+	public func loadChanges(_ json: [String: Any]) async {
+		if let manager = FirestoreManager.instance.recordManager, await !manager.shouldChange(object: subject, with: json) { return }
+		
 		self.json = json
 	}
 }
