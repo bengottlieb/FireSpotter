@@ -61,6 +61,7 @@ public extension SpotCollection {
 	@MainActor var all: [SpotDocument<Element>] {
 		get async {
 			do {
+				if let all = allCache { return all }
 				let results = try await base.getDocuments().documents
 				allCache = try results.map { try document(from: $0.data() ) }
 				objectWillChange.send()
