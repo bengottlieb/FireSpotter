@@ -11,8 +11,8 @@ public struct CredentialsScreen: View {
 	let showSignInWithApple: Bool
 	@State private var isRegistering = false
 	@State private var isCommunicating = false
-	@State private var email = CommandLine.string(for: "preloadedEmail") ?? ""
-	@State private var password = CommandLine.string(for: "preloadedPassword") ?? ""
+	@State private var email = ProcessInfo.string(for: "preloadedEmail") ?? ""
+	@State private var password = ProcessInfo.string(for: "preloadedPassword") ?? ""
 	@EnvironmentObject var authorizedUser: AuthorizedUser
 	let allowAccountCreation: Bool
 	
