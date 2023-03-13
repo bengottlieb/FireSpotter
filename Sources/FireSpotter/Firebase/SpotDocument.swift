@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 import Journalist
 import Suite
 
-public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Identifiable where Subject.ID == String {	
+public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Identifiable, Hashable where Subject.ID == String {	
 	public var subject: Subject { willSet { objectWillChange.sendOnMain() }}
 	public var json: [String: Any] { willSet { objectWillChange.sendOnMain() }}
 	public var id: String {
@@ -28,6 +28,10 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 	
 	public let collection: SpotCollection<Subject>
 	public var path: String { collection.path + "/" + subject.id }
+	
+	public func hash(into hasher: inout Hasher) {
+		hasher.combine(subject)
+	}
 	
 	public func childCollection<Element: SpotRecord>(at name: String, of elem: Element.Type) -> SpotCollection<Element> {
 		FirestoreManager.instance.collection(at: path + "/" + name, of: elem)
