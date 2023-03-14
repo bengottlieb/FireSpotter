@@ -12,7 +12,7 @@ extension String {
 		let id = UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased()
 		return prefix + "-" + id
 	}
-		
+
 	public static func id(for record: any SpotRecord.Type) -> String {
 		.id(prefix: String(describing: record))
 	}
@@ -47,3 +47,4 @@ extension String {
 	}
 	
 }
+

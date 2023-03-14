@@ -22,6 +22,13 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 		}
 	}
 	
+	public var recordBinding: Binding<Subject> {
+		Binding(
+			get: { self.subject },
+			set: { new in self.subject = new }
+		)
+	}
+	
 	public static func ==(lhs: SpotDocument, rhs: SpotDocument) -> Bool {
 		lhs.subject.id == rhs.subject.id
 	}
