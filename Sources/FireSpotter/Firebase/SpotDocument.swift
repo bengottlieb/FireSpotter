@@ -105,6 +105,12 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 	public func loadChanges(_ json: [String: Any]) async {
 		if let manager = FirestoreManager.instance.recordManager, await !manager.shouldChange(object: subject, with: json) { return }
 		
+		do {
+			subject = try Subject.loadJSON(dictionary: json)
+		} catch {
+			print("Failed to re-constitute the subject: \(error)")
+		}
+		
 		self.json = json
 	}
 }
