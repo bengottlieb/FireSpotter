@@ -13,7 +13,7 @@ extension String {
 		return prefix + "-" + id
 	}
 
-	public static func id(for record: any SpotRecord.Type) -> String {
+	public static func id(for record: any Any.Type) -> String {
 		.id(prefix: String(describing: record))
 	}
 	
