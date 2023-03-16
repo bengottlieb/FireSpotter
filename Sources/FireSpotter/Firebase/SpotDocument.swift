@@ -114,3 +114,9 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 		self.json = json
 	}
 }
+
+extension SpotDocument: Comparable where Subject: Comparable {
+	public static func <(lhs: SpotDocument, rhs: SpotDocument) -> Bool {
+		lhs.subject < rhs.subject
+	}
+}
