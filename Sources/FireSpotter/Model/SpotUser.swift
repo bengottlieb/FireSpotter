@@ -12,8 +12,8 @@ public struct SpotUser: SpotRecord {
 	public var firstName: String?
 	public var lastName: String?
 	public var emailAddress: String?
-	
-	
+	var apnsTokens: [APNSDeviceInfo]?
+		
 	public static var minimalRecord = SpotUser(id: "")
 	public static var emptyUser = SpotDocument(SpotUser(id: ""), collection: FirestoreManager.instance.users)
 	

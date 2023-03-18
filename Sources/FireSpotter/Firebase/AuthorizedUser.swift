@@ -26,6 +26,8 @@ import Suite
 	public var fbUser: User?
 	public var userDefaults = UserDefaults.standard
 	public var currentUserID: String? { fbUser?.uid }
+	public var apnsToken: String? { didSet { didUpdateDeviceInfo() }}
+	public var deviceID = Gestalt.deviceID { didSet { didUpdateDeviceInfo() }}
 	
 	var rawUserJSON: [String: Any] = [:]
 	
@@ -45,6 +47,7 @@ import Suite
 				if self.isSignedIn { Notifications.didSignIn.notify() }
 			}
 		}
+		
 	}
 	
 	func setupUserCancellable() {
@@ -53,7 +56,6 @@ import Suite
 			.sink {
 				self.objectWillChange.send()
 			}
-		
 	}
 	
 	public func save() {
@@ -66,6 +68,12 @@ import Suite
 		set {
 			user[key] = newValue
 			saveUserDefaults()
+		}
+	}
+	
+	func didUpdateDeviceInfo() {
+		if isSignedIn, user.subject.addToken(token: apnsToken, deviceID: deviceID) {
+			user.save()
 		}
 	}
 	
@@ -127,6 +135,7 @@ import Suite
 						self.user.subject.firstName = cred?.fullName?.givenName
 						self.user.subject.lastName = cred?.fullName?.familyName
 						self.user.subject.emailAddress = cred?.email
+						self.user.subject.addToken(token: self.apnsToken, deviceID: self.deviceID)
 						self.user.save()
 						Notifications.didSignIn.notify()
 						continuation.resume()
@@ -147,6 +156,7 @@ import Suite
 				} else if let user = authResult?.user {
 					self.store(user: user) {
 						self.user.subject.emailAddress = email
+						self.user.subject.addToken(token: self.apnsToken, deviceID: self.deviceID)
 						self.user.save()
 						continuation.resume()
 					}
@@ -166,6 +176,7 @@ import Suite
 				} else if let user = authResult?.user {
 					self.store(user: user) {
 						self.user.subject.emailAddress = email
+						self.user.subject.addToken(token: self.apnsToken, deviceID: self.deviceID)
 						self.user.save()
 						continuation.resume()
 					}
