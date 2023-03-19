@@ -58,6 +58,10 @@ public extension SpotCollection {
 		return self
 	}
 	
+	@MainActor @discardableResult func fetchAll() async -> [SpotDocument<Element>] {
+		await all
+	}
+	
 	@MainActor var all: [SpotDocument<Element>] {
 		get async {
 			do {

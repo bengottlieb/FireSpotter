@@ -91,7 +91,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	}
 	
 	@MainActor public func new(withID id: String = .id(for: Element.self), addNow: Bool = true) -> SpotDocument<Element> {
-		objectWillChange.send()
+		DispatchQueue.main.async { self.objectWillChange.send() }
 		
 		if addNow {
 			let new = try! document(from: Element.newRecord(withID: id).asJSON())
