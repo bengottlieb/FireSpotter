@@ -35,6 +35,7 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 	
 	public let collection: SpotCollection<Subject>!
 	public var path: String { collection.path + "/" + subject.id }
+	var isSaved = true
 	
 	public func hash(into hasher: inout Hasher) {
 		hasher.combine(subject)
@@ -80,11 +81,12 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 		return base
 	}
 	
-	init(_ subject: Subject, collection: SpotCollection<Subject>?, json: [String: Any]? = nil) {
+	init(_ subject: Subject, collection: SpotCollection<Subject>?, json: [String: Any]? = nil, isSaved: Bool = true) {
 		assert(Gestalt.isInPreview || collection != nil, "Cannot use a nil collection for a SpotDocument<\(Subject.self)>")
 		self.subject = subject
 		self.collection = collection
 		self.json = json ?? (try? subject.asJSON()) ?? [:]
+		self.isSaved = isSaved
 	}
 	
 	public func save() {
