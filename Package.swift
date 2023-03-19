@@ -21,12 +21,15 @@ let package = Package(
 				
 				"FirebaseCrashlytics", "FirebaseSessions", "GoogleDataTransport", "PromisesSwift",
 				
-				"abseil", "BoringSSL-GRPC", "FirebaseCoreExtension", "FirebaseFirestore", "FirebaseFirestoreSwift", "FirebaseSharedSwift", "gRPC-C++", "gRPC-Core", "leveldb-library", "Libuv-gRPC"
+				"abseil", "BoringSSL-GRPC", "FirebaseCoreExtension", "FirebaseFirestore", "FirebaseFirestoreSwift", "FirebaseSharedSwift", "gRPC-C++", "gRPC-Core", "leveldb-library", "Libuv-gRPC",
+				
+				"FirebaseAppCheckInterop", "FirebaseAuthInterop", "FirebaseStorage"
 			]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/bengottlieb/suite", from: "1.0.79"),
 		.package(url: "https://github.com/bengottlieb/journalist", from: "1.0.5"),
+		.package(url: "https://github.com/bengottlieb/crossplatformkit", from: "1.0.8"),
 	],
 	targets: [
 		// Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -34,6 +37,7 @@ let package = Package(
 		.target(name: "FireSpotter", dependencies: [
 			.product(name: "Suite", package: "Suite"),
 			.product(name: "Journalist", package: "Journalist"),
+			.product(name: "CrossPlatformKit", package: "CrossPlatformKit"),
 		], resources: [
 			.copy("Resources/info.plist"),
 			.copy("Resources/roots.pem"),
@@ -67,5 +71,9 @@ let package = Package(
 		.binaryTarget(name: "gRPC-Core", path: "Frameworks/FirebaseFireStore/gRPC-Core.xcframework"),
 		.binaryTarget(name: "leveldb-library", path: "Frameworks/FirebaseFireStore/leveldb-library.xcframework"),
 		.binaryTarget(name: "Libuv-gRPC", path: "Frameworks/FirebaseFireStore/Libuv-gRPC.xcframework"),
+
+		.binaryTarget(name: "FirebaseAppCheckInterop", path: "Frameworks/FirebaseStorage/FirebaseAppCheckInterop.xcframework"),
+		.binaryTarget(name: "FirebaseAuthInterop", path: "Frameworks/FirebaseStorage/FirebaseAuthInterop.xcframework"),
+		.binaryTarget(name: "FirebaseStorage", path: "Frameworks/FirebaseStorage/FirebaseStorage.xcframework"),
 	]
 )
