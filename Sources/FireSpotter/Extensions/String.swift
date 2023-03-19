@@ -7,10 +7,15 @@
 
 import Suite
 
+extension UUID {
+	var id: String {
+		uuidString.replacingOccurrences(of: "-", with: "").lowercased()
+	}
+}
+
 extension String {
 	public static func id(prefix: String) -> String {
-		let id = UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased()
-		return prefix + "-" + id
+		return prefix + "-" + UUID().id
 	}
 
 	public static func id(for record: any Any.Type) -> String {

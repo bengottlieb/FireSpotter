@@ -18,15 +18,8 @@ public struct SpotUser: SpotRecord {
 	public var profileImageURL: URL? {
 		get async throws {
 			guard let path = profileImagePath else { return nil }
-			return try await FileStore.instance.urlForFile(at: path)
+			return try await FileStore.instance.urlForImage(at: path, kind: .avatar)
 		}
-	}
-	
-	mutating public func setProfileImage(_ image: UXImage) async throws {
-		let path = "profile_images/\(id)"
-		
-		try await FileStore.instance.upload(image: image, to: path)
-		self.profileImagePath = path
 	}
 	
 	var apnsTokens: [APNSDeviceInfo]?
@@ -36,5 +29,14 @@ public struct SpotUser: SpotRecord {
 	
 	@MainActor public static func newRecord(withID id: String) -> Self {
 		SpotUser(id: id)
+	}
+}
+
+extension SpotDocument where Subject == SpotUser {
+	
+	public func setProfileImage(_ image: UXImage) async throws {
+		try await FileStore.instance.upload(image: image, kind: .avatar, to: id)
+		self.subject.profileImagePath = id
+		self.save()
 	}
 }

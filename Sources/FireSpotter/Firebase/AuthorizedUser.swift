@@ -47,7 +47,6 @@ import Suite
 				if self.isSignedIn { Notifications.didSignIn.notify() }
 			}
 		}
-		
 	}
 	
 	func setupUserCancellable() {

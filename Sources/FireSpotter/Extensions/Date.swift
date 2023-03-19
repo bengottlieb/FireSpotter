@@ -12,6 +12,11 @@ extension Date {
 		let string = DateFormatter.idFormatter.string(from: self)
 		return prefix + "-" + string
 	}
+
+	public func datePrefixedUUID() -> String {
+		let string = DateFormatter.idFormatter.string(from: self)
+		return string + "-" + UUID().id
+	}
 }
 
 
