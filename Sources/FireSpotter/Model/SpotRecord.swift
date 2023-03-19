@@ -13,3 +13,12 @@ public protocol SpotRecord: Codable, Identifiable, Equatable, Sendable, Hashable
 
 	@MainActor static func newRecord(withID id: String) -> Self
 }
+
+extension SpotRecord {
+	
+	
+	public static var sampleDocument: SpotDocument<Self> {
+		SpotDocument(.minimalRecord, collection: nil)
+	}
+
+}

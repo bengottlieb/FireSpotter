@@ -38,7 +38,7 @@ extension SpotDocument where Subject == SpotMeta {
 		
 		let diff = json.diff(relativeTo: current)
 		var isMateriallyChanged = !diff.additions.isEmpty || !diff.changes.isEmpty
-		if isMateriallyChanged, (try? await collection.isEmpty) == true { isMateriallyChanged = false }
+		if isMateriallyChanged, (try? await collection!.isEmpty) == true { isMateriallyChanged = false }
 		if !isMateriallyChanged {
 			if !diff.isEmpty {
 				subject.minimalJSON = json

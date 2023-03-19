@@ -33,7 +33,7 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 		lhs.subject.id == rhs.subject.id
 	}
 	
-	public let collection: SpotCollection<Subject>
+	public let collection: SpotCollection<Subject>!
 	public var path: String { collection.path + "/" + subject.id }
 	
 	public func hash(into hasher: inout Hasher) {
@@ -80,7 +80,8 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 		return base
 	}
 	
-	init(_ subject: Subject, collection: SpotCollection<Subject>, json: [String: Any]? = nil) {
+	init(_ subject: Subject, collection: SpotCollection<Subject>?, json: [String: Any]? = nil) {
+		assert(Gestalt.isInPreview || collection != nil, "Cannot use a nil collection for a SpotDocument<\(Subject.self)>")
 		self.subject = subject
 		self.collection = collection
 		self.json = json ?? (try? subject.asJSON()) ?? [:]
