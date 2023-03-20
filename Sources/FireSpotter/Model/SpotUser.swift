@@ -13,12 +13,10 @@ public struct SpotUser: SpotRecord {
 	public var firstName: String?
 	public var lastName: String?
 	public var emailAddress: String?
-	public var profileImagePath: String?
 
 	public var profileImageURL: URL? {
 		get async throws {
-			guard let path = profileImagePath else { return nil }
-			return try await FileStore.instance.urlForImage(at: path, kind: .avatar)
+			return try await FileStore.instance.urlForImage(at: id, kind: .avatar)
 		}
 	}
 	
@@ -36,7 +34,6 @@ extension SpotDocument where Subject == SpotUser {
 	
 	public func setProfileImage(_ image: UXImage) async throws {
 		try await FileStore.instance.upload(image: image, kind: .avatar, to: id)
-		self.subject.profileImagePath = id
 		self.save()
 	}
 }
