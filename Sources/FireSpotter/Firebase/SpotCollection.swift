@@ -104,7 +104,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	}
 
 	func document(from json: JSONDictionary) throws -> SpotDocument<Element> {
-		let element = try Element.loadJSON(dictionary: json)
+		let element = try Element.loadJSON(dictionary: json, using: .firebaseDecoder)
 		
 		if let cached = cache[element.id] {
 			cached.subject = element

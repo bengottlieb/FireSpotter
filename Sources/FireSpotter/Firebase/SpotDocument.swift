@@ -61,7 +61,7 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 			guard let raw = try await collection.base.document(id).getDocument().data() else { return false }
 			
 			if !raw.isEqual(to: json) {
-				subject = try Subject.loadJSON(dictionary: raw)
+				subject = try Subject.loadJSON(dictionary: raw, using: .firebaseDecoder)
 				json = raw
 				return true
 			}
@@ -109,7 +109,7 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 		if let manager = FirestoreManager.instance.recordManager, await !manager.shouldChange(object: subject, with: json) { return }
 		
 		do {
-			subject = try Subject.loadJSON(dictionary: json)
+			subject = try Subject.loadJSON(dictionary: json, using: .firebaseDecoder)
 		} catch {
 			print("Failed to re-constitute the subject: \(error)")
 		}

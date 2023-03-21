@@ -35,7 +35,7 @@ import Suite
 	
 	init() {
 		fbUser = Auth.auth().currentUser
-		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, let user = try? SpotUser.loadJSON(dictionary: json) {
+		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, let user = try? SpotUser.loadJSON(dictionary: json, using: .firebaseDecoder) {
 			let newUser = FirestoreManager.instance.users.document(from: user, json: json)
 			self.user = newUser
 			Task { @MainActor in

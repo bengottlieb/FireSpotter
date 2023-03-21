@@ -34,7 +34,7 @@ public extension SpotCollection {
 							await current.loadChanges(data)
 						} else if let current = self.allCache?.first(where: { $0.id == id }) {
 							await current.loadChanges(data)
-						} else if self.allCache != nil, let element = try? Element.loadJSON(dictionary: data) {
+						} else if self.allCache != nil, let element = try? Element.loadJSON(dictionary: data, using: .firebaseDecoder) {
 							let new = SpotDocument(element, collection: self, json: data)
 							self.allCache?.append(new)
 						}
