@@ -82,6 +82,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 	
 	func save(_ doc: SpotDocument<Element>) async throws {
 		try await base.document(doc.id).setData(doc.jsonPayload)
+		objectWillChange.sendOnMain()
 	}
 	
 	public var isEmpty: Bool {
