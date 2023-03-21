@@ -7,7 +7,7 @@
 
 import Suite
 
-public struct TimeAndDate: Codable, Equatable, Hashable, Sendable {
+public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 	let day: String
 	let time: String?
 	
@@ -21,8 +21,8 @@ public struct TimeAndDate: Codable, Equatable, Hashable, Sendable {
 		return date.midnight
 	}
 	
-	public static var now: TimeAndDate {
-		TimeAndDate(Date.now)
+	public static var now: SpotDate {
+		SpotDate(Date.now)
 	}
 	
 	public init(_ date: Date, includingTime: Bool = true) {
