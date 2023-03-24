@@ -10,16 +10,19 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 public class SpotCollection<Element: SpotRecord>: ObservableObject where Element.ID == String {
-	public let base: CollectionReference
+	public var base: CollectionReference
 	
 	var cache: [String: SpotDocument<Element>] = [:]
 	public var path: String { base.path }
 	var allCache: [SpotDocument<Element>]?
-	var isListening = false
+	var isListening: Bool { listener != nil }
+	var listener: ListenerRegistration?
+	var kind: FirebaseCollectionKind<Element>
 	
-	init(_ collection: CollectionReference, kind: Element.Type) {
+	init(_ collection: CollectionReference, kind: FirebaseCollectionKind<Element>) {
 		print("Creating collection at \(collection.path) for \(String(describing: Element.self))")
 		base = collection
+		self.kind = kind
 	}
 	
 	@MainActor public func remove(_ doc: SpotDocument<Element>) async throws {
@@ -89,6 +92,19 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		get async throws {
 			try await base.limit(to: 1).count.query.getDocuments().count == 0
 		}
+	}
+	
+	func changePath(to newPath: String) throws {
+		if newPath == base.path { return }
+		let isListening = self.isListening
+		
+		print("Changing collection: \(base.path) -> \(newPath)")
+		stopListening()
+		cache = [:]
+		allCache = []
+		base = FirestoreManager.instance.db.collection(newPath)
+		
+		if isListening { listen() }
 	}
 	
 	@MainActor public func new(withID id: String = .id(for: Element.self), addNow: Bool = true) -> SpotDocument<Element> {

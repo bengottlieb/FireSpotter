@@ -14,10 +14,17 @@ public extension SpotCollection {
 		allCache ?? []
 	}
 	
-	func listen() -> SpotCollection<Element> {
+	func stopListening() {
+		guard let listener else { return }
+		
+		listener.remove()
+		self.listener = nil
+	}
+	
+	@discardableResult func listen() -> SpotCollection<Element> {
 		if isListening { return self }
 
-		base.addSnapshotListener { querySnapshot, error in
+		listener = base.addSnapshotListener { querySnapshot, error in
 			Task { @MainActor in
 				guard let changes = querySnapshot?.documentChanges else {
 					print("No changes")
@@ -54,7 +61,6 @@ public extension SpotCollection {
 			}
 		}
 		
-		isListening = true
 		return self
 	}
 	

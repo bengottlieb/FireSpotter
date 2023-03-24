@@ -14,7 +14,6 @@ public class FirestoreManager {
 	public static let instance = FirestoreManager()
 	public var checkSchemas = true
 	
-	public enum CollectionKind: String { case users }
 	public var recordManager: SpotRecordManager?
 	
 	var cache: [String: AnySpotCollection] = [:]
@@ -38,12 +37,12 @@ public class FirestoreManager {
 		}
 	}
 	
-	public func collection<Element: SpotRecord>(at path: String, of: Element.Type) -> SpotCollection<Element> {
+	public func collection<Element: SpotRecord>(at path: String, of kind: FirebaseCollectionKind<Element>) -> SpotCollection<Element> {
 		
 		if let cached: SpotCollection<Element> = cache[path]?.collection() { return cached }
 		
-		let col = SpotCollection(db.collection(path), kind: Element.self)
 		cache[path] = AnySpotCollection(boxed: col)
+		let col = SpotCollection(db.collection(path), kind: kind)
 		return col
 	}
 	
@@ -51,8 +50,8 @@ public class FirestoreManager {
 
 		if let cached: SpotCollection<Element> = cache[kind.name]?.collection() { return cached }
 
-		let col = SpotCollection(db.collection(kind.name), kind: Element.self)
 		cache[kind.name] = AnySpotCollection(boxed: col)
+		let col = SpotCollection(db.collection(kind.name), kind: kind.self)
 		return col
 	}
 	

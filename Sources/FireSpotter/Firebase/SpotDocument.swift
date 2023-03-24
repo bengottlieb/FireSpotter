@@ -41,8 +41,8 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 		hasher.combine(subject)
 	}
 	
-	public func childCollection<Element: SpotRecord>(at name: String, of elem: Element.Type) -> SpotCollection<Element> {
-		FirestoreManager.instance.collection(at: path + "/" + name, of: elem)
+	public func childCollection<Element: SpotRecord>(at name: String, kind: FirebaseCollectionKind<Element>) -> SpotCollection<Element> {
+		FirestoreManager.instance.collection(at: path + "/" + name, of: kind)
 	}
 	
 	public subscript(key: String) -> Any? {
