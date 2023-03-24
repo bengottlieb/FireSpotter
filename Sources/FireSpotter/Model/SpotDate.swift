@@ -12,7 +12,9 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 	let time: String?
 	
 	public var date: Date? {
-		guard let date = DateFormatter.dmyDecoder.date(from: day)  else { return nil }
+		guard let date = DateFormatter.dmyDecoder.date(from: day)  else {
+			return nil
+		}
 		
 		if let time, let timeInfo = Date.Time(string: time) {
 			return date.bySetting(time: timeInfo)
@@ -20,6 +22,8 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 		
 		return date.noon
 	}
+	
+	public var hasTime: Bool { time != nil }
 	
 	public static var now: SpotDate {
 		SpotDate(Date.now)
