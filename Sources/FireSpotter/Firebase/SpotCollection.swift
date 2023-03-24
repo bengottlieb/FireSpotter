@@ -9,7 +9,12 @@ import Suite
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-public class SpotCollection<Element: SpotRecord>: ObservableObject where Element.ID == String {
+public protocol CollectionWrapper {
+	var path: String { get }
+	func changePath(to newPath: String) throws
+}
+
+public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWrapper where Element.ID == String {
 	public var base: CollectionReference
 	
 	var cache: [String: SpotDocument<Element>] = [:]
@@ -42,6 +47,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		try await save(doc)
 		cache[id] = doc
 		allCache?.append(doc)
+		objectWillChange.sendOnMain()
 	}
 	
 	@MainActor public func uncache(_ element: Element) {
@@ -94,7 +100,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject where Element
 		}
 	}
 	
-	func changePath(to newPath: String) throws {
+	public func changePath(to newPath: String) throws {
 		if newPath == base.path { return }
 		let isListening = self.isListening
 		

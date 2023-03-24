@@ -16,7 +16,7 @@ public class FirestoreManager {
 	
 	public var recordManager: SpotRecordManager?
 	
-	var cache: [String: AnySpotCollection] = [:]
+	public var cache: [String: CollectionWrapper] = [:]
 	let db = Firestore.firestore()
 	var kinds: [String: FirebaseCollectionInfo] = ["meta": try! .init(firebaseMetaCollectionKind)]
 	
@@ -39,20 +39,28 @@ public class FirestoreManager {
 	
 	public func collection<Element: SpotRecord>(at path: String, of kind: FirebaseCollectionKind<Element>) -> SpotCollection<Element> {
 		
-		if let cached: SpotCollection<Element> = cache[path]?.collection() { return cached }
+		if let cached = cache[path] as? SpotCollection<Element> { return cached }
 		
-		cache[path] = AnySpotCollection(boxed: col)
 		let col = SpotCollection(db.collection(path), kind: kind)
+		cache[path] = col
 		return col
 	}
 	
 	public subscript<Element: SpotRecord>(kind: FirebaseCollectionKind<Element>) -> SpotCollection<Element> {
 
-		if let cached: SpotCollection<Element> = cache[kind.name]?.collection() { return cached }
+		if let cached = cache[kind.name] as? SpotCollection<Element> { return cached }
 
-		cache[kind.name] = AnySpotCollection(boxed: col)
 		let col = SpotCollection(db.collection(kind.name), kind: kind.self)
+		cache[kind.name] = col
 		return col
+	}
+	
+	public func moveCollection(at oldPath: String, to newPath: String) throws {
+		guard let collection = cache[oldPath] else { return }
+		
+		try collection.changePath(to: newPath)
+		cache.removeValue(forKey: oldPath)
+		cache[newPath] = collection
 	}
 	
 //	public subscript<Element: Codable & Identifiable>(collection: CollectionKind) -> SpotCollection<Element> {

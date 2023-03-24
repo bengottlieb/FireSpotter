@@ -41,10 +41,10 @@ import Suite
 			Task { @MainActor in
 				if await newUser.update() {
 					saveUserDefaults()
-					objectWillChange.send()
 				}
 				self.setupUserCancellable()
 				if self.isSignedIn { Notifications.didSignIn.notify() }
+				objectWillChange.send()
 			}
 		}
 	}
