@@ -8,25 +8,40 @@
 import Suite
 
 public struct SpotDate: Codable, Equatable, Hashable, Sendable {
-	let day: String
-	let time: String?
+	var day: String
+	var time: String?
 	
-	public var date: Date? {
-		guard let date = DateFormatter.dmyDecoder.date(from: day)  else {
-			return nil
+	public var date: Date {
+		get {
+			guard let date = DateFormatter.dmyDecoder.date(from: day) else {
+				return .now
+			}
+			
+			if let time, let timeInfo = Date.Time(string: time) {
+				return date.bySetting(time: timeInfo)
+			}
+			
+			return date.noon
 		}
 		
-		if let time, let timeInfo = Date.Time(string: time) {
-			return date.bySetting(time: timeInfo)
+		set {
+			day = DateFormatter.dmyDecoder.string(from: newValue.noon)
+			if time != nil {
+				time = String(format: "%02d:%02d", newValue.hour, newValue.minute)
+			}
 		}
-		
-		return date.noon
+	}
+	
+	public func formatted(date dateStyle: Date.FormatStyle.DateStyle = .long, time timeStye: Date.FormatStyle.TimeStyle = .shortened) -> String {
+		if !hasTime {
+			return dateStyle == .omitted ? "" : date.formatted(date: dateStyle, time: .omitted)
+		}
+		return date.formatted(date: dateStyle, time: timeStye)
 	}
 	
 	public var hasTime: Bool { time != nil }
-	public var noon: SpotDate? {
-		guard let noon = date?.noon else { return nil }
-		return SpotDate(noon)
+	public var noon: SpotDate {
+		SpotDate(date.noon)
 	}
 	
 	public static var now: SpotDate {
