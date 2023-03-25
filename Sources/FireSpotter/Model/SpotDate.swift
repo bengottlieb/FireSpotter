@@ -24,6 +24,10 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 	}
 	
 	public var hasTime: Bool { time != nil }
+	public var noon: SpotDate? {
+		guard let noon = date?.noon else { return nil }
+		return SpotDate(noon)
+	}
 	
 	public static var now: SpotDate {
 		SpotDate(Date.now)
