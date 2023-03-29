@@ -9,7 +9,7 @@ import Suite
 
 public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 	var day: String
-	var time: String?
+	public var time: String?
 	
 	public var date: Date {
 		get {
