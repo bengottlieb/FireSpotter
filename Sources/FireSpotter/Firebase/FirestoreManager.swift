@@ -41,7 +41,16 @@ public class FirestoreManager {
 		
 		if let cached = cache[path] as? SpotCollection<Element> { return cached }
 		
-		let col = SpotCollection(db.collection(path), kind: kind)
+		let col = SpotCollection(db.collection(path), kind: kind, parent: nil)
+		cache[path] = col
+		return col
+	}
+	
+	public func collection<Element: SpotRecord, Parent: SpotRecord>(at path: String, of kind: FirebaseCollectionKind<Element>, parent: SpotDocument<Parent>) -> SpotCollection<Element> {
+		
+		if let cached = cache[path] as? SpotCollection<Element> { return cached }
+		
+		let col = SpotCollection(db.collection(path), kind: kind, parent: parent)
 		cache[path] = col
 		return col
 	}

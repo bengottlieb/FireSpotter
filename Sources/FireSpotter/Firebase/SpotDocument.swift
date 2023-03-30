@@ -42,7 +42,8 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 	}
 	
 	public func childCollection<Element: SpotRecord>(at name: String, kind: FirebaseCollectionKind<Element>) -> SpotCollection<Element> {
-		FirestoreManager.instance.collection(at: path + "/" + name, of: kind)
+		let collection = FirestoreManager.instance.collection(at: path + "/" + name, of: kind, parent: self)
+		return collection
 	}
 	
 	public subscript(key: String) -> Any? {

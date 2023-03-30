@@ -23,15 +23,21 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 	var isListening: Bool { listener != nil }
 	var listener: ListenerRegistration?
 	var kind: FirebaseCollectionKind<Element>
-	
-	init(_ collection: CollectionReference, kind: FirebaseCollectionKind<Element>) {
+	private var parentDocument: Any?
+
+	init(_ collection: CollectionReference, kind: FirebaseCollectionKind<Element>, parent: Any? = nil) {
 		print("Creating collection at \(collection.path) for \(String(describing: Element.self))")
 		base = collection
 		self.kind = kind
+		self.parentDocument = parent
 	}
 	
 	@MainActor public func remove(_ doc: SpotDocument<Element>) async throws {
 		try await remove(doc.subject)
+	}
+	
+	public func parent<DocSubject: SpotRecord>() -> SpotDocument<DocSubject>? {
+		parentDocument as? SpotDocument<DocSubject>
 	}
 	
 	@MainActor public func remove(_ element: Element) async throws {
