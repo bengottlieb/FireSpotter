@@ -24,7 +24,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 	var listener: ListenerRegistration?
 	var kind: FirebaseCollectionKind<Element>
 	private var parentDocument: Any?
-
+	
 	init(_ collection: CollectionReference, kind: FirebaseCollectionKind<Element>, parent: Any? = nil) {
 		print("Creating collection at \(collection.path) for \(String(describing: Element.self))")
 		base = collection
@@ -131,7 +131,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		let record = Element.newRecord(withID: id)
 		return SpotDocument(record, collection: self, isSaved: false)
 	}
-
+	
 	func document(from json: JSONDictionary) throws -> SpotDocument<Element> {
 		let element = try Element.loadJSON(dictionary: json, using: .firebaseDecoder)
 		
@@ -145,7 +145,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		cache[new.id] = new
 		return new
 	}
-
+	
 	public subscript(id: String, default: Element) -> SpotDocument<Element> {
 		get async {
 			assert(id.isNotEmpty, "Cannot create an element wiith an empty ID")
@@ -157,10 +157,10 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		}
 	}
 	
-	public subscript(id: String) -> SpotDocument<Element>? {
+	public subscript(id: String?) -> SpotDocument<Element>? {
 		get async {
 			do {
-				if id.isEmpty { return nil }
+				guard let id, !id.isEmpty else { return nil }
 				let raw = try await base.document(id).getDocument()
 				guard let data = raw.data() else { return nil }
 				return try document(from: data)
@@ -168,6 +168,13 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 				print("Failed to get document: \(error)")
 				return nil
 			}
+		}
+	}
+	
+	public subscript(sync id: String?) -> SpotDocument<Element>? {
+		get {
+			allCache?.first { $0.id == id }
+			
 		}
 	}
 }
