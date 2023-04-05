@@ -63,6 +63,17 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 		SpotDate(Date.now)
 	}
 	
+	public func withTime(_ src: Date? = nil) -> SpotDate {
+		var newDate = self
+		newDate.time = (src ?? .now).time
+		return newDate
+	}
+	
+	public var dateOnly: Date {
+		get { date.noon }
+		set { self.dayString = DateFormatter.dmyDecoder.string(from: newValue) }
+	}
+	
 	public init(_ date: Date, includingTime: Bool = true) {
 		dayString = DateFormatter.dmyDecoder.string(from: date.noon)
 		if includingTime {

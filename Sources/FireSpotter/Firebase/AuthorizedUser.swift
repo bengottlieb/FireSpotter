@@ -10,7 +10,7 @@ import FirebaseAuth
 import AuthenticationServices
 import Suite
 
-@MainActor public class AuthorizedUser: ObservableObject {
+public class AuthorizedUser: ObservableObject {
 	public static let instance = AuthorizedUser()
 	
 	enum AuthorizationError: Error { case unknown, noIdentityToken, badIdentityToken }
