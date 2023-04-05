@@ -14,6 +14,7 @@ extension CredentialsScreen {
 		@Binding var email: String
 		@Binding var password: String
 		let showSignInWithApple: Bool
+		let skipSignIn: (() -> Void)?
 
 		@State private var displayedError: Error?
 		
@@ -52,14 +53,21 @@ extension CredentialsScreen {
 				
 				Spacer()
 				
-				Button("Create Account") {
-					createUser()
+				HStack {
+					Button("Create Account") { createUser() }
+						.buttonStyle(FullWidthButtonStyle())
+						.keyboardShortcut("\n", localization: .automatic)
+						.disabled(!validCredentials || isCommunicating)
+					
+					if let skipSignIn {
+						Button("Skip") { skipSignIn() }
+							.buttonStyle(FullWidthButtonStyle(borderOnly: true, borderWidth: 2))
+							.keyboardShortcut("\n", localization: .automatic)
+							.disabled(isCommunicating)
+					}
 				}
-				.keyboardShortcut("\n", localization: .automatic)
-				.buttonStyle(FullWidthButtonStyle())
-				.disabled(!validCredentials || isCommunicating)
 				.frame(height: 50)
-				
+
 				if showSignInWithApple {
 					SignInWithAppleView(displayedError: $displayedError, label: .signUp)
 				}
@@ -71,6 +79,6 @@ extension CredentialsScreen {
 
 struct CredentialsScreen_RegisterUserView_Previews: PreviewProvider {
     static var previews: some View {
-		 CredentialsScreen.RegisterUserView(isCommunicating: .constant(false), email: .constant(""), password: .constant(""), showSignInWithApple: false)
+		 CredentialsScreen.RegisterUserView(isCommunicating: .constant(false), email: .constant(""), password: .constant(""), showSignInWithApple: false) { }
     }
 }

@@ -14,6 +14,7 @@ extension CredentialsScreen {
 		@Binding var email: String
 		@Binding var password: String
 		let showSignInWithApple: Bool
+		let skipSignIn: (() -> Void)?
 		
 		@State private var displayedError: Error?
 		@EnvironmentObject var authorizedUser: AuthorizedUser
@@ -52,13 +53,20 @@ extension CredentialsScreen {
 				
 				Spacer()
 				
-				Button("Sign In") {
-					signIn()
+				HStack {
+					Button("Sign In") { signIn() }
+						.buttonStyle(FullWidthButtonStyle())
+						.keyboardShortcut("\n", localization: .automatic)
+						.disabled(!validCredentials || isCommunicating)
+						
+					if let skipSignIn {
+						Button("Skip") { skipSignIn() }
+							.buttonStyle(FullWidthButtonStyle(borderOnly: true, borderWidth: 2))
+							.keyboardShortcut("\n", localization: .automatic)
+							.disabled(isCommunicating)
+					}
 				}
-				.keyboardShortcut("\n", localization: .automatic)
 				.frame(height: 50)
-				.buttonStyle(FullWidthButtonStyle())
-				.disabled(!validCredentials || isCommunicating)
 
 				if showSignInWithApple {
 					SignInWithAppleView(displayedError: $displayedError, label: .signIn)
@@ -71,7 +79,7 @@ extension CredentialsScreen {
 
 struct CredentialsScreen_LoginUserView_Previews: PreviewProvider {
 	static var previews: some View {
-		CredentialsScreen.LoginUserView(isCommunicating: .constant(false), email: .constant(""), password: .constant(""), showSignInWithApple: false)
+		CredentialsScreen.LoginUserView(isCommunicating: .constant(false), email: .constant(""), password: .constant(""), showSignInWithApple: false) { }
 	}
 }
 

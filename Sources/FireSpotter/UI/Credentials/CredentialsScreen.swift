@@ -15,13 +15,19 @@ public struct CredentialsScreen: View {
 	@State private var password = ProcessInfo.string(for: "preloadedPassword") ?? ""
 	@EnvironmentObject var authorizedUser: AuthorizedUser
 	let allowAccountCreation: Bool
+	let allowDontSignIn: Bool
 	
-	public init(showSignInWithApple: Bool = false, allowAccountCreation: Bool = true) {
+	public init(showSignInWithApple: Bool = false, allowAccountCreation: Bool = true, allowDontSignIn: Bool = false) {
 		self.showSignInWithApple = showSignInWithApple
 		self.allowAccountCreation = allowAccountCreation
+		self.allowDontSignIn = allowDontSignIn
 		if !allowAccountCreation { isRegistering = false }
 	}
 	
+	func skip() {
+		
+	}
+
 	public var body: some View {
 		VStack {
 			Text("Credentials")
@@ -36,9 +42,9 @@ public struct CredentialsScreen: View {
 			}
 			
 			if isRegistering {
-				RegisterUserView(isCommunicating: $isCommunicating, email: $email, password: $password, showSignInWithApple: showSignInWithApple)
+				RegisterUserView(isCommunicating: $isCommunicating, email: $email, password: $password, showSignInWithApple: showSignInWithApple, skipSignIn: allowDontSignIn ? { skip() } : nil)
 			} else {
-				LoginUserView(isCommunicating: $isCommunicating, email: $email, password: $password, showSignInWithApple: showSignInWithApple)
+				LoginUserView(isCommunicating: $isCommunicating, email: $email, password: $password, showSignInWithApple: showSignInWithApple, skipSignIn: allowDontSignIn ? { skip() } : nil)
 			}
 		}
 		.padding(.horizontal)
