@@ -14,6 +14,7 @@ public struct CredentialsScreen: View {
 	@State private var email = ProcessInfo.string(for: "preloadedEmail") ?? ""
 	@State private var password = ProcessInfo.string(for: "preloadedPassword") ?? ""
 	@EnvironmentObject var authorizedUser: AuthorizedUser
+	@Environment(\.dismiss) var dismiss
 	let allowAccountCreation: Bool
 	let allowDontSignIn: Bool
 	
@@ -25,7 +26,7 @@ public struct CredentialsScreen: View {
 	}
 	
 	func skip() {
-		
+		dismiss()
 	}
 
 	public var body: some View {
