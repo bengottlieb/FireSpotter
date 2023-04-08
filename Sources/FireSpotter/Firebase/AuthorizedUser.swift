@@ -103,7 +103,7 @@ public class AuthorizedUser: ObservableObject {
 			print("Failed to sign out of Firebase: \(error)")
 		}
 		userDefaults.removeObject(forKey: userDefaultsKey)
-		objectWillChange.send()
+		objectWillChange.sendOnMain()
 		Notifications.didSignOut.notify()
 	}
 	
