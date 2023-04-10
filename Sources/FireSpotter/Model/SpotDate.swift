@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SpotDate.swift
 //  
 //
 //  Created by Ben Gottlieb on 3/21/23.
@@ -31,6 +31,11 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 				timeString = String(format: "%02d:%02d", newValue.hour, newValue.minute)
 			}
 		}
+	}
+	
+	public var day: Date.Day {
+		get { Date.Day(dmy: dayString) ?? date.day }
+		set { dayString = newValue.dmyString }
 	}
 	
 	public var time: Date.Time? {
