@@ -15,7 +15,7 @@ extension UUID {
 
 extension String {
 	public static func id(prefix: String) -> String {
-		return prefix + "-" + UUID().id
+		return prefix + "-" + .dateTag + "-" + UUID().id
 	}
 
 	public static func id(for record: any Any.Type) -> String {
