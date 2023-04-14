@@ -8,6 +8,8 @@
 import Foundation
 import CrossPlatformKit
 
+public typealias SpotUserDocument = SpotDocument<SpotUser>
+
 public struct SpotUser: SpotRecord {
 	public var id = String.id(for: SpotUser.self)
 	public var firstName: String?

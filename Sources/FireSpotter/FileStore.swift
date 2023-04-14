@@ -27,6 +27,7 @@ public struct ImageKind: Equatable {
 
 public class FileStore {
 	public static let instance = FileStore()
+	public var session = URLSession.shared
 	
 	public static var maxUploadedImageSize = CGSize(width: 500, height: 500)
 	
@@ -51,6 +52,30 @@ public class FileStore {
 		metadata.contentType = contentType
 		
 		return try await storage.putDataAsync(data, metadata: metadata)
+	}
+	
+	@discardableResult public func moveFile(at src: String, to dst: String, kind: ImageKind?) async throws -> FirebaseStorage.StorageMetadata {
+		let srcPath = kind?.path(for: src) ?? src
+		let dstPath = kind?.path(for: dst) ?? dst
+		let storage = try storage(forPath: srcPath)
+		let metadata = try await storage.getMetadata()
+		let url = try await storage.downloadURL()
+		let local = try await session.download(from: url).0
+		let data = try Data(contentsOf: local)
+		try? FileManager.default.removeItem(at: local)
+		
+		let result = try await upload(data: data, to: dstPath, contentType: metadata.contentType)
+		try await delete(from: srcPath)
+		
+		return result
+	}
+	
+	public func data(at path: String) async throws -> Data {
+		let url = try await urlForFile(at: path)
+		let local = try await session.download(from: url).0
+		let data = try Data(contentsOf: local)
+		try? FileManager.default.removeItem(at: local)
+		return data
 	}
 	
 	public func urlForFile(at path: String) async throws -> URL {

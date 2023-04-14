@@ -19,7 +19,7 @@ public class AuthorizedUser: ObservableObject {
 		public static let didSignOut = Notification.Name("AuthorizedUser.didSignOut")
 	}
 	
-	public var user: SpotDocument<SpotUser> = SpotUser.emptyUser { didSet {
+	public var user: SpotUserDocument = SpotUser.emptyUser { didSet {
 		setupUserCancellable()
 	}}
 	private var userCancellable: AnyCancellable?
