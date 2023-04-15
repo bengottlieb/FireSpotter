@@ -28,10 +28,10 @@ public struct SpotMeta: SpotRecord {
 	@MainActor public static func newRecord(withID id: String) -> Self { fatalError("SpotMeta.newRecord() should never be called") }
 }
 
-extension SpotDocument where Subject == SpotMeta {
+extension SpotDocument where Record == SpotMeta {
 	func modelDifferences(json: [String: Any]) async -> KeyDifferences? {
-		guard let current = subject.minimalJSON else {
-			subject.minimalJSON = json
+		guard let current = record.minimalJSON else {
+			record.minimalJSON = json
 			save()
 			return nil
 		}
@@ -41,7 +41,7 @@ extension SpotDocument where Subject == SpotMeta {
 		if isMateriallyChanged, (try? await collection!.isEmpty) == true { isMateriallyChanged = false }
 		if !isMateriallyChanged {
 			if !diff.isEmpty {
-				subject.minimalJSON = json
+				record.minimalJSON = json
 				save()
 			}
 			return nil

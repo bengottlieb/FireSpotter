@@ -71,7 +71,7 @@ public class AuthorizedUser: ObservableObject {
 	}
 	
 	func didUpdateDeviceInfo() {
-		if isSignedIn, user.subject.addToken(token: apnsToken, deviceID: deviceID) {
+		if isSignedIn, user.record.addToken(token: apnsToken, deviceID: deviceID) {
 			user.save()
 		}
 	}
@@ -131,10 +131,10 @@ public class AuthorizedUser: ObservableObject {
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.user.subject.firstName = cred?.fullName?.givenName
-						self.user.subject.lastName = cred?.fullName?.familyName
-						self.user.subject.emailAddress = cred?.email
-						self.user.subject.addToken(token: self.apnsToken, deviceID: self.deviceID)
+						self.user.record.firstName = cred?.fullName?.givenName
+						self.user.record.lastName = cred?.fullName?.familyName
+						self.user.record.emailAddress = cred?.email
+						self.user.record.addToken(token: self.apnsToken, deviceID: self.deviceID)
 						self.user.save()
 						Notifications.didSignIn.notify()
 						continuation.resume()
@@ -154,8 +154,8 @@ public class AuthorizedUser: ObservableObject {
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.user.subject.emailAddress = email
-						self.user.subject.addToken(token: self.apnsToken, deviceID: self.deviceID)
+						self.user.record.emailAddress = email
+						self.user.record.addToken(token: self.apnsToken, deviceID: self.deviceID)
 						self.user.save()
 						continuation.resume()
 					}
@@ -174,8 +174,8 @@ public class AuthorizedUser: ObservableObject {
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.user.subject.emailAddress = email
-						self.user.subject.addToken(token: self.apnsToken, deviceID: self.deviceID)
+						self.user.record.emailAddress = email
+						self.user.record.addToken(token: self.apnsToken, deviceID: self.deviceID)
 						self.user.save()
 						continuation.resume()
 					}

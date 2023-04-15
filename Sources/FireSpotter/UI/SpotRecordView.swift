@@ -21,7 +21,7 @@ public struct SpotRecordView<Record: SpotRecord, Content: View>: View {
 	}
 	
 	public var body: some View {
-		content(doc?.subject)
+		content(doc?.record)
 			.task { await doc = collection[id] }
 	}
 }

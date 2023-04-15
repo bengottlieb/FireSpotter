@@ -32,7 +32,7 @@ public struct SpotUser: SpotRecord {
 	}
 }
 
-extension SpotDocument where Subject == SpotUser {
+extension SpotDocument where Record == SpotUser {
 	
 	public func setProfileImage(_ image: UXImage) async throws {
 		try await FileStore.instance.upload(image: image, kind: .avatar, to: id)

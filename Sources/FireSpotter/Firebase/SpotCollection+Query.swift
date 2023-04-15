@@ -48,9 +48,9 @@ public extension SpotCollection {
 
 					case .removed:
 						if let index = self.allCache?.firstIndex(where: { $0.id == id }) {
-							if let manager = FirestoreManager.instance.recordManager, let obj = self.allCache?[index], await !manager.shouldDelete(object: obj.subject) { return }
+							if let manager = FirestoreManager.instance.recordManager, let obj = self.allCache?[index], await !manager.shouldDelete(object: obj.record) { return }
 							self.allCache?.remove(at: index)
-						} else if let manager = FirestoreManager.instance.recordManager, let obj = self.cache[id], await !manager.shouldDelete(object: obj.subject) {
+						} else if let manager = FirestoreManager.instance.recordManager, let obj = self.cache[id], await !manager.shouldDelete(object: obj.record) {
 							return
 						}
 

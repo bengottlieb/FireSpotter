@@ -33,7 +33,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 	}
 	
 	@MainActor public func remove(_ doc: SpotDocument<Element>) async throws {
-		try await remove(doc.subject)
+		try await remove(doc.record)
 	}
 	
 	public func parent<DocSubject: SpotRecord>() -> SpotDocument<DocSubject>? {
@@ -48,7 +48,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 	
 	@MainActor public func move(_ doc: SpotDocument<Element>, toID id: String) async throws {
 		if doc.id == id { return }
-		try await remove(doc.subject)
+		try await remove(doc.record)
 		doc.id = id
 		try await save(doc)
 		cache[id] = doc
@@ -72,7 +72,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 	
 	@discardableResult func save(_ element: Element, json: [String: Any]? = nil) async throws -> SpotDocument<Element> {
 		if let cached = cache[element.id] {
-			cached.subject = element
+			cached.record = element
 			try await save(cached)
 			return cached
 		}
@@ -85,7 +85,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 	
 	public func document(from element: Element, json: JSONDictionary) -> SpotDocument<Element> {
 		if let cached = cache[element.id] {
-			cached.subject = element
+			cached.record = element
 			cached.json = json
 			return cached
 		}
@@ -136,7 +136,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		let element = try Element.loadJSON(dictionary: json, using: .firebaseDecoder)
 		
 		if let cached = cache[element.id] {
-			cached.subject = element
+			cached.record = element
 			cached.merge(json)
 			return cached
 		}

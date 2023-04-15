@@ -11,34 +11,34 @@ import FirebaseFirestoreSwift
 import Journalist
 import Suite
 
-public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Identifiable, Hashable where Subject.ID == String {	
-	public var subject: Subject { willSet { objectWillChange.sendOnMain() }}
+public class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Identifiable, Hashable {	
+	public var record: Record { willSet { objectWillChange.sendOnMain() }}
 	public var json: [String: Any] { willSet { objectWillChange.sendOnMain() }}
 	public var id: String {
-		get { subject.id }
+		get { record.id }
 		set {
-			subject.id = newValue
+			record.id = newValue
 			json["id"] = newValue
 		}
 	}
 	
-	public var recordBinding: Binding<Subject> {
+	public var recordBinding: Binding<Record> {
 		Binding(
-			get: { self.subject },
-			set: { new in self.subject = new }
+			get: { self.record },
+			set: { new in self.record = new }
 		)
 	}
 	
 	public static func ==(lhs: SpotDocument, rhs: SpotDocument) -> Bool {
-		lhs.subject.id == rhs.subject.id
+		lhs.record.id == rhs.record.id
 	}
 	
-	public let collection: SpotCollection<Subject>!
-	public var path: String { collection.path + "/" + subject.id }
+	public let collection: SpotCollection<Record>!
+	public var path: String { collection.path + "/" + record.id }
 	var isSaved = true
 	
 	public func hash(into hasher: inout Hasher) {
-		hasher.combine(subject)
+		hasher.combine(record)
 	}
 	
 	public func childCollection<Element: SpotRecord>(at name: String, kind: FirebaseCollectionKind<Element>) -> SpotCollection<Element> {
@@ -62,7 +62,7 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 			guard let raw = try await collection.base.document(id).getDocument().data() else { return false }
 			
 			if !raw.isEqual(to: json) {
-				subject = try Subject.loadJSON(dictionary: raw, using: .firebaseDecoder)
+				record = try Record.loadJSON(dictionary: raw, using: .firebaseDecoder)
 				json = raw
 				return true
 			}
@@ -74,7 +74,7 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 	
 	var jsonPayload: [String: Any] {
 		var base = json
-		let raw = (try? subject.asJSON()) ?? [:]
+		let raw = (try? record.asJSON()) ?? [:]
 		
 		for (key, value) in raw {
 			base[key] = value
@@ -82,9 +82,9 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 		return base
 	}
 	
-	init(_ subject: Subject, collection: SpotCollection<Subject>?, json: [String: Any]? = nil, isSaved: Bool = true) {
-		assert(Gestalt.isInPreview || collection != nil, "Cannot use a nil collection for a SpotDocument<\(Subject.self)>")
-		self.subject = subject
+	init(_ subject: Record, collection: SpotCollection<Record>?, json: [String: Any]? = nil, isSaved: Bool = true) {
+		assert(Gestalt.isInPreview || collection != nil, "Cannot use a nil collection for a SpotDocument<\(Record.self)>")
+		self.record = subject
 		self.collection = collection
 		self.json = json ?? (try? subject.asJSON()) ?? [:]
 		self.isSaved = isSaved
@@ -107,10 +107,10 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 	}
 	
 	public func loadChanges(_ json: [String: Any]) async {
-		if let manager = FirestoreManager.instance.recordManager, await !manager.shouldChange(object: subject, with: json) { return }
+		if let manager = FirestoreManager.instance.recordManager, await !manager.shouldChange(object: record, with: json) { return }
 		
 		do {
-			subject = try Subject.loadJSON(dictionary: json, using: .firebaseDecoder)
+			record = try Record.loadJSON(dictionary: json, using: .firebaseDecoder)
 		} catch {
 			print("Failed to re-constitute the subject: \(error)")
 		}
@@ -119,8 +119,8 @@ public class SpotDocument<Subject: SpotRecord>: Equatable, ObservableObject, Ide
 	}
 }
 
-extension SpotDocument: Comparable where Subject: Comparable {
+extension SpotDocument: Comparable where Record: Comparable {
 	public static func <(lhs: SpotDocument, rhs: SpotDocument) -> Bool {
-		lhs.subject < rhs.subject
+		lhs.record < rhs.record
 	}
 }
