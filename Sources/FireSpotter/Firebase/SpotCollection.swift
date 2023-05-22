@@ -56,6 +56,10 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		objectWillChange.sendOnMain()
 	}
 	
+	@MainActor public func isCached(_ element: Element) -> Bool {
+		allCache?.contains(where: { $0.id == element.id }) == true
+	}
+	
 	@MainActor public func uncache(_ element: Element) {
 		if let index = allCache?.firstIndex(where: { $0.id == element.id }) {
 			allCache?.remove(at: index)
