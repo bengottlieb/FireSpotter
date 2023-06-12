@@ -9,20 +9,14 @@ import Suite
 
 public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 	enum CodingKeys: String, CodingKey { case dayString = "day", timeString = "time" }
-	var dayString: String
-	public var timeString: String?
+	var dayString: String { didSet { cachedDate = computedDate }}
+	public var timeString: String? { didSet { cachedDate = computedDate }}
+	public var cachedDate: Date?
 	
 	public var date: Date {
 		get {
-			guard let date = DateFormatter.dmyDecoder.date(from: dayString) else {
-				return .now
-			}
-			
-			if let time = timeString, let timeInfo = Date.Time(string: time) {
-				return date.bySetting(time: timeInfo)
-			}
-			
-			return date.noon
+			if let cachedDate { return cachedDate }
+			return computedDate
 		}
 		
 		set {
@@ -30,6 +24,7 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 			if timeString != nil {
 				timeString = String(format: "%02d:%02d", newValue.hour, newValue.minute)
 			}
+			cachedDate = newValue
 		}
 	}
 	
@@ -49,6 +44,7 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 			} else {
 				timeString = nil
 			}
+			cachedDate = computedDate
 		}
 	}
 	
@@ -91,9 +87,29 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 		} else {
 			timeString = nil
 		}
+		cachedDate = date
+	}
+	
+	public init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		dayString = try container.decode(String.self, forKey: .dayString)
+		timeString = try container.decodeIfPresent(String.self, forKey: .timeString)
+		cachedDate = computedDate
 	}
 	
 	public static var timezone = TimeZone(abbreviation: "MDT")
+	
+	public var computedDate: Date {
+		guard let date = DateFormatter.dmyDecoder.date(from: dayString) else {
+			return .now
+		}
+		
+		if let time = timeString, let timeInfo = Date.Time(string: time) {
+			return date.bySetting(time: timeInfo)
+		}
+		
+		return date.noon
+	}
 }
 
 
