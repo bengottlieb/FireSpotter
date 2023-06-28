@@ -31,7 +31,7 @@ public extension SpotCollection {
 					return
 				}
 				
-				print("Received \(changes.count) changes")
+				//print("Received \(changes.count) changes")
 				for change in changes {
 					let id = change.document.documentID
 					switch change.type {

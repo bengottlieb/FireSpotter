@@ -28,6 +28,10 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 		}
 	}
 	
+	public func byAdding(timeInterval: TimeInterval) -> SpotDate {
+		.init(date.addingTimeInterval(timeInterval))
+	}
+	
 	public var day: Date.Day {
 		get { Date.Day(dmy: dayString) ?? date.day }
 		set { dayString = newValue.dmyString }
