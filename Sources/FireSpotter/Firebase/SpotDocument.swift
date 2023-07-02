@@ -57,6 +57,10 @@ public class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Iden
 		}
 	}
 	
+	func awakeFromFetch() async {
+		await record.awakeFromFetch(in: self)
+	}
+	
 	@MainActor public func update() async -> Bool {
 		do {
 			guard let raw = try await collection.base.document(id).getDocument().data() else { return false }
@@ -64,6 +68,7 @@ public class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Iden
 			if !raw.isEqual(to: json) {
 				record = try Record.loadJSON(dictionary: raw, using: .firebaseDecoder)
 				json = raw
+				await awakeFromFetch()
 				return true
 			}
 		} catch {

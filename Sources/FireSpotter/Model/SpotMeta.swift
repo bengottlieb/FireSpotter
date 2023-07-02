@@ -24,7 +24,7 @@ public struct SpotMeta: SpotRecord {
 	}
 	
 	public static var minimalRecord = SpotMeta(id: "")
-
+	public func awakeFromFetch(in document: SpotDocument<Self>) async { }
 	@MainActor public static func newRecord(withID id: String) -> Self { fatalError("SpotMeta.newRecord() should never be called") }
 }
 

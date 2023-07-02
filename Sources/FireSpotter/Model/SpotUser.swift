@@ -26,7 +26,8 @@ public struct SpotUser: SpotRecord {
 		
 	public static var minimalRecord = SpotUser(id: "")
 	public static var emptyUser = SpotDocument(SpotUser(id: ""), collection: FirestoreManager.instance.users)
-	
+	public func awakeFromFetch(in document: SpotDocument<Self>) async { }
+
 	@MainActor public static func newRecord(withID id: String) -> Self {
 		SpotUser(id: id)
 	}

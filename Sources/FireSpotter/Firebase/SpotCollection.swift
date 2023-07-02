@@ -167,7 +167,9 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 				guard let id, !id.isEmpty else { return nil }
 				let raw = try await base.document(id).getDocument()
 				guard let data = raw.data() else { return nil }
-				return try document(from: data)
+				let doc = try document(from: data)
+				await doc.awakeFromFetch()
+				return doc
 			} catch {
 				print("Failed to get document: \(error)")
 				return nil
