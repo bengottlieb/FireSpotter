@@ -64,24 +64,20 @@ public extension SpotCollection {
 		return self
 	}
 	
-	@MainActor @discardableResult func fetchAll() async -> [SpotDocument<Element>] {
-		await all
+	
+	@discardableResult @MainActor func fetchAll() async throws -> [SpotDocument<Element>] {
+		try await all
 	}
 	
 	@MainActor var all: [SpotDocument<Element>] {
-		get async {
-			do {
-				if let all = allCache { return all }
-				let results = try await base.getDocuments().documents
-				allCache = try results.map { try document(from: $0.data() ) }
-				for doc in allCache! { await doc.awakeFromFetch() }
-				objectWillChange.send()
-				print("Fetched \(results.count) / \(allCache?.count ?? 0) for \(path)")
-				return allCache ?? []
-			} catch {
-				print("Failed to fetch documents: \(error)")
-				return []
-			}
+		get async throws {
+			if let all = allCache { return all }
+			let results = try await base.getDocuments().documents
+			allCache = try results.map { try document(from: $0.data() ) }
+			for doc in allCache! { await doc.awakeFromFetch() }
+			objectWillChange.send()
+			print("Fetched \(results.count) / \(allCache?.count ?? 0) for \(path)")
+			return allCache ?? []
 		}
 	}
 	

@@ -20,6 +20,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 	var cache: [String: SpotDocument<Element>] = [:]
 	public var path: String { base.path }
 	public var allCache: [SpotDocument<Element>]?
+	public var cachedCount: Int { allCache?.count ?? 0 }
 	var isListening: Bool { listener != nil }
 	var listener: ListenerRegistration?
 	var kind: FirebaseCollectionKind<Element>
