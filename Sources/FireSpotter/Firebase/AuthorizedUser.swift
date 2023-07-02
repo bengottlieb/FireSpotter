@@ -43,7 +43,13 @@ public class AuthorizedUser: ObservableObject {
 					saveUserDefaults()
 				}
 				self.setupUserCancellable()
-				if self.isSignedIn { Notifications.didSignIn.notify() }
+				if self.isSignedIn {
+					Task {
+						await FirestoreManager.instance.recordManager?.didSignIn()
+						Notifications.didSignIn.notify()
+					}
+					
+				}
 				objectWillChange.send()
 			}
 		}
@@ -110,13 +116,16 @@ public class AuthorizedUser: ObservableObject {
 	func store(user fbUser: User, completion: @escaping () -> Void) {
 		self.fbUser = fbUser
 		let users = FirestoreManager.instance.users
-		Task { @MainActor in 
-			self.user = await users[fbUser.uid] ?? SpotDocument(SpotUser.newRecord(withID: fbUser.uid), collection: users)
+		Task {
 			saveUserDefaults()
+			await FirestoreManager.instance.recordManager?.didSignIn()
 
-			self.objectWillChange.send()
-			completion()
-			Notifications.didSignIn.notify()
+			Task { @MainActor in
+				self.user = await users[fbUser.uid] ?? SpotDocument(SpotUser.newRecord(withID: fbUser.uid), collection: users)
+				self.objectWillChange.send()
+				completion()
+				Notifications.didSignIn.notify()
+			}
 		}
 	}
 	
@@ -136,8 +145,11 @@ public class AuthorizedUser: ObservableObject {
 						self.user.record.emailAddress = cred?.email
 						self.user.record.addToken(token: self.apnsToken, deviceID: self.deviceID)
 						self.user.save()
-						Notifications.didSignIn.notify()
-						continuation.resume()
+						Task {
+							await FirestoreManager.instance.recordManager?.didSignIn()
+							Notifications.didSignIn.notify()
+							continuation.resume()
+						}
 					}
 				} else {
 					continuation.resume(throwing: AuthorizationError.unknown)

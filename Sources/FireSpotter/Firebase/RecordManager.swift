@@ -8,6 +8,7 @@
 import Suite
 
 public protocol SpotRecordManager: AnyObject {
+	func didSignIn() async
 	func shouldChange(object: any SpotRecord, with json: JSONDictionary) async -> Bool
 	func shouldDelete(object: any SpotRecord) async -> Bool
 }
