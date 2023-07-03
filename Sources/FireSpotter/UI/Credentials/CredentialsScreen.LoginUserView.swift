@@ -15,7 +15,8 @@ extension CredentialsScreen {
 		@Binding var password: String
 		let showSignInWithApple: Bool
 		let skipSignIn: (() -> Void)?
-		
+		@ViewBuilder var content: () -> Content
+
 		@State private var displayedError: Error?
 		@EnvironmentObject var authorizedUser: AuthorizedUser
 		
@@ -51,6 +52,8 @@ extension CredentialsScreen {
 						.multilineTextAlignment(.center)
 				}
 				
+				content()
+				
 				Spacer()
 				
 				HStack {
@@ -76,10 +79,3 @@ extension CredentialsScreen {
 		}
 	}
 }
-
-struct CredentialsScreen_LoginUserView_Previews: PreviewProvider {
-	static var previews: some View {
-		CredentialsScreen.LoginUserView(isCommunicating: .constant(false), email: .constant(""), password: .constant(""), showSignInWithApple: false) { }
-	}
-}
-

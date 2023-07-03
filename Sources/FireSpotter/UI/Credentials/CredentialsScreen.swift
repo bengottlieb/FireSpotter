@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct CredentialsScreen: View {
+public struct CredentialsScreen<Content: View>: View {
 	let showSignInWithApple: Bool
 	@State private var isRegistering = false
 	@State private var isCommunicating = false
@@ -17,11 +17,13 @@ public struct CredentialsScreen: View {
 	@Environment(\.dismiss) var dismiss
 	let allowAccountCreation: Bool
 	let allowDontSignIn: Bool
+	@ViewBuilder var content: () -> Content
 	
-	public init(showSignInWithApple: Bool = false, allowAccountCreation: Bool = true, allowDontSignIn: Bool = false) {
+	public init(showSignInWithApple: Bool = false, allowAccountCreation: Bool = true, allowDontSignIn: Bool = false, @ViewBuilder content: @escaping () -> Content) {
 		self.showSignInWithApple = showSignInWithApple
 		self.allowAccountCreation = allowAccountCreation
 		self.allowDontSignIn = allowDontSignIn
+		self.content = content
 		if !allowAccountCreation { isRegistering = false }
 	}
 	
@@ -43,9 +45,9 @@ public struct CredentialsScreen: View {
 			}
 			
 			if isRegistering {
-				RegisterUserView(isCommunicating: $isCommunicating, email: $email, password: $password, showSignInWithApple: showSignInWithApple, skipSignIn: allowDontSignIn ? { skip() } : nil)
+				RegisterUserView(isCommunicating: $isCommunicating, email: $email, password: $password, showSignInWithApple: showSignInWithApple, skipSignIn: allowDontSignIn ? { skip() } : nil, content: content)
 			} else {
-				LoginUserView(isCommunicating: $isCommunicating, email: $email, password: $password, showSignInWithApple: showSignInWithApple, skipSignIn: allowDontSignIn ? { skip() } : nil)
+				LoginUserView(isCommunicating: $isCommunicating, email: $email, password: $password, showSignInWithApple: showSignInWithApple, skipSignIn: allowDontSignIn ? { skip() } : nil, content: content)
 			}
 		}
 		.padding(.horizontal)
@@ -55,6 +57,6 @@ public struct CredentialsScreen: View {
 
 struct CredentialsScreen_Previews: PreviewProvider {
 	static var previews: some View {
-		CredentialsScreen()
+		CredentialsScreen() { EmptyView() }
 	}
 }

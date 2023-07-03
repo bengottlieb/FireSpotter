@@ -116,16 +116,13 @@ public class AuthorizedUser: ObservableObject {
 	func store(user fbUser: User, completion: @escaping () -> Void) {
 		self.fbUser = fbUser
 		let users = FirestoreManager.instance.users
-		Task {
+		Task { @MainActor in
+			self.user = await users[fbUser.uid] ?? SpotDocument(SpotUser.newRecord(withID: fbUser.uid), collection: users)
 			saveUserDefaults()
 			await FirestoreManager.instance.recordManager?.didSignIn()
-
-			Task { @MainActor in
-				self.user = await users[fbUser.uid] ?? SpotDocument(SpotUser.newRecord(withID: fbUser.uid), collection: users)
-				self.objectWillChange.send()
-				completion()
-				Notifications.didSignIn.notify()
-			}
+			self.objectWillChange.send()
+			completion()
+			Notifications.didSignIn.notify()
 		}
 	}
 	

@@ -64,7 +64,7 @@ public class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Iden
 	
 	@MainActor public func update() async -> Bool {
 		do {
-			guard let raw = try await collection.base.document(id).getDocument().data() else { return false }
+			guard !id.isEmpty, let raw = try await collection.base.document(id).getDocument().data() else { return false }
 			
 			if !raw.isEqual(to: json) {
 				record = try Record.loadJSON(dictionary: raw, using: .firebaseDecoder)
