@@ -26,6 +26,15 @@ public class FirestoreManager {
 		}
 	}
 	
+	public var latestBuildNumber: Int? {
+		get async {
+			if let info = await meta["info"] {
+				return info.json["latest_build"] as? Int
+			}
+			return nil
+		}
+	}
+	
 	func register<Element>(kind: FirebaseCollectionKind<Element>) async throws {
 		kinds[kind.name] = try .init(kind)
 		

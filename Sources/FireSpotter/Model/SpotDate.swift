@@ -108,8 +108,10 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable {
 			return .now
 		}
 		
-		if let time = timeString, let timeInfo = Date.Time(string: time) {
-			return date.bySetting(time: timeInfo)
+		if let time = timeString {
+			if let timeInfo = Date.Time(string: time) {
+				return date.bySetting(time: timeInfo)
+			}
 		}
 		
 		return date.noon
