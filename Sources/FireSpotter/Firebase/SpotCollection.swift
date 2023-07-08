@@ -17,7 +17,7 @@ public protocol CollectionWrapper {
 public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWrapper where Element.ID == String {
 	public var base: CollectionReference
 	
-	var cache: [String: SpotDocument<Element>] = [:]
+	var cache = RecordCache<Element>()
 	public var path: String { base.path }
 	public var allCache: [SpotDocument<Element>]?
 	public var cachedCount: Int { allCache?.count ?? 0 }
@@ -25,6 +25,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 	var listener: ListenerRegistration?
 	var kind: FirebaseCollectionKind<Element>
 	private var parentDocument: Any?
+	
 	
 	init(_ collection: CollectionReference, kind: FirebaseCollectionKind<Element>, parent: Any? = nil) {
 		print("Creating collection at \(collection.path) for \(String(describing: Element.self))")
@@ -52,7 +53,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		try await remove(doc.record)
 		doc.id = id
 		try await save(doc)
-		cache[id] = doc
+		await cache.set(doc, forKey: id)
 		allCache?.append(doc)
 		objectWillChange.sendOnMain()
 	}
@@ -65,7 +66,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		if let index = allCache?.firstIndex(where: { $0.id == element.id }) {
 			allCache?.remove(at: index)
 		}
-		cache.removeValue(forKey: element.id)
+		Task { await cache.removeRecord(forKey: element.id) }
 	}
 	
 	@discardableResult public func append(_ element: Element) throws -> SpotDocument<Element> {
@@ -76,27 +77,27 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 	}
 	
 	@discardableResult func save(_ element: Element, json: [String: Any]? = nil) async throws -> SpotDocument<Element> {
-		if let cached = cache[element.id] {
+		if let cached = await cache.record(forKey: element.id) {
 			cached.record = element
 			try await save(cached)
 			return cached
 		}
 		
 		let doc = SpotDocument(element, collection: self)
-		cache[element.id] = doc
+		await cache.set(doc, forKey: element.id)
 		try await save(doc)
 		return doc
 	}
 	
 	public func document(from element: Element, json: JSONDictionary) -> SpotDocument<Element> {
-		if let cached = cache[element.id] {
+		if let cached = cache.inMemoryCache.value[element.id] {
 			cached.record = element
 			cached.json = json
 			return cached
 		}
 		
 		let new = SpotDocument(element, collection: self, json: json)
-		cache[element.id] = new
+		Task { await cache.set(new, forKey: element.id) }
 		return new
 	}
 	
@@ -117,7 +118,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		
 		print("Changing collection: \(base.path) -> \(newPath)")
 		stopListening()
-		cache = [:]
+		Task { await cache.clear() }
 		allCache = []
 		base = FirestoreManager.instance.db.collection(newPath)
 		
@@ -140,14 +141,14 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 	func document(from json: JSONDictionary) throws -> SpotDocument<Element> {
 		let element = try Element.loadJSON(dictionary: json, using: .firebaseDecoder)
 		
-		if let cached = cache[element.id] {
+		if let cached = cache.inMemoryCache.value[element.id] {
 			cached.record = element
 			cached.merge(json)
 			return cached
 		}
 		
 		let new = SpotDocument(element, collection: self, json: json)
-		cache[new.id] = new
+		Task { await cache.set(new, forKey: new.id) }
 		return new
 	}
 	
@@ -157,7 +158,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 			if let current = await self[id] { return current }
 			let new = SpotDocument(`default`, collection: self)
 			new.id = id
-			cache[id] = new
+			await cache.set(new, forKey: id)
 			return new
 		}
 	}

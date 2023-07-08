@@ -37,7 +37,7 @@ public extension SpotCollection {
 					switch change.type {
 					case .added, .modified:
 						let data = change.document.data()
-						if let current = self.cache[id] {
+						if let current = self.cache.inMemoryCache.value[id] {
 							await current.loadChanges(data)
 						} else if let current = self.allCache?.first(where: { $0.id == id }) {
 							await current.loadChanges(data)
@@ -50,11 +50,11 @@ public extension SpotCollection {
 						if let index = self.allCache?.firstIndex(where: { $0.id == id }) {
 							if let manager = FirestoreManager.instance.recordManager, let obj = self.allCache?[index], await !manager.shouldDelete(object: obj.record) { return }
 							self.allCache?.remove(at: index)
-						} else if let manager = FirestoreManager.instance.recordManager, let obj = self.cache[id], await !manager.shouldDelete(object: obj.record) {
+						} else if let manager = FirestoreManager.instance.recordManager, let obj = self.cache.inMemoryCache.value[id], await !manager.shouldDelete(object: obj.record) {
 							return
 						}
 
-						self.cache.removeValue(forKey: id)
+						Task { await self.cache.removeRecord(forKey: id) }
 					}
 				}
 				self.objectWillChange.send()
