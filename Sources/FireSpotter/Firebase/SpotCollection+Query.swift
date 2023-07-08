@@ -10,7 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 public extension SpotCollection {
-	var syncAll: [SpotDocument<Element>] {
+	var syncAll: [SpotDocument<RecordType>] {
 		allCache ?? []
 	}
 	
@@ -21,7 +21,7 @@ public extension SpotCollection {
 		self.listener = nil
 	}
 	
-	@discardableResult func listen() -> SpotCollection<Element> {
+	@discardableResult func listen() -> SpotCollection<RecordType> {
 		if isListening { return self }
 
 		listener = base.addSnapshotListener { querySnapshot, error in
@@ -41,7 +41,7 @@ public extension SpotCollection {
 							await current.loadChanges(data)
 						} else if let current = self.allCache?.first(where: { $0.id == id }) {
 							await current.loadChanges(data)
-						} else if self.allCache != nil, let element = try? Element.loadJSON(dictionary: data, using: .firebaseDecoder) {
+						} else if self.allCache != nil, let element = try? RecordType.loadJSON(dictionary: data, using: .firebaseDecoder) {
 							let new = SpotDocument(element, collection: self, json: data)
 							self.allCache?.append(new)
 						}
@@ -65,11 +65,11 @@ public extension SpotCollection {
 	}
 	
 	
-	@discardableResult @MainActor func fetchAll() async throws -> [SpotDocument<Element>] {
+	@discardableResult @MainActor func fetchAll() async throws -> [SpotDocument<RecordType>] {
 		try await all
 	}
 	
-	@MainActor var all: [SpotDocument<Element>] {
+	@MainActor var all: [SpotDocument<RecordType>] {
 		get async throws {
 			if let all = allCache { return all }
 			let results = try await base.getDocuments().documents
@@ -81,7 +81,7 @@ public extension SpotCollection {
 		}
 	}
 	
-	func documents(where field: String, isEqualTo target: Any) async throws -> [SpotDocument<Element>] {
+	func documents(where field: String, isEqualTo target: Any) async throws -> [SpotDocument<RecordType>] {
 		
 		let results = try await base.whereField(field, isEqualTo: target).getDocuments().documents
 		
@@ -89,7 +89,7 @@ public extension SpotCollection {
 		return try results.map { try document(from: $0.data() ) }
 	}
 	
-	func documents(where field: String, startsWith target: String) async throws -> [SpotDocument<Element>] {
+	func documents(where field: String, startsWith target: String) async throws -> [SpotDocument<RecordType>] {
 		
 		let results = try await base
 			.whereField(field, isGreaterThanOrEqualTo: target)

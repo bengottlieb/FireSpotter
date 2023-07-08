@@ -9,32 +9,32 @@ import Suite
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-public protocol CollectionWrapper {
+public protocol CollectionWrapper: AnyObject {
 	var path: String { get }
 	func changePath(to newPath: String) throws
 }
 
-public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWrapper where Element.ID == String {
+public class SpotCollection<RecordType: SpotRecord>: ObservableObject, CollectionWrapper where RecordType.ID == String {
 	public var base: CollectionReference
 	
-	var cache = RecordCache<Element>()
+	var cache = ObjectCache<SpotDocument<RecordType>>()
 	public var path: String { base.path }
-	public var allCache: [SpotDocument<Element>]?
+	public var allCache: [SpotDocument<RecordType>]?
 	public var cachedCount: Int { allCache?.count ?? 0 }
 	var isListening: Bool { listener != nil }
 	var listener: ListenerRegistration?
-	var kind: FirebaseCollectionKind<Element>
+	var kind: FirebaseCollectionKind<RecordType>
 	private var parentDocument: Any?
 	
 	
-	init(_ collection: CollectionReference, kind: FirebaseCollectionKind<Element>, parent: Any? = nil) {
-		print("Creating collection at \(collection.path) for \(String(describing: Element.self))")
+	init(_ collection: CollectionReference, kind: FirebaseCollectionKind<RecordType>, parent: Any? = nil) {
+		print("Creating collection at \(collection.path) for \(String(describing: RecordType.self))")
 		base = collection
 		self.kind = kind
 		self.parentDocument = parent
 	}
 	
-	@MainActor public func remove(_ doc: SpotDocument<Element>) async throws {
+	@MainActor public func remove(_ doc: SpotDocument<RecordType>) async throws {
 		try await remove(doc.record)
 	}
 	
@@ -42,13 +42,13 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		parentDocument as? SpotDocument<DocSubject>
 	}
 	
-	@MainActor public func remove(_ element: Element) async throws {
+	@MainActor public func remove(_ element: RecordType) async throws {
 		try await base.document(element.id).delete()
 		uncache(element)
 		objectWillChange.send()
 	}
 	
-	@MainActor public func move(_ doc: SpotDocument<Element>, toID id: String) async throws {
+	@MainActor public func move(_ doc: SpotDocument<RecordType>, toID id: String) async throws {
 		if doc.id == id { return }
 		try await remove(doc.record)
 		doc.id = id
@@ -58,25 +58,25 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		objectWillChange.sendOnMain()
 	}
 	
-	@MainActor public func isCached(_ element: Element) -> Bool {
+	@MainActor public func isCached(_ element: RecordType) -> Bool {
 		allCache?.contains(where: { $0.id == element.id }) == true
 	}
 	
-	@MainActor public func uncache(_ element: Element) {
+	@MainActor public func uncache(_ element: RecordType) {
 		if let index = allCache?.firstIndex(where: { $0.id == element.id }) {
 			allCache?.remove(at: index)
 		}
 		Task { await cache.removeRecord(forKey: element.id) }
 	}
 	
-	@discardableResult public func append(_ element: Element) throws -> SpotDocument<Element> {
+	@discardableResult public func append(_ element: RecordType) throws -> SpotDocument<RecordType> {
 		let doc = base.document(element.id)
 		try doc.setData(from: element)
 		
 		return SpotDocument(element, collection: self)
 	}
 	
-	@discardableResult func save(_ element: Element, json: [String: Any]? = nil) async throws -> SpotDocument<Element> {
+	@discardableResult func save(_ element: RecordType, json: [String: Any]? = nil) async throws -> SpotDocument<RecordType> {
 		if let cached = await cache.record(forKey: element.id) {
 			cached.record = element
 			try await save(cached)
@@ -89,7 +89,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		return doc
 	}
 	
-	public func document(from element: Element, json: JSONDictionary) -> SpotDocument<Element> {
+	public func document(from element: RecordType, json: JSONDictionary) -> SpotDocument<RecordType> {
 		if let cached = cache.inMemoryCache.value[element.id] {
 			cached.record = element
 			cached.json = json
@@ -101,7 +101,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		return new
 	}
 	
-	func save(_ doc: SpotDocument<Element>) async throws {
+	func save(_ doc: SpotDocument<RecordType>) async throws {
 		try await base.document(doc.id).setData(doc.jsonPayload)
 		objectWillChange.sendOnMain()
 	}
@@ -125,21 +125,21 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		if isListening { listen() }
 	}
 	
-	@MainActor public func new(withID id: String = .id(for: Element.self), addNow: Bool = true) -> SpotDocument<Element> {
+	@MainActor public func new(withID id: String = .id(for: RecordType.self), addNow: Bool = true) -> SpotDocument<RecordType> {
 		DispatchQueue.main.async { self.objectWillChange.send() }
 		
 		if addNow {
-			let new = try! document(from: Element.newRecord(withID: id).asJSON())
+			let new = try! document(from: RecordType.newRecord(withID: id).asJSON())
 			allCache?.append(new)
 			return new
 		}
 		
-		let record = Element.newRecord(withID: id)
+		let record = RecordType.newRecord(withID: id)
 		return SpotDocument(record, collection: self, isSaved: false)
 	}
 	
-	func document(from json: JSONDictionary) throws -> SpotDocument<Element> {
-		let element = try Element.loadJSON(dictionary: json, using: .firebaseDecoder)
+	func document(from json: JSONDictionary) throws -> SpotDocument<RecordType> {
+		let element = try RecordType.loadJSON(dictionary: json, using: .firebaseDecoder)
 		
 		if let cached = cache.inMemoryCache.value[element.id] {
 			cached.record = element
@@ -152,7 +152,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		return new
 	}
 	
-	public subscript(id: String, default: Element) -> SpotDocument<Element> {
+	public subscript(id: String, default: RecordType) -> SpotDocument<RecordType> {
 		get async {
 			assert(id.isNotEmpty, "Cannot create an element wiith an empty ID")
 			if let current = await self[id] { return current }
@@ -163,7 +163,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		}
 	}
 	
-	public subscript(id: String?) -> SpotDocument<Element>? {
+	public subscript(id: String?) -> SpotDocument<RecordType>? {
 		get async {
 			do {
 				guard let id, !id.isEmpty else { return nil }
@@ -179,7 +179,7 @@ public class SpotCollection<Element: SpotRecord>: ObservableObject, CollectionWr
 		}
 	}
 	
-	public subscript(sync id: String?) -> SpotDocument<Element>? {
+	public subscript(sync id: String?) -> SpotDocument<RecordType>? {
 		get {
 			allCache?.first { $0.id == id }
 			
