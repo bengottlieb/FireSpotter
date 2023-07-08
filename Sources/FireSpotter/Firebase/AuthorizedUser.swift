@@ -36,7 +36,7 @@ public class AuthorizedUser: ObservableObject {
 	init() {
 		fbUser = Auth.auth().currentUser
 		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, let user = try? SpotUser.loadJSON(dictionary: json, using: .firebaseDecoder) {
-			let newUser = FirestoreManager.instance.users.document(from: user, json: json)
+			let newUser = FirestoreManager.users.document(from: user, json: json)
 			self.user = newUser
 			Task { @MainActor in
 				if await newUser.update() {
@@ -115,7 +115,7 @@ public class AuthorizedUser: ObservableObject {
 	
 	func store(user fbUser: User, completion: @escaping () -> Void) {
 		self.fbUser = fbUser
-		let users = FirestoreManager.instance.users
+		let users = FirestoreManager.users
 		Task { @MainActor in
 			self.user = await users[fbUser.uid] ?? SpotDocument(SpotUser.newRecord(withID: fbUser.uid), collection: users)
 			saveUserDefaults()

@@ -28,7 +28,7 @@ public class FirestoreManager {
 	
 	public var latestBuildNumber: Int? {
 		get async {
-			if let info = await meta["info"] {
+			if let info = await Self.meta["info"] {
 				return info.json["latest_build"] as? Int
 			}
 			return nil
@@ -39,7 +39,7 @@ public class FirestoreManager {
 		kinds[kind.name] = try .init(kind)
 		
 		if checkSchemas, !kind.isMeta {
-			let existing = await meta[kind.name, .init(id: kind.name)]
+			let existing = await Self.meta[kind.name, .init(id: kind.name)]
 			if let diffs = await existing.modelDifferences(json: try Element.minimalRecord.asJSON()) {
 				fatalError("Data type changed: \(Element.self), diffs: \(diffs.description)")
 			}
@@ -88,8 +88,8 @@ public class FirestoreManager {
 }
 
 public extension FirestoreManager {
-	var users: SpotCollection<SpotUser> { self[firebaseUserCollectionKind]}
-	var meta: SpotCollection<SpotMeta> { self[firebaseMetaCollectionKind]}
+	static var users: SpotCollection<SpotUser> = FirestoreManager.instance[firebaseUserCollectionKind]
+	static var meta: SpotCollection<SpotMeta> = FirestoreManager.instance[firebaseMetaCollectionKind]
 }
 
 struct AnySpotCollection {

@@ -25,7 +25,7 @@ public struct SpotUser: SpotRecord {
 	var apnsTokens: [APNSDeviceInfo]?
 		
 	public static var minimalRecord = SpotUser(id: "")
-	public static var emptyUser = SpotDocument(SpotUser(id: ""), collection: FirestoreManager.instance.users)
+	public static var emptyUser = SpotDocument(SpotUser(id: ""), collection: FirestoreManager.users)
 	public func awakeFromFetch(in document: SpotDocument<Self>) async { }
 
 	@MainActor public static func newRecord(withID id: String) -> Self {
