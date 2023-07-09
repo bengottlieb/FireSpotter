@@ -10,6 +10,7 @@ import Suite
 public struct SpotMeta: SpotRecord {
 	public var id: String
 	var minimalData: String?
+	var testDate: Date?
 	
 	var minimalJSON: [String: Any]? {
 		get {
@@ -24,8 +25,17 @@ public struct SpotMeta: SpotRecord {
 	}
 	
 	public static var minimalRecord = SpotMeta(id: "")
-	public func awakeFromFetch(in document: SpotDocument<Self>) async { }
+	public func awakeFromFetch(in document: SpotDocument<Self>) async {
+		document.record.testDate = Date().byAdding(days: 10)
+		document.save()
+	}
 	@MainActor public static func newRecord(withID id: String) -> Self { fatalError("SpotMeta.newRecord() should never be called") }
+}
+
+extension SpotMeta: DateKeyProvider {
+	static public func isDateKey(_ key: String) -> Bool {
+		return key == "testDate"
+	}
 }
 
 extension SpotDocument where Record == SpotMeta {
