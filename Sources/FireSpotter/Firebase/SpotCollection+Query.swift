@@ -36,7 +36,7 @@ public extension SpotCollection {
 					let id = change.document.documentID
 					switch change.type {
 					case .added, .modified:
-						let data = change.document.data()
+						let data = change.document.data().convertingFirebaseTimestampsToDates()
 						if let current = self.cache.inMemoryCache.value[id] {
 							await current.loadChanges(data)
 						} else if let current = self.allCache?.first(where: { $0.id == id }) {
