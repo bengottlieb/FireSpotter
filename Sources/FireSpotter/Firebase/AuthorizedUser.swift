@@ -10,7 +10,7 @@ import FirebaseAuth
 import AuthenticationServices
 import Suite
 
-public class AuthorizedUser: ObservableObject {
+@MainActor public class AuthorizedUser: ObservableObject {
 	public static let instance = AuthorizedUser()
 	
 	enum AuthorizationError: Error { case unknown, noIdentityToken, badIdentityToken }
@@ -19,7 +19,7 @@ public class AuthorizedUser: ObservableObject {
 		public static let didSignOut = Notification.Name("AuthorizedUser.didSignOut")
 	}
 	
-	public var user: SpotUserDocument = SpotUser.emptyUser { didSet {
+	@MainActor public var user: SpotUserDocument = SpotUser.emptyUser { didSet {
 		setupUserCancellable()
 	}}
 	private var userCancellable: AnyCancellable?

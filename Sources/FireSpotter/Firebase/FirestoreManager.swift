@@ -88,8 +88,8 @@ public class FirestoreManager {
 }
 
 public extension FirestoreManager {
-	static var users: SpotCollection<SpotUser> = FirestoreManager.instance[firebaseUserCollectionKind]
-	static var meta: SpotCollection<SpotMeta> = FirestoreManager.instance[firebaseMetaCollectionKind]
+	@MainActor static var users: SpotCollection<SpotUser> = FirestoreManager.instance[firebaseUserCollectionKind]
+	@MainActor static var meta: SpotCollection<SpotMeta> = FirestoreManager.instance[firebaseMetaCollectionKind]
 }
 
 struct AnySpotCollection {

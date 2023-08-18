@@ -12,10 +12,11 @@ import Journalist
 import Suite
 
 public class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Identifiable, Hashable {	
+	public typealias ID = String
 	public var record: Record { willSet { objectWillChange.sendOnMain() }}
 	public var json: [String: Any] { willSet { objectWillChange.sendOnMain() }}
 	public var cachedValues: [String: Any] = [:]
-	public var id: String {
+	public var id: ID {
 		get { record.id }
 		set {
 			record.id = newValue
