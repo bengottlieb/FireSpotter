@@ -125,6 +125,17 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 		if isListening { listen() }
 	}
 	
+	@MainActor @discardableResult public func add(record: RecordType) async -> SpotDocument<RecordType> {
+		if let existing = await self[record.id] {
+			existing.record = record
+			return existing
+		}
+		
+		let new = SpotDocument(record, collection: self)
+		await cache.set(new, forKey: record.id)
+		return new
+	}
+	
 	@MainActor public func new(withID id: String = .id(for: RecordType.self), addNow: Bool = true) -> SpotDocument<RecordType> {
 		DispatchQueue.main.async { self.objectWillChange.send() }
 		
