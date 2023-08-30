@@ -34,18 +34,8 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 		self.parentDocument = parent
 	}
 	
-	@MainActor public func remove(_ doc: SpotDocument<RecordType>) async throws {
-		try await remove(doc.record)
-	}
-	
 	public func parent<DocSubject: SpotRecord>() -> SpotDocument<DocSubject>? {
 		parentDocument as? SpotDocument<DocSubject>
-	}
-	
-	@MainActor public func remove(_ element: RecordType) async throws {
-		try await base.document(element.id).delete()
-		uncache(element)
-		objectWillChange.send()
 	}
 	
 	@MainActor public func move(_ doc: SpotDocument<RecordType>, toID id: String) async throws {
