@@ -19,8 +19,10 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 	
 	var cache = ObjectCache<SpotDocument<RecordType>>()
 	public var path: String { base.path }
-	public var allCache: [SpotDocument<RecordType>]?
-	public var cachedCount: Int { allCache?.count ?? 0 }
+	
+	public var cachedDocuments: [SpotDocument<RecordType>] { allCache ?? [] }
+	var allCache: [SpotDocument<RecordType>]?
+	public var cachedCount: Int { cachedDocuments.count }
 	var isListening: Bool { listener != nil }
 	var listener: ListenerRegistration?
 	var kind: FirebaseCollectionKind<RecordType>
@@ -43,30 +45,44 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 		try await remove(doc.record)
 		doc.id = id
 		try await save(doc)
-		await cache.set(doc, forKey: id)
-		allCache?.append(doc)
+		cache(doc)
 		objectWillChange.sendOnMain()
 	}
+	
+	@MainActor public func isCached(_ id: String) -> Bool {
+		allCache?.contains(where: { $0.id == id }) == true
+	}
+	
 	
 	@MainActor public func isCached(_ element: RecordType) -> Bool {
 		allCache?.contains(where: { $0.id == element.id }) == true
 	}
 	
 	@MainActor public func uncache(_ element: RecordType) {
-		if let index = allCache?.firstIndex(where: { $0.id == element.id }) {
-			allCache?.remove(at: index)
-		}
+		allCache?.removeAll { $0.id == element.id }
 		Task { await cache.removeRecord(forKey: element.id) }
 	}
 	
-	@discardableResult public func append(_ element: RecordType) throws -> SpotDocument<RecordType> {
+	@MainActor func cache(_ document: SpotDocument<RecordType>) {
+		if allCache == nil { allCache = [] }
+		if allCache?.contains(document) == true { 
+			print("duplicate record?: \(document)")
+			return
+		}
+		allCache?.append(document)
+		Task { await cache.set(document, forKey: document.id) }
+	}
+	
+	@MainActor @discardableResult public func append(_ element: RecordType) throws -> SpotDocument<RecordType> {
 		let doc = base.document(element.id)
 		try doc.setData(element.asJSON().convertingDatesToFirebaseTimestamps(using: RecordType.self as? DateKeyProvider.Type))
 		
-		return SpotDocument(element, collection: self)
+		let newDoc = SpotDocument(element, collection: self)
+		cache(newDoc)
+		return newDoc
 	}
 	
-	@discardableResult func save(_ element: RecordType, json: [String: Any]? = nil) async throws -> SpotDocument<RecordType> {
+	@MainActor @discardableResult func save(_ element: RecordType, json: [String: Any]? = nil) async throws -> SpotDocument<RecordType> {
 		if let cached = await cache.record(forKey: element.id) {
 			cached.record = element
 			try await save(cached)
@@ -74,20 +90,20 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 		}
 		
 		let doc = SpotDocument(element, collection: self)
-		await cache.set(doc, forKey: element.id)
 		try await save(doc)
+		cache(doc)
 		return doc
 	}
 	
-	public func document(from element: RecordType, json: JSONDictionary) -> SpotDocument<RecordType> {
-		if let cached = cache.inMemoryCache.value[element.id] {
+	@MainActor public func document(from element: RecordType, json: JSONDictionary) -> SpotDocument<RecordType> {
+		if let cached = cached(id: element.id) {
 			cached.record = element
 			cached.json = json
 			return cached
 		}
 		
 		let new = SpotDocument(element, collection: self, json: json)
-		Task { await cache.set(new, forKey: element.id) }
+		cache(new)
 		return new
 	}
 	
@@ -122,7 +138,8 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 		}
 		
 		let new = SpotDocument(record, collection: self)
-		await cache.set(new, forKey: record.id)
+		cache(new)
+		objectWillChange.sendOnMain()
 		return new
 	}
 	
@@ -131,25 +148,33 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 		
 		if addNow {
 			let new = try! document(from: RecordType.newRecord(withID: id).asJSON())
-			allCache?.append(new)
 			return new
 		}
 		
 		let record = RecordType.newRecord(withID: id)
-		return SpotDocument(record, collection: self, isSaved: false)
+		let doc = SpotDocument(record, collection: self, isSaved: false)
+		cache(doc)
+		return doc
 	}
 	
-	func document(from json: JSONDictionary) throws -> SpotDocument<RecordType> {
+	func cached(id: String) -> SpotDocument<RecordType>? {
+		if let cached = cache.inMemoryCache.value[id] { return cached }
+		
+		if let cached = allCache?.first(where: { $0.id == id }) { return cached }
+		return nil
+	}
+	
+	@MainActor func document(from json: JSONDictionary) throws -> SpotDocument<RecordType> {
 		let element = try RecordType.loadJSON(dictionary: json.convertingFirebaseTimestampsToDates(), using: .firebaseDecoder)
 		
-		if let cached = cache.inMemoryCache.value[element.id] {
+		if let cached = cached(id: element.id) {
 			cached.record = element
 			cached.merge(json)
 			return cached
 		}
 		
 		let new = SpotDocument(element, collection: self, json: json)
-		Task { await cache.set(new, forKey: new.id) }
+		cache(new)
 		return new
 	}
 	
@@ -159,15 +184,16 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 			if let current = await self[id] { return current }
 			let new = SpotDocument(`default`, collection: self)
 			new.id = id
-			await cache.set(new, forKey: id)
+			await cache(new)
 			return new
 		}
 	}
 	
-	public subscript(id: String?) -> SpotDocument<RecordType>? {
+	@MainActor public subscript(id: String?) -> SpotDocument<RecordType>? {
 		get async {
 			do {
 				guard let id, !id.isEmpty else { return nil }
+				if let existing = allCache?.first(where: { $0.id == id }) { return existing }
 				let raw = try await base.document(id).getDocument()
 				guard let data = raw.data() else { return nil }
 				let doc = try document(from: data)

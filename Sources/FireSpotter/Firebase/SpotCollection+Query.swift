@@ -43,13 +43,15 @@ public extension SpotCollection {
 							await current.loadChanges(data)
 						} else if self.allCache != nil, let element = try? RecordType.loadJSON(dictionary: data, using: .firebaseDecoder) {
 							let new = SpotDocument(element, collection: self, json: data)
-							self.allCache?.append(new)
+							self.cache(new)
 						}
 
 					case .removed:
 						if let index = self.allCache?.firstIndex(where: { $0.id == id }) {
 							if let manager = FirestoreManager.instance.recordManager, let obj = self.allCache?[index], await !manager.shouldDelete(object: obj.record) { return }
-							self.allCache?.remove(at: index)
+							self.allCache?.removeAll { $0.id == id }
+							Task { await self.cache.removeRecord(forKey: id) }
+
 						} else if let manager = FirestoreManager.instance.recordManager, let obj = self.cache.inMemoryCache.value[id], await !manager.shouldDelete(object: obj.record) {
 							return
 						}
@@ -81,7 +83,7 @@ public extension SpotCollection {
 		}
 	}
 	
-	func documents(where field: String, isEqualTo target: Any) async throws -> [SpotDocument<RecordType>] {
+	@MainActor func documents(where field: String, isEqualTo target: Any) async throws -> [SpotDocument<RecordType>] {
 		
 		let results = try await base.whereField(field, isEqualTo: target).getDocuments().documents
 		
@@ -89,7 +91,7 @@ public extension SpotCollection {
 		return try results.map { try document(from: $0.data() ) }
 	}
 	
-	func documents(where field: String, startsWith target: String) async throws -> [SpotDocument<RecordType>] {
+	@MainActor func documents(where field: String, startsWith target: String) async throws -> [SpotDocument<RecordType>] {
 		
 		let results = try await base
 			.whereField(field, isGreaterThanOrEqualTo: target)
