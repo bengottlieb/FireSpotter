@@ -78,7 +78,7 @@ public extension SpotCollection {
 			allCache = try results.map { try document(from: $0.data() ) }
 			for doc in allCache! { await doc.awakeFromFetch() }
 			objectWillChange.send()
-			print("Fetched \(results.count) / \(allCache?.count ?? 0) for \(path)")
+			//print("Fetched \(results.count) / \(allCache?.count ?? 0) for \(path)")
 			return allCache ?? []
 		}
 	}

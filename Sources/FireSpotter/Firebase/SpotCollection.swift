@@ -30,7 +30,7 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 	
 	
 	init(_ collection: CollectionReference, kind: FirebaseCollectionKind<RecordType>, parent: Any? = nil) {
-		print("Creating collection at \(collection.path) for \(String(describing: RecordType.self))")
+		//print("Creating collection at \(collection.path) for \(String(describing: RecordType.self))")
 		base = collection
 		self.kind = kind
 		self.parentDocument = parent
