@@ -75,7 +75,14 @@ public extension SpotCollection {
 		get async throws {
 			if let all = allCache { return all }
 			let results = try await base.getDocuments().documents
-			allCache = try results.map { try document(from: $0.data() ) }
+			allCache = try results.map { 
+				do {
+					return try document(from: $0.data() )
+				} catch {
+					print("Error decoding \(RecordType.self): \(error)")
+					throw error
+				}
+			}
 			for doc in allCache! { await doc.awakeFromFetch() }
 			objectWillChange.send()
 			//print("Fetched \(results.count) / \(allCache?.count ?? 0) for \(path)")

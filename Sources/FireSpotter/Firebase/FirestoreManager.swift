@@ -24,6 +24,11 @@ public class FirestoreManager {
 		Task { @MainActor in
 			try await register(kind: firebaseUserCollectionKind)
 		}
+		if ProcessInfo.bool(for: "offline") { goOffline() }
+	}
+	
+	func goOffline() {
+		db.disableNetwork()
 	}
 	
 	public var latestBuildNumber: Int? {

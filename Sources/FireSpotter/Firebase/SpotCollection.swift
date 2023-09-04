@@ -200,7 +200,7 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 				await doc.awakeFromFetch()
 				return doc
 			} catch {
-				print("Failed to get \(RecordType.self): \(error)")
+			//	print("Failed to get \(RecordType.self): \(error)")
 				return nil
 			}
 		}
