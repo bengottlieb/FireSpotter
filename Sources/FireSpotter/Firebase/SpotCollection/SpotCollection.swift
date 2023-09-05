@@ -12,6 +12,7 @@ import FirebaseFirestoreSwift
 public protocol CollectionWrapper: AnyObject {
 	var path: String { get }
 	func changePath(to newPath: String) throws
+	func backup(to backup: FirestoreBackup) async throws
 }
 
 public class SpotCollection<RecordType: SpotRecord>: ObservableObject, CollectionWrapper where RecordType.ID == String {
