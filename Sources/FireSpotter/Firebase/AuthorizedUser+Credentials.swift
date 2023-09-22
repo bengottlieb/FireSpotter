@@ -20,7 +20,7 @@ extension AuthorizedUser {
 		let email = userID + autoICloudEmailSuffix
 		
 		do {
-			try await signIn(email: email, password: defaultPassword)
+			try await signIn(email: email, password: defaultPassword, logErrors: false)
 		} catch {
 			if (error as NSError).domain == "FIRAuthErrorDomain", (error as NSError).code == 17999 {
 				try await register(email: email, password: defaultPassword)
@@ -73,11 +73,11 @@ extension AuthorizedUser {
 		}
 	}
 	
-	public func register(email: String, password: String) async throws {
+	public func register(email: String, password: String, logErrors: Bool = true) async throws {
 		let _: Void = try await withCheckedThrowingContinuation { continuation in
 			Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
 				if let error {
-					print("*** Registration error: \(error)")
+					if logErrors { print("*** Registration error: \(error)") }
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
@@ -93,11 +93,11 @@ extension AuthorizedUser {
 		}
 	}
 	
-	public func signIn(email: String, password: String) async throws {
+	public func signIn(email: String, password: String, logErrors: Bool = true) async throws {
 		let _: Void = try await withCheckedThrowingContinuation { continuation in
 			Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
 				if let error {
-					print("*** Sign In error: \(error) \n\n\((error as NSError).userInfo)")
+					if logErrors { print("*** Sign In error: \(error) \n\n\((error as NSError).userInfo)") }
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
