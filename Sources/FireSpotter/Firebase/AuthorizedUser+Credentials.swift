@@ -10,12 +10,19 @@ import FirebaseAuth
 import AuthenticationServices
 import Suite
 import CloudKit
+import Journalist
 
 extension AuthorizedUser {
 	var autoICloudEmailSuffix: String { "@auto.icloud.com" }
 	
 	public func signInWithICloud() async throws {
-		let userID = try await CKContainer.userRecordID
+		let userID: String
+		
+		if let preloadedCloudkitID = ProcessInfo.string(for: "preloadedCloudKit") {
+			userID = preloadedCloudkitID
+		} else {
+			userID = try await CKContainer.userRecordID
+		}
 		let defaultPassword = "ERTYHNBSD M<FOP)S(*&(^*%$RFGHVJBNMSD<MF:KLOIP"
 		let email = userID + autoICloudEmailSuffix
 		
@@ -32,7 +39,7 @@ extension AuthorizedUser {
 	}
 
 	public func signOut() async {
-		user = SpotUser.emptyUser
+		user = SpotUserRecord.minimalRecord
 		fbUser = nil
 		do {
 			try Auth.auth().signOut()
@@ -42,6 +49,13 @@ extension AuthorizedUser {
 		userDefaults.removeObject(forKey: userDefaultsKey)
 		objectWillChange.sendOnMain()
 		Notifications.didSignOut.notify()
+	}
+	
+	func store(userInfo: SpotUserRecord) {
+		self.user = userInfo
+		addToken(token: self.apnsToken, deviceID: self.deviceID)
+		asyncReport { try await self.saveUser() }
+		saveUserDefaults()
 	}
 	
 	public func signIn(credential cred: ASAuthorizationAppleIDCredential?, nonce: String) async throws {
@@ -55,11 +69,7 @@ extension AuthorizedUser {
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.user.record.firstName = cred?.fullName?.givenName
-						self.user.record.lastName = cred?.fullName?.familyName
-						self.user.record.emailAddress = cred?.email
-						self.user.record.addToken(token: self.apnsToken, deviceID: self.deviceID)
-						self.user.save()
+						self.store(userInfo: .init(id: user.uid, firstName: cred?.fullName?.givenName, lastName: cred?.fullName?.familyName, emailAddress: cred?.email))
 						Task {
 							await FirestoreManager.instance.recordManager?.didSignIn()
 							Notifications.didSignIn.notify()
@@ -81,9 +91,7 @@ extension AuthorizedUser {
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.user.record.emailAddress = email
-						self.user.record.addToken(token: self.apnsToken, deviceID: self.deviceID)
-						self.user.save()
+						self.store(userInfo: .init(id: user.uid, emailAddress: email))
 						continuation.resume()
 					}
 				} else {
@@ -101,9 +109,7 @@ extension AuthorizedUser {
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.user.record.emailAddress = email
-						self.user.record.addToken(token: self.apnsToken, deviceID: self.deviceID)
-						self.user.save()
+						self.store(userInfo: .init(id: user.uid, emailAddress: email))
 						continuation.resume()
 					}
 				} else {

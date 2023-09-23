@@ -21,9 +21,9 @@ public class FirestoreManager {
 	var kinds: [String: FirebaseCollectionInfo] = ["meta": try! .init(firebaseMetaCollectionKind)]
 	
 	init() {
-		Task { @MainActor in
-			try await register(kind: firebaseUserCollectionKind)
-		}
+//		Task { @MainActor in
+//			try await register(kind: firebaseUserCollectionKind)
+//		}
 		if ProcessInfo.bool(for: "offline") { goOffline() }
 	}
 	
@@ -93,7 +93,7 @@ public class FirestoreManager {
 }
 
 public extension FirestoreManager {
-	@MainActor static var users: SpotCollection<SpotUser> = FirestoreManager.instance[firebaseUserCollectionKind]
+//	@MainActor static var users: SpotCollection<SpotUser> = FirestoreManager.instance[firebaseUserCollectionKind]
 	@MainActor static var meta: SpotCollection<SpotMeta> = FirestoreManager.instance[firebaseMetaCollectionKind]
 }
 

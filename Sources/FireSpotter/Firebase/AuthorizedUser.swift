@@ -9,6 +9,7 @@ import FirebaseCore
 import FirebaseAuth
 import AuthenticationServices
 import Suite
+import Journalist
 
 @MainActor public class AuthorizedUser: ObservableObject {
 	public static let instance = AuthorizedUser()
@@ -19,9 +20,6 @@ import Suite
 		public static let didSignOut = Notification.Name("AuthorizedUser.didSignOut")
 	}
 	
-	@MainActor public var user: SpotUserDocument = SpotUser.emptyUser { didSet {
-		setupUserCancellable()
-	}}
 	private var userCancellable: AnyCancellable?
 	public var fbUser: User?
 	public var userDefaults = UserDefaults.standard
@@ -29,20 +27,18 @@ import Suite
 	public var apnsToken: String? { didSet { didUpdateDeviceInfo() }}
 	public var deviceID = Gestalt.deviceID { didSet { didUpdateDeviceInfo() }}
 	
+	var user: SpotUserRecord = SpotUserRecord.minimalRecord
 	var rawUserJSON: [String: Any] = [:]
 	
 	let userDefaultsKey = "firespotter_stored_user"
+	public func setup() { }
 	
 	init() {
 		fbUser = Auth.auth().currentUser
-		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, let user = try? SpotUser.loadJSON(dictionary: json, using: .firebaseDecoder) {
-			let newUser = FirestoreManager.users.document(from: user, json: json)
-			self.user = newUser
+		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, let user = try? SpotUserRecord.loadJSON(dictionary: json, using: .firebaseDecoder) {
+			self.user = user
 			Task { @MainActor in
-				if await newUser.update() {
-					saveUserDefaults()
-				}
-				self.setupUserCancellable()
+				try? await fetchUser()
 				if self.isSignedIn {
 					Task {
 						await FirestoreManager.instance.recordManager?.didSignIn()
@@ -52,38 +48,24 @@ import Suite
 				}
 				objectWillChange.send()
 			}
+		} else {
+			asyncReport { try await self.fetchUser() }
 		}
-	}
-	
-	func setupUserCancellable() {
-		userCancellable = user.objectWillChange
-			.receive(on: RunLoop.main)
-			.sink {
-				self.objectWillChange.send()
-			}
 	}
 	
 	public func save() {
-		user.save()
+		asyncReport { try await self.saveUser() }
 		saveUserDefaults()
 	}
 	
-	public subscript(key: String) -> Any? {
-		get { user[key] }
-		set {
-			user[key] = newValue
-			saveUserDefaults()
-		}
-	}
-	
 	func didUpdateDeviceInfo() {
-		if isSignedIn, user.record.addToken(token: apnsToken, deviceID: deviceID) {
-			user.save()
+		if isSignedIn {
+			addToken(token: apnsToken, deviceID: deviceID)
 		}
 	}
 	
 	func saveUserDefaults() {
-		try? userDefaults.set(self.user.jsonPayload.jsonData, forKey: userDefaultsKey)
+		try? userDefaults.set(self.user.asJSON().jsonData, forKey: userDefaultsKey)
 		userDefaults.synchronize()
 	}
 	
@@ -102,10 +84,7 @@ import Suite
 	
 	func store(user fbUser: User, completion: @escaping () -> Void) {
 		self.fbUser = fbUser
-		let users = FirestoreManager.users
 		Task { @MainActor in
-			self.user = await users[fbUser.uid] ?? SpotDocument(SpotUser.newRecord(withID: fbUser.uid), collection: users)
-			saveUserDefaults()
 			await FirestoreManager.instance.recordManager?.didSignIn()
 			self.objectWillChange.send()
 			completion()

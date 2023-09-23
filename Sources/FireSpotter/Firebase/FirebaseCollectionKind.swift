@@ -31,5 +31,4 @@ extension FirebaseCollectionKind {
 	var isMeta: Bool { name == "meta" }
 }
 
-public let firebaseUserCollectionKind = FirebaseCollectionKind("users", contents: SpotUser.self)
 public let firebaseMetaCollectionKind = FirebaseCollectionKind("meta", contents: SpotMeta.self)
