@@ -131,3 +131,7 @@ extension SpotDocument: Comparable where Record: Comparable {
 		lhs.record < rhs.record
 	}
 }
+
+extension SpotDocument: CustomStringConvertible where Record: CustomStringConvertible {
+	public var description: String { record.description }
+}
