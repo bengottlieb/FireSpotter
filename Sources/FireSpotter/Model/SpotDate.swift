@@ -89,7 +89,7 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable, Comparable {
 		timeString = time?.hourMinuteString
 	}
 	
-	public init(_ date: Date, includingTime: Bool = true) {
+	public init(_ date: Date = .now, includingTime: Bool = true) {
 		dayString = DateFormatter.dmyDecoder.string(from: date.noon)
 		if includingTime {
 			timeString = date.time.stringValue
