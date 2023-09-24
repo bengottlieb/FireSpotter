@@ -21,9 +21,6 @@ public class FirestoreManager {
 	var kinds: [String: FirebaseCollectionInfo] = ["meta": try! .init(firebaseMetaCollectionKind)]
 	
 	init() {
-//		Task { @MainActor in
-//			try await register(kind: firebaseUserCollectionKind)
-//		}
 		if ProcessInfo.bool(for: "offline") { goOffline() }
 	}
 	
@@ -85,15 +82,9 @@ public class FirestoreManager {
 		cache.removeValue(forKey: oldPath)
 		cache[newPath] = collection
 	}
-	
-//	public subscript<Element: Codable & Identifiable>(collection: CollectionKind) -> SpotCollection<Element> {
-//		let col = db.collection(collection.rawValue)
-//		return SpotCollection(col, kind: Element.self)
-//	}
 }
 
 public extension FirestoreManager {
-//	@MainActor static var users: SpotCollection<SpotUser> = FirestoreManager.instance[firebaseUserCollectionKind]
 	@MainActor static var meta: SpotCollection<SpotMeta> = FirestoreManager.instance[firebaseMetaCollectionKind]
 }
 
