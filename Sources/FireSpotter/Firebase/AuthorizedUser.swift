@@ -20,8 +20,10 @@ import Journalist
 		public static let didSignOut = Notification.Name("AuthorizedUser.didSignOut")
 	}
 	
+	public static var currentUserID = ""
+	
 	private var userCancellable: AnyCancellable?
-	public var fbUser: User?
+	public var fbUser: User? { didSet { updateFBUser() }}
 	public var userDefaults = UserDefaults.standard
 	public var currentUserID: String? { fbUser?.uid }
 	public var apnsToken: String? { didSet { didUpdateDeviceInfo() }}
@@ -32,6 +34,12 @@ import Journalist
 	
 	let userDefaultsKey = "firespotter_stored_user"
 	public func setup() { }
+	
+	func updateFBUser() {
+		guard let fbUser else { return }
+		
+		Self.currentUserID = fbUser.uid
+	}
 	
 	init() {
 		fbUser = Auth.auth().currentUser
