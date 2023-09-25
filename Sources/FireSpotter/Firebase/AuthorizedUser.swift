@@ -92,6 +92,9 @@ import Journalist
 	
 	func store(user fbUser: User, completion: @escaping () -> Void) {
 		self.fbUser = fbUser
+		if !isSignedIn { user = .init(id: fbUser.uid) }
+		save()
+		
 		Task { @MainActor in
 			await FirestoreManager.instance.recordManager?.didSignIn()
 			self.objectWillChange.send()
