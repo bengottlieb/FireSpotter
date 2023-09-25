@@ -37,6 +37,10 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 		self.parentDocument = parent
 	}
 	
+	deinit {
+		stopListening()
+	}
+	
 	public func parent<DocSubject: SpotRecord>() -> SpotDocument<DocSubject>? {
 		parentDocument as? SpotDocument<DocSubject>
 	}

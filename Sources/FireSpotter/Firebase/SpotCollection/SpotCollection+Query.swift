@@ -24,7 +24,9 @@ public extension SpotCollection {
 	@discardableResult func listen() -> SpotCollection<RecordType> {
 		if isListening { return self }
 
-		listener = base.addSnapshotListener { querySnapshot, error in
+		listener = base.addSnapshotListener { [weak self] querySnapshot, error in
+			guard let self else { return }
+			
 			Task { @MainActor in
 				guard let changes = querySnapshot?.documentChanges else {
 					print("No changes")
