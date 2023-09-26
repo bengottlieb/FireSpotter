@@ -42,6 +42,8 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable, Comparable {
 		set { dayString = newValue.dmyString }
 	}
 	
+	public var isToday: Bool { date.isToday }
+	
 	public var time: Date.Time? {
 		get {
 			guard let timeString else { return nil }
