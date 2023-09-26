@@ -15,6 +15,8 @@ public class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Iden
 	public typealias ID = String
 	public var record: Record { willSet { objectWillChange.sendOnMain() }}
 	public var json: [String: Any] { willSet { objectWillChange.sendOnMain() }}
+	public var snapshot: Record?
+	
 	public var cachedValues: [String: Any] = [:]
 	public var id: ID {
 		get { record.id }
@@ -63,6 +65,34 @@ public class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Iden
 		await record.awakeFromFetch(in: self)
 	}
 	
+	public var isTrackingChanges: Bool { snapshot != nil }
+	
+	public func startTrackingChanges() {
+		snapshot = record
+	}
+	
+	public func revertChanges() {
+		guard let snapshot else {
+			print("Trying to revert changes, but no snapshot is present. Call `startTrackingChanges()` before editing begins")
+			return
+		}
+		
+		record = snapshot
+	}
+	
+	public func stopTrackingChanges() {
+		snapshot = nil
+	}
+	
+	public var hasChanges: Bool {
+		guard let snapshot else {
+			print("Checking for changes, but no snapshot is present. Call `startTrackingChanges()` before editing begins")
+			return true
+		}
+		
+		return snapshot != record
+	}
+	
 	@MainActor public func update() async -> Bool {
 		do {
 			guard !id.isEmpty, let raw = try await collection.base.document(id).getDocument().data() else { return false }
@@ -102,6 +132,7 @@ public class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Iden
 	}
 	
 	public func saveAsync() async {
+		if snapshot != nil { snapshot = record }
 		await report { try await self.collection.save(self) }
 	}
 	
@@ -125,6 +156,7 @@ public class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Iden
 		self.json = json
 	}
 }
+
 
 extension SpotDocument: Comparable where Record: Comparable {
 	public static func <(lhs: SpotDocument, rhs: SpotDocument) -> Bool {
