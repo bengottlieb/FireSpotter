@@ -78,7 +78,7 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 		Task { await cache.set(document, forKey: document.id) }
 	}
 	
-	@MainActor @discardableResult public func append(_ element: RecordType) throws -> SpotDocument<RecordType> {
+	@MainActor @discardableResult public func append(_ element: RecordType, andSave: Bool = true) throws -> SpotDocument<RecordType> {
 		let doc = base.document(element.id)
 		try doc.setData(element.asJSON().convertingDatesToFirebaseTimestamps(using: RecordType.self as? DateKeyProvider.Type))
 		
@@ -87,7 +87,7 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 		return newDoc
 	}
 	
-	@MainActor @discardableResult func save(_ element: RecordType, json: [String: Any]? = nil) async throws -> SpotDocument<RecordType> {
+	@MainActor @discardableResult public func save(_ element: RecordType, json: [String: Any]? = nil) async throws -> SpotDocument<RecordType> {
 		if let cached = await cache.record(forKey: element.id) {
 			cached.record = element
 			try await save(cached)
