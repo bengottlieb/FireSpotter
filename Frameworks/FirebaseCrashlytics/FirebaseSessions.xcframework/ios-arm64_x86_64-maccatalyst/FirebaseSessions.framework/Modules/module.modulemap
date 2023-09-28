@@ -6,6 +6,6 @@ framework module FirebaseSessions {
 }
 
 module FirebaseSessions.Swift {
-    header "FirebaseSessions-Swift.h"
-    requires objc
+  header "FirebaseSessions-Swift.h"
+  requires objc
 }

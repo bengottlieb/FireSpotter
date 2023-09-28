@@ -6,6 +6,6 @@ framework module FirebaseAnalyticsSwift {
 }
 
 module FirebaseAnalyticsSwift.Swift {
-    header "FirebaseAnalyticsSwift-Swift.h"
-    requires objc
+  header "FirebaseAnalyticsSwift-Swift.h"
+  requires objc
 }
