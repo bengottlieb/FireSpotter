@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 import Journalist
 import Suite
 
-public class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Identifiable, Hashable {	
+public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject, Identifiable, Hashable {	
 	public typealias ID = String
 	public var record: Record { willSet { objectWillChange.sendOnMain() }}
 	public var json: [String: Any] { willSet { objectWillChange.sendOnMain() }}
@@ -166,4 +166,11 @@ extension SpotDocument: Comparable where Record: Comparable {
 
 extension SpotDocument: CustomStringConvertible where Record: CustomStringConvertible {
 	public var description: String { record.description }
+}
+
+extension SpotDocument {
+	public static var sample: Self {
+		self.init(.minimalRecord, collection: nil)
+	}
+
 }
