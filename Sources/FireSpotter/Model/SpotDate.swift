@@ -23,7 +23,7 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable, Comparable {
 		set {
 			dayString = DateFormatter.dmyDecoder.string(from: newValue.noon)
 			if timeString != nil {
-				timeString = String(format: "%02d:%02d", newValue.hour, newValue.minute)
+				timeString = newValue.time.spotDateString
 			}
 			cachedDate = newValue
 		}
@@ -51,7 +51,7 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable, Comparable {
 		}
 		set {
 			if let newValue {
-				timeString = String(format: "%02d:%02d", newValue.hour, newValue.minute)
+				timeString = newValue.spotDateString
 			} else {
 				timeString = nil
 			}
@@ -88,13 +88,13 @@ public struct SpotDate: Codable, Equatable, Hashable, Sendable, Comparable {
 	
 	public init(_ day: Date.Day, _ time: Date.Time?) {
 		dayString = day.dmyString
-		timeString = time?.hourMinuteString
+		timeString = time?.spotDateString
 	}
 	
 	public init(_ date: Date = .now, includingTime: Bool = true) {
 		dayString = DateFormatter.dmyDecoder.string(from: date.noon)
 		if includingTime {
-			timeString = date.time.stringValue
+			timeString = date.time.spotDateString
 		} else {
 			timeString = nil
 		}
@@ -135,4 +135,10 @@ extension DateFormatter {
 		
 		return formatter
 	}()
+}
+
+fileprivate extension Date.Time {
+	var spotDateString: String {
+		String(format: "%02d:%02d:%02f", hour, minute, second)
+	}
 }
