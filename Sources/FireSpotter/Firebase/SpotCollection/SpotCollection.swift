@@ -25,6 +25,7 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 	var allCache: [SpotDocument<RecordType>]?
 	public var cachedCount: Int { cachedDocuments.count }
 	var isListening: Bool { listener != nil }
+	var listenCount = 0
 	var listener: ListenerRegistration?
 	var kind: FirebaseCollectionKind<RecordType>
 	private var parentDocument: Any?

@@ -17,11 +17,15 @@ public extension SpotCollection {
 	func stopListening() {
 		guard let listener else { return }
 		
-		listener.remove()
-		self.listener = nil
+		listenCount -= 1
+		if listenCount == 0 {
+			listener.remove()
+			self.listener = nil
+		}
 	}
 	
 	@discardableResult func listen() -> SpotCollection<RecordType> {
+		listenCount += 1
 		if isListening { return self }
 
 		listener = base.addSnapshotListener { [weak self] querySnapshot, error in
