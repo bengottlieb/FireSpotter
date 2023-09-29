@@ -17,7 +17,7 @@ public class FirestoreManager {
 	public var recordManager: SpotRecordManager?
 	
 	public var cache: [String: CollectionWrapper] = [:]
-	let db = Firestore.firestore()
+	lazy var db = Firestore.firestore()
 	var kinds: [String: FirebaseCollectionInfo] = ["meta": try! .init(firebaseMetaCollectionKind)]
 	
 	init() {
