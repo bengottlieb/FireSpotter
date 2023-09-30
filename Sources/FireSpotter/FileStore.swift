@@ -18,9 +18,11 @@ public struct ImageKind: Equatable {
 	}
 	
 	func path(for name: String) -> String {
-		rawValue + "/" + name
+		guard !rawValue.isEmpty else { return name }
+		return rawValue + "/" + name
 	}
 	
+	static public let root = ImageKind(rawValue: "")
 	static public let avatar = ImageKind(rawValue: "avatar")
 	static public let userSubmitted = ImageKind(rawValue: "userSubmitted")
 }
