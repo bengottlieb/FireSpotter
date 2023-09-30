@@ -24,7 +24,7 @@ public class FirestoreManager {
 		if ProcessInfo.bool(for: "offline") { goOffline() }
 	}
 	
-	public func configure(reduceLogging: Bool = true) {
+	public static func configure(reduceLogging: Bool = true) {
 		if reduceLogging { FirebaseConfiguration.shared.setLoggerLevel(.min) }
 		FirebaseApp.configure()
 	}
