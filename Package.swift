@@ -23,7 +23,9 @@ let package = Package(
 				
 				"abseil", "BoringSSL-GRPC", "FirebaseCoreExtension", "FirebaseFirestore", "FirebaseFirestoreSwift", "FirebaseSharedSwift", "gRPC-C++", "gRPC-Core", "leveldb-library", "Libuv-gRPC",
 				
-				"FirebaseAppCheckInterop", "FirebaseAuthInterop", "FirebaseStorage"
+				"FirebaseAppCheckInterop", "FirebaseAuthInterop", "FirebaseStorage",
+				
+				"FirebaseDatabase", "FirebaseDatabaseSwift",
 			]),
 	],
 	dependencies: [
@@ -75,5 +77,8 @@ let package = Package(
 		.binaryTarget(name: "FirebaseAppCheckInterop", path: "Frameworks/FirebaseStorage/FirebaseAppCheckInterop.xcframework"),
 		.binaryTarget(name: "FirebaseAuthInterop", path: "Frameworks/FirebaseStorage/FirebaseAuthInterop.xcframework"),
 		.binaryTarget(name: "FirebaseStorage", path: "Frameworks/FirebaseStorage/FirebaseStorage.xcframework"),
+
+		.binaryTarget(name: "FirebaseDatabase", path: "Frameworks/FirebaseDatabase/FirebaseDatabase.xcframework"),
+		.binaryTarget(name: "FirebaseDatabaseSwift", path: "Frameworks/FirebaseDatabase/FirebaseDatabaseSwift.xcframework"),
 	]
 )
