@@ -9,7 +9,7 @@ import Suite
 
 public struct SpotDate: Codable, Equatable, Hashable, Sendable, Comparable {
 	enum CodingKeys: String, CodingKey { case dayString = "day", timeString = "time" }
-	var dayString: String { didSet { cachedDate = computedDate }}
+	public var dayString: String { didSet { cachedDate = computedDate }}
 	public var timeString: String? { didSet { cachedDate = computedDate }}
 	public var cachedDate: Date?
 	

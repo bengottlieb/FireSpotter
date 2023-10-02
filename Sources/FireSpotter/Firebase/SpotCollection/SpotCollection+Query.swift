@@ -81,7 +81,8 @@ public extension SpotCollection {
 		get async throws {
 			if let all = allCache { return all }
 			let results = try await base.getDocuments().documents
-			allCache = try results.map { 
+			print("Fetched \(results.count) \(String(describing: RecordType.self))")
+			allCache = try results.map {
 				do {
 					return try document(from: $0.data() )
 				} catch {
