@@ -29,7 +29,7 @@ import Journalist
 	public var apnsToken: String? { didSet { didUpdateDeviceInfo() }}
 	public var deviceID = Gestalt.deviceID { didSet { didUpdateDeviceInfo() }}
 	
-	var user: SpotUserRecord = SpotUserRecord.minimalRecord
+	public var user: SpotUserDocument = SpotUserDocument(SpotUserRecord.minimalRecord, collection: FirestoreManager.users)
 	var rawUserJSON: [String: Any] = [:]
 	
 	let userDefaultsKey = "firespotter_stored_user"
@@ -43,8 +43,8 @@ import Journalist
 	
 	init() {
 		fbUser = Auth.auth().currentUser
-		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, let user = try? SpotUserRecord.loadJSON(dictionary: json, using: .firebaseDecoder) {
-			self.user = user
+		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, !json.isEmpty, let user = try? SpotUserRecord.loadJSON(dictionary: json, using: .firebaseDecoder) {
+			self.user.record = user
 			Task { @MainActor in
 				try? await fetchUser()
 				if self.isSignedIn {
@@ -73,7 +73,7 @@ import Journalist
 	}
 	
 	func saveUserDefaults() {
-		try? userDefaults.set(self.user.asJSON().jsonData, forKey: userDefaultsKey)
+		try? userDefaults.set(self.user.json.jsonData, forKey: userDefaultsKey)
 		userDefaults.synchronize()
 	}
 	
@@ -92,7 +92,7 @@ import Journalist
 	
 	func store(user fbUser: User, completion: @escaping () -> Void) {
 		self.fbUser = fbUser
-		if !isSignedIn { user = .init(id: fbUser.uid) }
+		if !isSignedIn { user = .init(.init(id: fbUser.uid), collection: FirestoreManager.users) }
 		save()
 		
 		Task { @MainActor in

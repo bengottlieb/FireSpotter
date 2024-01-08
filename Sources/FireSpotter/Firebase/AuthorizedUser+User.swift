@@ -17,7 +17,7 @@ extension AuthorizedUser {
 		let userPath = "users/\(id)"
 		
 		if let json = (try? await Firestore.firestore().document(userPath).getDocument().data()) {
-			self.user = try .loadJSON(dictionary: json)
+			self.user = .init(try .loadJSON(dictionary: json), collection: FirestoreManager.users)
 		}
 		saveUserDefaults()
 	}
@@ -29,7 +29,7 @@ extension AuthorizedUser {
 		var json = (try? await Firestore.firestore().document(userPath).getDocument().data()) ?? [:]
 		
 		
-		for (key, value) in try user.asJSON() {
+		for (key, value) in user.json {
 			json[key] = value
 		}
 		
@@ -42,18 +42,18 @@ extension AuthorizedUser {
 extension AuthorizedUser {
 	@discardableResult func addToken(token: String?, deviceID: String?) -> Bool {
 		guard let token, let deviceID else { return false }
-		var tokens = user.apnsTokens ?? []
+		var tokens = user.record.apnsTokens ?? []
 		let info = APNSDeviceInfo(token: token, deviceID: deviceID)
 		
 		if tokens.contains(info) { return false }
 		if let index = tokens.firstIndex(where: { $0.deviceID == deviceID }) {
 			tokens[index].token = token
-			user.apnsTokens = tokens
+			user.record.apnsTokens = tokens
 		} else if let index = tokens.firstIndex(where: { $0.token == token }) {
 			tokens[index].deviceID = deviceID
-			user.apnsTokens = tokens
+			user.record.apnsTokens = tokens
 		} else {
-			user.apnsTokens = tokens + [info]
+			user.record.apnsTokens = tokens + [info]
 		}
 		asyncReport { try await self.saveUser() }
 

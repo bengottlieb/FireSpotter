@@ -16,7 +16,7 @@ public protocol SpotUser: SpotRecord {
 	var apnsTokens: [APNSDeviceInfo]? { get }
 }
 
-//public typealias SpotUserDocument = SpotDocument<SpotUser>
+public typealias SpotUserDocument = SpotDocument<SpotUserRecord>
 
 public struct SpotUserRecord: SpotUser {
 	public var id = String.id(for: SpotUserRecord.self)

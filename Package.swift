@@ -29,8 +29,8 @@ let package = Package(
 			]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/bengottlieb/suite", from: "1.0.79"),
-		.package(url: "https://github.com/bengottlieb/journalist", from: "1.0.5"),
+		.package(url: "https://github.com/ios-tooling/suite", from: "1.0.79"),
+		.package(url: "https://github.com/ios-tooling/journalist", from: "1.0.5"),
 		.package(url: "https://github.com/bengottlieb/crossplatformkit", from: "1.0.8"),
 	],
 	targets: [

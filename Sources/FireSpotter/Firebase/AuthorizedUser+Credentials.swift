@@ -39,7 +39,7 @@ extension AuthorizedUser {
 	}
 
 	public func signOut() async {
-		user = SpotUserRecord.minimalRecord
+		user = .init(SpotUserRecord.minimalRecord, collection: FirestoreManager.users)
 		fbUser = nil
 		do {
 			try Auth.auth().signOut()
@@ -52,7 +52,7 @@ extension AuthorizedUser {
 	}
 	
 	func store(userInfo: SpotUserRecord) {
-		self.user = userInfo
+		self.user.record = userInfo
 		addToken(token: self.apnsToken, deviceID: self.deviceID)
 		asyncReport { try await self.saveUser() }
 		saveUserDefaults()

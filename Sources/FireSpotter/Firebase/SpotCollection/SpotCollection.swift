@@ -22,7 +22,7 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 	public var path: String { base.path }
 	
 	public var cachedDocuments: [SpotDocument<RecordType>] { allCache ?? [] }
-	var allCache: [SpotDocument<RecordType>]?
+	public var allCache: [SpotDocument<RecordType>]?
 	public var cachedCount: Int { cachedDocuments.count }
 	var isListening: Bool { listener != nil }
 	var listenCount = 0

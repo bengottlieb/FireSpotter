@@ -32,3 +32,4 @@ extension FirebaseCollectionKind {
 }
 
 public let firebaseMetaCollectionKind = FirebaseCollectionKind("meta", contents: SpotMeta.self)
+public let firebaseUserCollectionKind = FirebaseCollectionKind("user", contents: SpotUserRecord.self)
