@@ -119,7 +119,7 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 		return base
 	}
 	
-	init(_ subject: Record, collection: SpotCollection<Record>?, json: [String: Any]? = nil, isSaved: Bool = true) {
+	public init(_ subject: Record, collection: SpotCollection<Record>?, json: [String: Any]? = nil, isSaved: Bool = true) {
 		assert(Gestalt.isInPreview || collection != nil, "Cannot use a nil collection for a SpotDocument<\(Record.self)>")
 		self.record = subject
 		self.collection = collection
