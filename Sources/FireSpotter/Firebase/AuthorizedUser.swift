@@ -10,6 +10,7 @@ import FirebaseAuth
 import AuthenticationServices
 import Suite
 import Journalist
+import Combine
 
 @MainActor public class AuthorizedUser: ObservableObject {
 	public static let instance = AuthorizedUser()
@@ -20,12 +21,17 @@ import Journalist
 		public static let didSignOut = Notification.Name("AuthorizedUser.didSignOut")
 	}
 	
-	public static var currentUserID = ""
+	static nonisolated let currentUserIDSubject: CurrentValueSubject<String, Never> = .init("")
+	
+	public static nonisolated var currentUserID: String {// { Auth.auth().currentUser?.uid ?? "" }
+		get { currentUserIDSubject.value }
+		set { currentUserIDSubject.value = newValue }
+	}
 	
 	private var userCancellable: AnyCancellable?
 	public var fbUser: User? { didSet { updateFBUser() }}
 	public var userDefaults = UserDefaults.standard
-	public var currentUserID: String? { fbUser?.uid }
+	public nonisolated var currentUserID: String? { Self.currentUserID }
 	public var apnsToken: String? { didSet { didUpdateDeviceInfo() }}
 	public var deviceID = Gestalt.deviceID { didSet { didUpdateDeviceInfo() }}
 	
@@ -45,6 +51,8 @@ import Journalist
 		fbUser = Auth.auth().currentUser
 		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, !json.isEmpty, let user = try? SpotUserRecord.loadJSON(dictionary: json, using: .firebaseDecoder) {
 			self.user.record = user
+			Self.currentUserID = user.id
+			
 			Task { @MainActor in
 				try? await fetchUser()
 				if self.isSignedIn {
