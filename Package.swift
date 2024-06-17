@@ -29,7 +29,7 @@ let package = Package(
 			]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ios-tooling/suite", from: "1.0.79"),
+		.package(url: "https://github.com/ios-tooling/suite", from: "1.0.135"),
 		.package(url: "https://github.com/ios-tooling/journalist", from: "1.0.5"),
 		.package(url: "https://github.com/ios-tooling/crossplatformkit", from: "1.0.8"),
 	],
