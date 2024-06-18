@@ -114,7 +114,9 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 	}
 	
 	func save(_ doc: SpotDocument<RecordType>) async throws {
-		try await base.document(doc.id).setData(doc.jsonPayload.convertingDatesToFirebaseTimestamps(using: RecordType.self as? DateKeyProvider.Type))
+		let data = doc.jsonPayload.convertingDatesToFirebaseTimestamps(using: RecordType.self as? DateKeyProvider.Type)
+		let ref = base.document(doc.id)
+		try await ref.setData(data)
 		objectWillChange.sendOnMain()
 	}
 	
