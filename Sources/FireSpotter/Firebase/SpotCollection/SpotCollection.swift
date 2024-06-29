@@ -188,7 +188,7 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 	
 	public subscript(id: String, default: RecordType) -> SpotDocument<RecordType> {
 		get async {
-			assert(id.isNotEmpty, "Cannot create an element wiith an empty ID")
+			assert(id.isNotEmpty, "Cannot create an element with an empty ID")
 			if let current = await self[id] { return current }
 			let new = SpotDocument(`default`, collection: self)
 			new.id = id
