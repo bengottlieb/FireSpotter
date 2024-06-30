@@ -8,12 +8,12 @@
 import Foundation
 
 public extension SpotCollection where RecordType: SpotUser {
-	@MainActor func setupCurrentUser() async -> SpotDocument<RecordType>? {
+	@MainActor func setupCurrentUser() async throws -> SpotDocument<RecordType>? {
 		guard AuthorizedUser.instance.isSignedIn, let id = AuthorizedUser.instance.currentUserID else { return nil }
 		if let user = await currentUser { return user }
 		
 		let newUser = new(withID: id, addNow: true)
-		await newUser.saveAsync()
+		try await newUser.saveAsync()
 		return newUser
 	}
 

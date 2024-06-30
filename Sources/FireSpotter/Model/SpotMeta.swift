@@ -25,7 +25,7 @@ public struct SpotMeta: SpotRecord {
 	
 	public static var minimalRecord = SpotMeta(id: "")
 	public func awakeFromFetch(in document: SpotDocument<Self>) async {
-		document.save()
+		try? document.save()
 	}
 	@MainActor public static func newRecord(withID id: String) -> Self { fatalError("SpotMeta.newRecord() should never be called") }
 }
@@ -40,7 +40,7 @@ extension SpotDocument where Record == SpotMeta {
 	func modelDifferences(json: [String: Any]) async -> KeyDifferences? {
 		guard let current = record.minimalJSON else {
 			record.minimalJSON = json
-			save()
+			try? save()
 			return nil
 		}
 		
@@ -50,7 +50,7 @@ extension SpotDocument where Record == SpotMeta {
 		if !isMateriallyChanged {
 			if !diff.isEmpty {
 				record.minimalJSON = json
-				save()
+				try? save()
 			}
 			return nil
 		}

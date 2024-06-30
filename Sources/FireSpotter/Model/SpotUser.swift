@@ -44,6 +44,6 @@ extension SpotDocument where Record == SpotUserRecord {
 	
 	public func setProfileImage(_ image: UXImage) async throws {
 		try await FileStore.instance.upload(image: image, kind: .avatar, to: id)
-		self.save()
+		try self.save()
 	}
 }

@@ -7,6 +7,8 @@
 
 import Foundation
 
+enum SpotRecordError: Error { case noRecordID }
+
 public protocol SpotRecord: Codable, Identifiable, Equatable, Hashable where ID == String {
 	var id: String { get set }
 	static var minimalRecord: Self { get }

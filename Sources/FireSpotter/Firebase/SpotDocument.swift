@@ -127,11 +127,13 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 		self.isSaved = isSaved
 	}
 	
-	public func save() {
-		Task { await self.saveAsync() }
+	public func save() throws {
+		if id.isEmpty { throw SpotRecordError.noRecordID }
+		Task { try await self.saveAsync() }
 	}
 	
-	public func saveAsync() async {
+	public func saveAsync() async throws {
+		if id.isEmpty { throw SpotRecordError.noRecordID }
 		if snapshot != nil { snapshot = record }
 		await report { try await self.collection.save(self) }
 	}

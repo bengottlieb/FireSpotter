@@ -23,7 +23,7 @@ extension AuthorizedUser {
 	}
 	
 	func saveUser() async throws {
-		guard let id = currentUserID else { throw AuthUserError.userNotFound }
+		guard let id = currentUserID, !id.isEmpty else { throw AuthUserError.userNotFound }
 		let userPath = "users/\(id)"
 		
 		var json = (try? await Firestore.firestore().document(userPath).getDocument().data()) ?? [:]
