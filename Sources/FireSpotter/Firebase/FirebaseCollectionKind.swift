@@ -6,9 +6,14 @@
 
 import Suite
 
-struct FirebaseCollectionInfo {
+@globalActor public actor FirestoreActor : GlobalActor {
+	public static let shared = FirestoreActor()
+}
+
+
+struct FirebaseCollectionInfo: Sendable {
 	let name: String
-	let minimal: [String: Any]
+	let minimal: [String: Sendable]
 	
 	init<Element>(_ kind: FirebaseCollectionKind<Element>) throws {
 		name = kind.name
@@ -16,7 +21,7 @@ struct FirebaseCollectionInfo {
 	}
 }
 
-public struct FirebaseCollectionKind<Content: SpotRecord> {
+public struct FirebaseCollectionKind<Content: SpotRecord>: Sendable {
 	public let name: String
 	public let contentType: Content.Type
 	
