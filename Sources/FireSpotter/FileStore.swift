@@ -10,6 +10,8 @@ import FirebaseStorage
 import CrossPlatformKit
 import Suite
 
+extension FirebaseStorage.StorageMetadata: @unchecked @retroactive Sendable { }
+
 public struct ImageKind: Equatable {
 	public let rawValue: String
 	
