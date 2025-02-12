@@ -114,6 +114,10 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 	}
 	
 	func save(_ doc: SpotDocument<RecordType>) async throws {
+		if doc.id.isEmpty {
+			print("Trying to save an empty document: \(doc)")
+			return
+		}
 		let data = doc.jsonPayload.convertingDatesToFirebaseTimestamps(using: RecordType.self as? DateKeyProvider.Type)
 		let ref = base.document(doc.id)
 		try await ref.setData(data)
