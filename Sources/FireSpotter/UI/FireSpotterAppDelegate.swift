@@ -21,7 +21,7 @@ open class FireSpotterAppDelegate: NSObject, UIApplicationDelegate {
 	}
 	
 	open func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-		print("Failed to register for remove notifications: \(error)")
+		FireSpotterLogger.warning("Failed to register for remove notifications: \(error, privacy: .public)")
 	}
 }
 

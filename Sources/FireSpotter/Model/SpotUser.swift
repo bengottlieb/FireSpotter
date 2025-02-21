@@ -24,6 +24,8 @@ public struct SpotUserRecord: SpotUser {
 	public var lastName: String?
 	public var emailAddress: String?
 
+	public var description: String { "User: \(id)" }
+	
 	public var profileImageURL: URL? {
 		get async throws {
 			return try await FileStore.instance.urlForImage(at: id, kind: .avatar)

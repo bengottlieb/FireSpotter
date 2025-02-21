@@ -33,11 +33,10 @@ public extension SpotCollection {
 			
 			Task { @MainActor in
 				guard let changes = querySnapshot?.documentChanges else {
-					print("No changes")
+					FireSpotterLogger.debug("Saving a record with no changes \(querySnapshot, privacy: .public)")
 					return
 				}
 				
-				//print("Received \(changes.count) changes")
 				for change in changes {
 					let id = change.document.documentID
 					switch change.type {
@@ -81,18 +80,17 @@ public extension SpotCollection {
 		get async throws {
 			if let all = allCache { return all }
 			let results = try await base.getDocuments().documents
-			print("Fetched \(results.count) \(String(describing: RecordType.self))")
+			FireSpotterLogger.info("Fetched \(results.count, privacy: .public) \(String(describing: RecordType.self), privacy: .public)")
 			allCache = try results.map {
 				do {
 					return try document(from: $0.data() )
 				} catch {
-					print("Error decoding \(RecordType.self): \(error)")
+					FireSpotterLogger.error("Error decoding \(RecordType.self, privacy: .public): \(error, privacy: .public)")
 					throw error
 				}
 			}
 			for doc in allCache! { await doc.awakeFromFetch() }
 			objectWillChange.send()
-			//print("Fetched \(results.count) / \(allCache?.count ?? 0) for \(path)")
 			return allCache ?? []
 		}
 	}

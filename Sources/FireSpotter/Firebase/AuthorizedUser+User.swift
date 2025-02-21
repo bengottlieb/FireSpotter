@@ -17,6 +17,7 @@ extension AuthorizedUser {
 		let userPath = "users/\(id)"
 		
 		if let json = (try? await Firestore.firestore().document(userPath).getDocument().data()) {
+			guard user.id == Self.firebaseUserID else { return }
 			self.user = .init(try .loadJSON(dictionary: json), collection: FirestoreManager.users)
 		}
 		saveUserDefaults()

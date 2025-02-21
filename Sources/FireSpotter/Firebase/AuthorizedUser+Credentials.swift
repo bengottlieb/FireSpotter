@@ -15,13 +15,14 @@ import Journalist
 extension AuthorizedUser {
 	var autoICloudEmailSuffix: String { "@auto.icloud.com" }
 	
-	public func signInWithICloud() async throws {
+	public func signInWithICloud(containerID: String? = nil) async throws {
 		let userID: String
 		
 		if let preloadedCloudkitID = ProcessInfo.string(for: "preloadedCloudKit") {
 			userID = preloadedCloudkitID
 		} else {
-			userID = try await CKContainer.userRecordID
+			let container = CKContainer.container(forID: containerID)
+			userID = try await container.userRecordID
 		}
 		let defaultPassword = "ERTYHNBSD M<FOP)S(*&(^*%$RFGHVJBNMSD<MF:KLOIP"
 		let email = userID + autoICloudEmailSuffix
@@ -33,7 +34,7 @@ extension AuthorizedUser {
 				try await register(email: email, password: defaultPassword)
 				return
 			}
-			print(error)
+			FireSpotterLogger.error("Failed to sign in with iCloud: \(error, privacy: .public)")
 			throw error
 		}
 	}
@@ -44,7 +45,7 @@ extension AuthorizedUser {
 		do {
 			try Auth.auth().signOut()
 		} catch {
-			print("Failed to sign out of Firebase: \(error)")
+			FireSpotterLogger.error("Failed to sign out of Firebase: \(error, privacy: .public)")
 		}
 		userDefaults.removeObject(forKey: userDefaultsKey)
 		objectWillChange.sendOnMain()
@@ -87,7 +88,7 @@ extension AuthorizedUser {
 		let _: Void = try await withCheckedThrowingContinuation { continuation in
 			Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
 				if let error {
-					if logErrors { print("*** Registration error: \(error)") }
+					if logErrors { FireSpotterLogger.error("*** Registration error: \(error, privacy: .public)") }
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
@@ -105,7 +106,7 @@ extension AuthorizedUser {
 		let _: Void = try await withCheckedThrowingContinuation { continuation in
 			Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
 				if let error {
-					if logErrors { print("*** Sign In error: \(error) \n\n\((error as NSError).userInfo)") }
+					if logErrors { FireSpotterLogger.warning("*** Sign In error: \(error, privacy: .public) \n\n\((error as NSError).userInfo, privacy: .public)") }
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {

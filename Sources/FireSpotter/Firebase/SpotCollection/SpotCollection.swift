@@ -8,6 +8,7 @@
 import Suite
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import os.log
 
 public protocol CollectionWrapper: AnyObject {
 	var path: String { get }
@@ -71,8 +72,8 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 	
 	@MainActor func cache(_ document: SpotDocument<RecordType>) {
 		if allCache == nil { allCache = [] }
-		if allCache?.contains(document) == true { 
-			print("duplicate record?: \(document)")
+		if allCache?.contains(document) == true {
+			FireSpotterLogger.warning("duplicate record?: \("", privacy: .public)")
 			return
 		}
 		allCache?.append(document)
@@ -115,7 +116,7 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 	
 	func save(_ doc: SpotDocument<RecordType>) async throws {
 		if doc.id.isEmpty {
-			print("Trying to save an empty document: \(doc)")
+			FireSpotterLogger.warning("Trying to save an empty document: \(doc, privacy: .public)")
 			return
 		}
 		let data = doc.jsonPayload.convertingDatesToFirebaseTimestamps(using: RecordType.self as? DateKeyProvider.Type)
@@ -134,7 +135,7 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject, Collectio
 		if newPath == base.path { return }
 		let isListening = self.isListening
 		
-		print("Changing collection: \(base.path) -> \(newPath)")
+		FireSpotterLogger.info("Changing collection: \(self.base.path, privacy: .public) -> \(newPath, privacy: .public)")
 		stopListening()
 		Task { await cache.clear() }
 		allCache = []

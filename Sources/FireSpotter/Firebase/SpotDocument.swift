@@ -73,7 +73,7 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 	
 	public func revertChanges() {
 		guard let snapshot else {
-			print("Trying to revert changes, but no snapshot is present. Call `startTrackingChanges()` before editing begins")
+			FireSpotterLogger.warning("Trying to revert changes, but no snapshot is present. Call `startTrackingChanges()` before editing begins")
 			return
 		}
 		
@@ -86,7 +86,7 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 	
 	public var hasChanges: Bool {
 		guard let snapshot else {
-			print("Checking for changes, but no snapshot is present. Call `startTrackingChanges()` before editing begins")
+			FireSpotterLogger.info("Checking for changes, but no snapshot is present. Call `startTrackingChanges()` before editing begins")
 			return true
 		}
 		
@@ -104,7 +104,7 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 				return true
 			}
 		} catch {
-			print("Failed to update \(self): \(error)")
+			FireSpotterLogger.error("Failed to update \(self, privacy: .public): \(error, privacy: .public)")
 		}
 		return false
 	}
@@ -142,7 +142,7 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 		do {
 			try await collection.remove(self)
 		} catch {
-			print("Failed to delete \(self)")
+			FireSpotterLogger.error("Failed to delete \(self, privacy: .public)")
 		}
 	}
 	
@@ -152,7 +152,7 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 		do {
 			record = try Record.loadJSON(dictionary: json, using: .firebaseDecoder)
 		} catch {
-			print("Failed to re-constitute the subject: \(error)")
+			FireSpotterLogger.error("Failed to re-constitute the subject: \(error, privacy: .public)")
 		}
 		
 		self.json = json

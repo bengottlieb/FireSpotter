@@ -23,6 +23,7 @@ import Combine
 	
 	static nonisolated let currentUserIDSubject: CurrentValueSubject<String, Never> = .init("")
 	
+	public static nonisolated var firebaseUserID: String? { Auth.auth().currentUser?.uid }
 	public static nonisolated var currentUserID: String {// { Auth.auth().currentUser?.uid ?? "" }
 		get { currentUserIDSubject.value }
 		set { currentUserIDSubject.value = newValue }
@@ -35,7 +36,9 @@ import Combine
 	public var apnsToken: String? { didSet { didUpdateDeviceInfo() }}
 	public var deviceID = Gestalt.deviceID { didSet { didUpdateDeviceInfo() }}
 	
-	public var user: SpotUserDocument = SpotUserDocument(SpotUserRecord.minimalRecord, collection: FirestoreManager.users)
+	public var user: SpotUserDocument = SpotUserDocument(SpotUserRecord.minimalRecord, collection: FirestoreManager.users) { didSet {
+		FireSpotterLogger.info("UserID set to \(self.user.id, privacy: .public)")
+	}}
 	var rawUserJSON: [String: Any] = [:]
 	
 	let userDefaultsKey = "firespotter_stored_user"

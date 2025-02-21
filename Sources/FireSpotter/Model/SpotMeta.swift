@@ -11,6 +11,10 @@ public struct SpotMeta: SpotRecord {
 	public var id: String
 	var minimalData: String?
 	
+	public var description: String {
+		"Meta: \(minimalData ?? "--")"
+	}
+	
 	var minimalJSON: [String: Any]? {
 		get {
 			guard let string = minimalData, let data = Data(base64Encoded: string) else { return nil }

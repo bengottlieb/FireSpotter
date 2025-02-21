@@ -16,6 +16,12 @@ public extension CKContainer {
 		}
 	}
 	
+	static func container(forID id: String? = nil) -> CKContainer {
+		guard let id else { return CKContainer.default() }
+		
+		return CKContainer(identifier: id)
+	}
+	
 	static var userRecordID: String {
 		get async throws {
 			try await CKContainer.default().userRecordID
