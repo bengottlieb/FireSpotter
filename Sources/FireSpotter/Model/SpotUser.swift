@@ -23,6 +23,10 @@ public struct SpotUserRecord: SpotUser {
 	public var firstName: String?
 	public var lastName: String?
 	public var emailAddress: String?
+	
+	public init() {
+		
+	}
 
 	public var description: String { "User: \(id)" }
 	
@@ -34,18 +38,12 @@ public struct SpotUserRecord: SpotUser {
 	
 	public var apnsTokens: [APNSDeviceInfo]?
 		
-	public static var minimalRecord = SpotUserRecord(id: "")
 	public func awakeFromFetch(in document: SpotDocument<Self>) async { }
-
-	@MainActor public static func newRecord(withID id: String) -> Self {
-		SpotUserRecord(id: id)
-	}
 }
 
 extension SpotDocument where Record == SpotUserRecord {
-	
 	public func setProfileImage(_ image: UXImage) async throws {
-		try await FileStore.instance.upload(image: image, kind: .avatar, to: id)
-		try self.save()
+	//	try await FileStore.instance.upload(image: image, kind: .avatar, to: id)
+//		try self.save()
 	}
 }

@@ -18,7 +18,7 @@ extension CredentialsScreen {
 		@ViewBuilder var content: () -> Content
 
 		@State private var displayedError: Error?
-		@EnvironmentObject var authorizedUser: AuthorizedUser
+//		@EnvironmentObject var authorizedUser: AuthorizedUser
 		
 		var validCredentials: Bool {
 			email.isValidEmail && password.count >= 6
@@ -29,7 +29,7 @@ extension CredentialsScreen {
 			
 			Task {
 				do {
-					try await authorizedUser.signIn(email: email, password: password)
+//					try await authorizedUser.signIn(email: email, password: password)
 				} catch {
 					displayedError = error
 				}

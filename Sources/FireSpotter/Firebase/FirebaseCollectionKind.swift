@@ -10,14 +10,13 @@ import Suite
 	public static let shared = FirestoreActor()
 }
 
-
 struct FirebaseCollectionInfo: Sendable {
 	let name: String
 	let minimal: [String: Sendable]
 	
 	init<Element>(_ kind: FirebaseCollectionKind<Element>) throws {
 		name = kind.name
-		minimal = try kind.contentType.minimalRecord.asJSON()
+		minimal = try kind.contentType.init().asJSON()
 	}
 }
 

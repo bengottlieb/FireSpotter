@@ -19,7 +19,7 @@ extension CredentialsScreen {
 
 		@State private var displayedError: Error?
 		
-		@EnvironmentObject var authorizedUser: AuthorizedUser
+//		@EnvironmentObject var authorizedUser: AuthorizedUser
 
 		var validCredentials: Bool {
 			email.isValidEmail && password.count >= 6
@@ -30,7 +30,7 @@ extension CredentialsScreen {
 			
 			Task {
 				do {
-					try await authorizedUser.register(email: email, password: password)
+//					try await authorizedUser.register(email: email, password: password)
 				} catch {
 					displayedError = error
 				}

@@ -8,6 +8,10 @@
 import Suite
 
 public struct SpotMeta: SpotRecord {
+	public init() {
+		id = ""
+	}
+	
 	public var id: String
 	var minimalData: String?
 	
@@ -27,9 +31,7 @@ public struct SpotMeta: SpotRecord {
 		}
 	}
 	
-	public static var minimalRecord = SpotMeta(id: "")
 	public func awakeFromFetch(in document: SpotDocument<Self>) async {
-		try? document.save()
 	}
 	@MainActor public static func newRecord(withID id: String) -> Self { fatalError("SpotMeta.newRecord() should never be called") }
 }
@@ -40,27 +42,27 @@ extension SpotMeta: DateKeyProvider {
 	}
 }
 
-extension SpotDocument where Record == SpotMeta {
-	func modelDifferences(json: [String: Any]) async -> KeyDifferences? {
-		guard let current = record.minimalJSON else {
-			record.minimalJSON = json
-			try? save()
-			return nil
-		}
-		
-		let diff = json.diff(relativeTo: current)
-		var isMateriallyChanged = !diff.additions.isEmpty || !diff.changes.isEmpty
-		if isMateriallyChanged, (try? await collection!.isEmpty) == true { isMateriallyChanged = false }
-		if !isMateriallyChanged {
-			if !diff.isEmpty {
-				record.minimalJSON = json
-				try? save()
-			}
-			return nil
-		}
-		
-		return diff
-	}
-	
-
-}
+//extension SpotDocument where Record == SpotMeta {
+//	func modelDifferences(json: [String: Any]) async -> KeyDifferences? {
+//		guard let current = record.minimalJSON else {
+//			record.minimalJSON = json
+//			try? save()
+//			return nil
+//		}
+//		
+//		let diff = json.diff(relativeTo: current)
+//		var isMateriallyChanged = !diff.additions.isEmpty || !diff.changes.isEmpty
+//		if isMateriallyChanged, (try? await collection!.isEmpty) == true { isMateriallyChanged = false }
+//		if !isMateriallyChanged {
+//			if !diff.isEmpty {
+//				record.minimalJSON = json
+//				try? save()
+//			}
+//			return nil
+//		}
+//		
+//		return diff
+//	}
+//	
+//
+//}

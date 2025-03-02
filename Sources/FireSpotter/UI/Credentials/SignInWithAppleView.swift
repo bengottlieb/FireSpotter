@@ -11,7 +11,7 @@ import AuthenticationServices
 	@Binding var displayedError: Error?
 	let label: SignInWithAppleButton.Label
 	
-	@EnvironmentObject private var authorizedUser: AuthorizedUser
+//	@EnvironmentObject private var authorizedUser: AuthorizedUser
 	@State private var nonce = ""
 	
 	var body: some View {
@@ -24,7 +24,7 @@ import AuthenticationServices
 			case .success(let auth):
 				Task {
 					do {
-						try await authorizedUser.signIn(credential: auth.credential as? ASAuthorizationAppleIDCredential, nonce: nonce)
+			//			try await authorizedUser.signIn(credential: auth.credential as? ASAuthorizationAppleIDCredential, nonce: nonce)
 					} catch {
 						displayedError = error
 					}

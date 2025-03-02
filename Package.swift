@@ -29,9 +29,9 @@ let package = Package(
 			]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/ios-tooling/suite", from: "1.0.135"),
-		.package(url: "https://github.com/ios-tooling/journalist", from: "1.0.5"),
-		.package(url: "https://github.com/ios-tooling/crossplatformkit", from: "1.0.8"),
+		.package(url: "https://github.com/ios-tooling/suite", from: "1.2.11"),
+		.package(url: "https://github.com/ios-tooling/journalist", from: "1.0.12"),
+		.package(url: "https://github.com/ios-tooling/crossplatformkit", from: "1.0.13"),
 	],
 	targets: [
 		// Targets are the basic building blocks of a package. A target can define a module or a test suite.

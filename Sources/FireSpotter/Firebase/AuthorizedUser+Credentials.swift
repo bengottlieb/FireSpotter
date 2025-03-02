@@ -40,7 +40,7 @@ extension AuthorizedUser {
 	}
 
 	public func signOut() async {
-		user = .init(SpotUserRecord.minimalRecord, collection: FirestoreManager.users)
+		user = nil
 		fbUser = nil
 		do {
 			try Auth.auth().signOut()
@@ -48,14 +48,13 @@ extension AuthorizedUser {
 			FireSpotterLogger.error("Failed to sign out of Firebase: \(error, privacy: .public)")
 		}
 		userDefaults.removeObject(forKey: userDefaultsKey)
-		objectWillChange.sendOnMain()
 		Notifications.didSignOut.notify()
 	}
 	
 	func store(userInfo: SpotUserRecord) {
-		self.user.record = userInfo
-		addToken(token: self.apnsToken, deviceID: self.deviceID)
-		asyncReport { try await self.saveUser() }
+		self.user?.record = userInfo
+//		addToken(token: self.apnsToken, deviceID: self.deviceID)
+//		asyncReport { try await self.saveUser() }
 		saveUserDefaults()
 	}
 	
@@ -63,24 +62,16 @@ extension AuthorizedUser {
 		guard let appleIDToken = cred?.identityToken else { throw AuthorizationError.noIdentityToken }
 		guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else { throw AuthorizationError.badIdentityToken }
 
-		let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
-		let _: Void = try await withCheckedThrowingContinuation { continuation in
-			Auth.auth().signIn(with: credential) { (authResult, error) in
-				if let error {
-					continuation.resume(throwing: error)
-				} else if let user = authResult?.user {
-					self.store(user: user) {
-						self.store(userInfo: .init(id: user.uid, firstName: cred?.fullName?.givenName, lastName: cred?.fullName?.familyName, emailAddress: cred?.email))
-						Task {
-							await FirestoreManager.instance.recordManager?.didSignIn()
-							Notifications.didSignIn.notify()
-							continuation.resume()
-						}
-					}
-				} else {
-					continuation.resume(throwing: AuthorizationError.unknown)
-				}
-			}
+		let credential: AuthCredential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: cred?.fullName)
+
+		let user = try await Auth.auth().signIn(with: credential).user
+		self.store(user: user) {
+//			self.store(userInfo: .init(id: user.uid, firstName: cred?.fullName?.givenName, lastName: cred?.fullName?.familyName, emailAddress: cred?.email))
+//			Task {
+//				await FirestoreManager.instance.recordManager?.didSignIn()
+//				Notifications.didSignIn.notify()
+//				continuation.resume()
+//			}
 		}
 	}
 	
@@ -92,7 +83,7 @@ extension AuthorizedUser {
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.store(userInfo: .init(id: user.uid, emailAddress: email))
+//						self.store(userInfo: .init(id: user.uid, emailAddress: email))
 						continuation.resume()
 					}
 				} else {
@@ -110,7 +101,7 @@ extension AuthorizedUser {
 					continuation.resume(throwing: error)
 				} else if let user = authResult?.user {
 					self.store(user: user) {
-						self.store(userInfo: .init(id: user.uid, emailAddress: email))
+//						self.store(userInfo: .init(id: user.uid, emailAddress: email))
 						continuation.resume()
 					}
 				} else {

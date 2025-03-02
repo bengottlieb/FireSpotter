@@ -17,11 +17,11 @@ open class FireSpotterAppDelegate: NSObject, UIApplicationDelegate {
 	}
 	
 	open func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-		AuthorizedUser.instance.apnsToken = deviceToken.hexString
+//		AuthorizedUser.instance.apnsToken = deviceToken.hexString
 	}
 	
 	open func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-		FireSpotterLogger.warning("Failed to register for remove notifications: \(error, privacy: .public)")
+//		FireSpotterLogger.warning("Failed to register for remove notifications: \(error, privacy: .public)")
 	}
 }
 

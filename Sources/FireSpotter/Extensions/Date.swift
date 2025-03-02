@@ -22,7 +22,7 @@ extension Date {
 
 extension DateFormatter {
 	static let idFormatter: DateFormatter = {
-		let formatter = DateFormatter(format: "dd-MM-yyyy")
+		let formatter = DateFormatter(format: "yyyy-MM-dd")
 		formatter.timeZone = .current
 		return formatter
 	}()

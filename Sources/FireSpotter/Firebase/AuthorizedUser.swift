@@ -12,7 +12,7 @@ import Suite
 import Journalist
 import Combine
 
-@MainActor public class AuthorizedUser: ObservableObject {
+public actor AuthorizedUser {
 	public static let instance = AuthorizedUser()
 	
 	enum AuthorizationError: Error { case unknown, noIdentityToken, badIdentityToken }
@@ -33,12 +33,12 @@ import Combine
 	public var fbUser: User? { didSet { updateFBUser() }}
 	public var userDefaults = UserDefaults.standard
 	public nonisolated var currentUserID: String? { Self.currentUserID }
-	public var apnsToken: String? { didSet { didUpdateDeviceInfo() }}
-	public var deviceID = Gestalt.deviceID { didSet { didUpdateDeviceInfo() }}
+	public var apnsToken: String? { didSet { Task { await didUpdateDeviceInfo() } }}
 	
-	public var user: SpotUserDocument = SpotUserDocument(SpotUserRecord.minimalRecord, collection: FirestoreManager.users) { didSet {
-		FireSpotterLogger.info("UserID set to \(self.user.id, privacy: .public)")
-	}}
+	public var user: SpotUserDocument?
+//	= SpotUserDocument(SpotUserRecord(), collection: FirestoreManager.users) { didSet {
+//		FireSpotterLogger.info("UserID set to \(self.user.id, privacy: .public)")
+//	}}
 	var rawUserJSON: [String: Any] = [:]
 	
 	let userDefaultsKey = "firespotter_stored_user"
@@ -52,44 +52,45 @@ import Combine
 	
 	init() {
 		fbUser = Auth.auth().currentUser
-		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, !json.isEmpty, let user = try? SpotUserRecord.loadJSON(dictionary: json, using: .firebaseDecoder) {
-			self.user.record = user
-			Self.currentUserID = user.id
-			
-			Task { @MainActor in
-				try? await fetchUser()
-				if self.isSignedIn {
-					Task {
-						await FirestoreManager.instance.recordManager?.didSignIn()
-						Notifications.didSignIn.notify()
-					}
-					
-				}
-				objectWillChange.send()
-			}
-		} else {
-			asyncReport { try await self.fetchUser() }
-		}
+//		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, !json.isEmpty, let user = try? SpotUserRecord.loadJSON(dictionary: json, using: .firebaseDecoder) {
+//			self.user.record = user
+//			Self.currentUserID = user.id
+//			
+//			Task { @MainActor in
+//				try? await fetchUser()
+//				if self.isSignedIn {
+//					Task {
+//						await FirestoreManager.instance.recordManager?.didSignIn()
+//						Notifications.didSignIn.notify()
+//					}
+//					
+//				}
+//				objectWillChange.send()
+//			}
+//		} else {
+//			asyncReport { try await self.fetchUser() }
+//		}
 	}
 	
 	public func save() {
-		asyncReport { try await self.saveUser() }
+//		asyncReport { try await self.saveUser() }
 		saveUserDefaults()
 	}
 	
-	func didUpdateDeviceInfo() {
-		if isSignedIn {
-			addToken(token: apnsToken, deviceID: deviceID)
-		}
+	func didUpdateDeviceInfo() async {
+//		let deviceID = await Gestalt.deviceID
+//		if isSignedIn {
+//			addToken(token: apnsToken, deviceID: deviceID)
+//		}
 	}
 	
 	func saveUserDefaults() {
-		try? userDefaults.set(self.user.json.jsonData, forKey: userDefaultsKey)
+//		try? userDefaults.set(self.user.json.jsonData, forKey: userDefaultsKey)
 		userDefaults.synchronize()
 	}
 	
 	public var isSignedIn: Bool {
-		get { !user.id.isEmpty }
+		get { user != nil }
 		set {
 			if isSignedIn, !newValue {
 				Task { await signOut() }
@@ -103,12 +104,12 @@ import Combine
 	
 	func store(user fbUser: User, completion: @escaping () -> Void) {
 		self.fbUser = fbUser
-		if !isSignedIn { user = .init(.init(id: fbUser.uid), collection: FirestoreManager.users) }
+//		if !isSignedIn { user = .init(.init(id: fbUser.uid), collection: FirestoreManager.users) }
 		save()
 		
 		Task { @MainActor in
-			await FirestoreManager.instance.recordManager?.didSignIn()
-			self.objectWillChange.send()
+//			await FirestoreManager.instance.recordManager?.didSignIn()
+//			self.objectWillChange.send()
 			completion()
 			Notifications.didSignIn.notify()
 		}
