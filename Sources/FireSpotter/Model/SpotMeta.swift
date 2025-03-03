@@ -8,8 +8,8 @@
 import Suite
 
 public struct SpotMeta: SpotRecord {
-	public init() {
-		id = ""
+	public init(id: String) {
+		self.id = id
 	}
 	
 	public var id: String

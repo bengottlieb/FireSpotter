@@ -26,3 +26,12 @@ open class FireSpotterAppDelegate: NSObject, UIApplicationDelegate {
 }
 
 #endif
+
+
+#if os(macOS)
+import Cocoa
+
+open class FireSpotterAppDelegate: NSObject, NSApplicationDelegate {
+	
+}
+#endif

@@ -16,12 +16,55 @@ import os.log
 //	func backup(to backup: FirestoreBackup) async throws
 //}
 
-public class SpotCollection<RecordType: SpotRecord>: ObservableObject where RecordType.ID == String {
+public class SpotCollection<RecordType: SpotRecord>: ObservableObject {
 	public var base: CollectionReference
+	var listenerRegistration: ListenerRegistration?
 	
-	init(_ collection: CollectionReference, recordType: any SpotRecord.Type) {
-		base = collection
+	convenience init(_ path: String, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
+		let collection = Firestore.firestore().collection(path)
+		self.init(collection, recordType: recordType, monitorChanges: monitorChanges)
 	}
+	
+	init(_ collection: CollectionReference, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
+		base = collection
+		if monitorChanges {
+			listenerRegistration = collection.addSnapshotListener { snapshot, error in
+				print("\(self) changed")
+			}
+		}
+	}
+	
+	var cache = SpotDocumentCache<RecordType>()
+	
+	public subscript(create recordID: String) -> SpotDocument<RecordType> {
+		get async {
+			if let existing = await self[recordID] { return existing }
+			let newRecord = RecordType(id: recordID)
+			let doc = SpotDocument(newRecord, collection: self)
+			cache[recordID] = doc
+			return doc
+		}
+	}
+	
+	public subscript(recordID: String) -> SpotDocument<RecordType>? {
+		get async {
+			if let cached = cache[recordID] { return cached }
+			do {
+				guard let json = try await base.document(recordID).getDocument().data() else { return nil }
+				let record = try RecordType.loadJSON(dictionary: json.convertingFirebaseTimestampsToDates())
+				
+				let doc = SpotDocument(record, collection: self)
+				doc.json = json
+				cache[recordID] = doc
+				return doc
+			} catch {
+				FireSpotterLogger.error("Failed to get \(RecordType.self) \"\(recordID)\"")
+				return nil
+			}
+		}
+	}
+	
+	
 //
 //	var cache = ObjectCache<SpotDocument<RecordType>>()
 	public var path: String { base.path }
@@ -93,19 +136,26 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject where Reco
 //		return newDoc
 //	}
 //	
-//	@MainActor @discardableResult public func save(_ element: RecordType, json: [String: Any]? = nil) async throws -> SpotDocument<RecordType> {
-//		if let cached = await cache.record(forKey: element.id) {
-//			cached.record = element
-//			try await save(cached)
-//			return cached
-//		}
-//		
-//		let doc = SpotDocument(element, collection: self)
-//		try await save(doc)
-//		cache(doc)
-//		return doc
-//	}
-//	
+	@discardableResult public func save(_ record: RecordType, json: [String: Any]? = nil) async throws -> SpotDocument<RecordType> {
+		
+		let cached = await self[create: record.id]
+		cached.record = record
+		try await save(cached)
+		return cached
+	}
+	
+	func save(_ doc: SpotDocument<RecordType>) async throws {
+		if doc.id.isEmpty {
+			FireSpotterLogger.warning("Trying to save an empty document: \(doc, privacy: .public)")
+			return
+		}
+		let data = doc.jsonPayload.convertingDatesToFirebaseTimestamps(using: RecordType.self as? DateKeyProvider.Type)
+		let ref = base.document(doc.id)
+		try await ref.setData(data)
+		objectWillChange.sendOnMain()
+	}
+
+//
 //	@MainActor public func document(from element: RecordType, json: JSONDictionary) -> SpotDocument<RecordType> {
 //		if let cached = cached(id: element.id) {
 //			cached.record = element
@@ -118,17 +168,7 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject where Reco
 //		return new
 //	}
 //	
-//	func save(_ doc: SpotDocument<RecordType>) async throws {
-//		if doc.id.isEmpty {
-//			FireSpotterLogger.warning("Trying to save an empty document: \(doc, privacy: .public)")
-//			return
-//		}
-//		let data = doc.jsonPayload.convertingDatesToFirebaseTimestamps(using: RecordType.self as? DateKeyProvider.Type)
-//		let ref = base.document(doc.id)
-//		try await ref.setData(data)
-//		objectWillChange.sendOnMain()
-//	}
-//	
+//
 //	public var isEmpty: Bool {
 //		get async throws {
 //			try await base.limit(to: 1).count.query.getDocuments().count == 0

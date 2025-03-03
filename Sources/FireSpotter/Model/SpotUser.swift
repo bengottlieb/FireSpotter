@@ -23,9 +23,10 @@ public struct SpotUserRecord: SpotUser {
 	public var firstName: String?
 	public var lastName: String?
 	public var emailAddress: String?
+	public var createdAt = Date.now
 	
-	public init() {
-		
+	public init(id: String) {
+		self.id = id
 	}
 
 	public var description: String { "User: \(id)" }

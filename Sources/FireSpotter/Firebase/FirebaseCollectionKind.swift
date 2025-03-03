@@ -6,8 +6,8 @@
 
 import Suite
 
-@globalActor public actor FirestoreActor : GlobalActor {
-	public static let shared = FirestoreActor()
+@globalActor public actor FireSpotterActor : GlobalActor {
+	public static let shared = FireSpotterActor()
 }
 
 struct FirebaseCollectionInfo: Sendable {
@@ -16,7 +16,7 @@ struct FirebaseCollectionInfo: Sendable {
 	
 	init<Element>(_ kind: FirebaseCollectionKind<Element>) throws {
 		name = kind.name
-		minimal = try kind.contentType.init().asJSON()
+		minimal = try kind.contentType.init(id: "").asJSON()
 	}
 }
 

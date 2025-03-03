@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,9 +6,9 @@ import PackageDescription
 let package = Package(
 	name: "FireSpotter",
 	platforms: [
-		.macOS(.v13),
-		.iOS(.v15),
-		.watchOS(.v8)
+		.macOS(.v14),
+		.iOS(.v17),
+		.watchOS(.v10)
 	],
 	products: [
 		// Products define the executables and libraries produced by a package, and make them visible to other packages.
@@ -26,6 +26,10 @@ let package = Package(
 				"FirebaseAppCheckInterop", "FirebaseAuthInterop", "FirebaseStorage",
 				
 				"FirebaseDatabase", "FirebaseDatabaseSwift",
+				
+				"FirebaseVertexAI"
+				
+				
 			]),
 	],
 	dependencies: [
@@ -80,5 +84,7 @@ let package = Package(
 
 		.binaryTarget(name: "FirebaseDatabase", path: "Frameworks/FirebaseDatabase/FirebaseDatabase.xcframework"),
 		.binaryTarget(name: "FirebaseDatabaseSwift", path: "Frameworks/FirebaseDatabase/FirebaseDatabaseSwift.xcframework"),
+
+		.binaryTarget(name: "FirebaseVertexAI", path: "Frameworks/FirebaseVertexAI/FirebaseVertexAI.xcframework"),
 	]
 )

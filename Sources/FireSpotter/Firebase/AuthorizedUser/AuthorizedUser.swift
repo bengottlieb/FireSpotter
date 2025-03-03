@@ -13,7 +13,7 @@ import Journalist
 import Combine
 
 public actor AuthorizedUser {
-	public static let instance = AuthorizedUser()
+	nonisolated public static let instance = AuthorizedUser()
 	
 	enum AuthorizationError: Error { case unknown, noIdentityToken, badIdentityToken }
 	public struct Notifications {
@@ -21,10 +21,10 @@ public actor AuthorizedUser {
 		public static let didSignOut = Notification.Name("AuthorizedUser.didSignOut")
 	}
 	
-	static nonisolated let currentUserIDSubject: CurrentValueSubject<String, Never> = .init("")
+	static nonisolated let currentUserIDSubject: CurrentValueSubject<String?, Never> = .init(nil)
 	
 	public static nonisolated var firebaseUserID: String? { Auth.auth().currentUser?.uid }
-	public static nonisolated var currentUserID: String {// { Auth.auth().currentUser?.uid ?? "" }
+	public static nonisolated var currentUserID: String? {
 		get { currentUserIDSubject.value }
 		set { currentUserIDSubject.value = newValue }
 	}
@@ -36,13 +36,10 @@ public actor AuthorizedUser {
 	public var apnsToken: String? { didSet { Task { await didUpdateDeviceInfo() } }}
 	
 	public var user: SpotUserDocument?
-//	= SpotUserDocument(SpotUserRecord(), collection: FirestoreManager.users) { didSet {
-//		FireSpotterLogger.info("UserID set to \(self.user.id, privacy: .public)")
-//	}}
 	var rawUserJSON: [String: Any] = [:]
 	
 	let userDefaultsKey = "firespotter_stored_user"
-	public func setup() { }
+	nonisolated public func setup() { }
 	
 	func updateFBUser() {
 		guard let fbUser else { return }
@@ -50,8 +47,25 @@ public actor AuthorizedUser {
 		Self.currentUserID = fbUser.uid
 	}
 	
+	func handleAuthStateChanged(for newUser: User?) async {
+		fbUser = newUser
+		if let newUser {
+			await setupUserRecord(newUser)
+			Notifications.didSignIn.notify()
+		} else {
+			Notifications.didSignOut.notify()
+		}
+		await UI.instance.setIsSignedIn(newUser != nil)
+	}
+	
 	init() {
-		fbUser = Auth.auth().currentUser
+		Auth.auth().addStateDidChangeListener { auth, user in
+			Task { await self.handleAuthStateChanged(for: user) }
+		}
+//		fbUser = Auth.auth().currentUser
+//		if fbUser != nil {
+//			Task { @MainActor in UI.instance.isSignedIn = true }
+//		}
 //		if let json = userDefaults.data(forKey: userDefaultsKey)?.jsonDictionary, !json.isEmpty, let user = try? SpotUserRecord.loadJSON(dictionary: json, using: .firebaseDecoder) {
 //			self.user.record = user
 //			Self.currentUserID = user.id
@@ -88,30 +102,8 @@ public actor AuthorizedUser {
 //		try? userDefaults.set(self.user.json.jsonData, forKey: userDefaultsKey)
 		userDefaults.synchronize()
 	}
-	
-	public var isSignedIn: Bool {
-		get { user != nil }
-		set {
-			if isSignedIn, !newValue {
-				Task { await signOut() }
-			}
-		}
-	}
-	
+		
 	public static var sample: AuthorizedUser {
 		AuthorizedUser()
-	}
-	
-	func store(user fbUser: User, completion: @escaping () -> Void) {
-		self.fbUser = fbUser
-//		if !isSignedIn { user = .init(.init(id: fbUser.uid), collection: FirestoreManager.users) }
-		save()
-		
-		Task { @MainActor in
-//			await FirestoreManager.instance.recordManager?.didSignIn()
-//			self.objectWillChange.send()
-			completion()
-			Notifications.didSignIn.notify()
-		}
 	}
 }

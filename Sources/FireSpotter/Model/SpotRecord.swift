@@ -11,7 +11,7 @@ enum SpotRecordError: Error { case noRecordID }
 
 public protocol SpotRecord: Codable, Identifiable, Equatable, Sendable, CustomStringConvertible, Hashable where ID == String {
 	var id: String { get set }
-	init()
+	init(id: String)
 		
 	func awakeFromFetch(in document: SpotDocument<Self>) async
 }

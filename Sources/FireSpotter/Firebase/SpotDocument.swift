@@ -46,10 +46,10 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 //		return collection
 //	}
 //	
-//	public subscript(key: String) -> Any? {
-//		get { json[key] }
-//		set { json[key] = newValue }
-//	}
+	public subscript(key: String) -> Any? {
+		get { json[key] }
+		set { json[key] = newValue }
+	}
 //	
 //	func merge(_ newJSON: JSONDictionary) {
 //		json.merge(newJSON) { value1, value2 in
@@ -105,15 +105,15 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 //		return false
 //	}
 //	
-//	var jsonPayload: [String: Any] {
-//		var base = json
-//		let raw = (try? record.asJSON()) ?? [:]
-//		
-//		for (key, value) in raw {
-//			base[key] = value
-//		}
-//		return base
-//	}
+	var jsonPayload: [String: Any] {
+		var base = json
+		let raw = (try? record.asJSON()) ?? [:]
+		
+		for (key, value) in raw {
+			base[key] = value
+		}
+		return base
+	}
 //	
 //	public init(_ subject: Record, collection: SpotCollection<Record>?, json: [String: Any]? = nil, isSaved: Bool = true) {
 //		assert(Gestalt.isInPreview || collection != nil, "Cannot use a nil collection for a SpotDocument<\(Record.self)>")
@@ -128,11 +128,11 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 //		Task { try await self.saveAsync() }
 //	}
 //	
-//	public func saveAsync() async throws {
-//		if id.isEmpty { throw SpotRecordError.noRecordID }
-//		if snapshot != nil { snapshot = record }
-//		await report { try await self.collection.save(self) }
-//	}
+	public func save() async throws {
+		if id.isEmpty { throw SpotRecordError.noRecordID }
+		if snapshot != nil { snapshot = record }
+		await report { try await self.collection.save(self) }
+	}
 //	
 //	public func delete() async {
 //		do {

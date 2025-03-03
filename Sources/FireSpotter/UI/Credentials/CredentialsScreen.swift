@@ -13,7 +13,7 @@ public struct CredentialsScreen<Content: View>: View {
 	@State private var isCommunicating = false
 	@State private var email = ProcessInfo.string(for: "preloadedEmail") ?? ""
 	@State private var password = ProcessInfo.string(for: "preloadedPassword") ?? ""
-//	@EnvironmentObject var authorizedUser: AuthorizedUser
+	@Environment(AuthorizedUser.UI.self) var authorizedUser: AuthorizedUser.UI
 	@Environment(\.dismiss) var dismiss
 	let allowAccountCreation: Bool
 	let allowDontSignIn: Bool
