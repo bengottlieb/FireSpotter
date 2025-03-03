@@ -6,10 +6,6 @@
 
 import Suite
 
-@globalActor public actor FireSpotterActor : GlobalActor {
-	public static let shared = FireSpotterActor()
-}
-
 struct FirebaseCollectionInfo: Sendable {
 	let name: String
 	let minimal: [String: Sendable]

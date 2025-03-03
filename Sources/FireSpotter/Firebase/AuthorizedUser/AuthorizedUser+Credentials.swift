@@ -22,10 +22,11 @@ extension AuthorizedUser {
 }
 
 extension AuthorizedUser.UI {
-	var user: AuthorizedUser { AuthorizedUser.instance }
+	var authorizedUser: AuthorizedUser { AuthorizedUser.instance }
 	var autoICloudEmailSuffix: String { "@auto.icloud.com" }
 	
 	public func signOut() async {
+		user = nil
 		await AuthorizedUser.instance.handleAuthStateChanged(for: nil)
 		do {
 			try Auth.auth().signOut()

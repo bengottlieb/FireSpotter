@@ -27,6 +27,10 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 		}
 	}
 	
+	public static var empty: SpotDocument<Record> {
+		.init(Record.empty, collection: .init(empty: Record.self))
+	}
+	
 	init(_ record: Record, collection: RecordCollection) {
 		self.record = record
 		self.collection = collection

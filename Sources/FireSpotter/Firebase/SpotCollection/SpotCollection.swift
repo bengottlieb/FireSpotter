@@ -17,8 +17,12 @@ import os.log
 //}
 
 public class SpotCollection<RecordType: SpotRecord>: ObservableObject {
-	public var base: CollectionReference
+	private var base: CollectionReference!
 	var listenerRegistration: ListenerRegistration?
+	
+	init(empty: any SpotRecord.Type) {
+		base = nil
+	}
 	
 	convenience init(_ path: String, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
 		let collection = Firestore.firestore().collection(path)
@@ -41,21 +45,21 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject {
 			if let existing = await self[recordID] { return existing }
 			let newRecord = RecordType(id: recordID)
 			let doc = SpotDocument(newRecord, collection: self)
-			cache[recordID] = doc
+			await cache.store(doc, for: recordID)
 			return doc
 		}
 	}
 	
 	public subscript(recordID: String) -> SpotDocument<RecordType>? {
 		get async {
-			if let cached = cache[recordID] { return cached }
+			if let cached = await cache[recordID] { return cached }
 			do {
 				guard let json = try await base.document(recordID).getDocument().data() else { return nil }
 				let record = try RecordType.loadJSON(dictionary: json.convertingFirebaseTimestampsToDates())
 				
 				let doc = SpotDocument(record, collection: self)
 				doc.json = json
-				cache[recordID] = doc
+				await cache.store(doc, for: recordID)
 				return doc
 			} catch {
 				FireSpotterLogger.error("Failed to get \(RecordType.self) \"\(recordID)\"")

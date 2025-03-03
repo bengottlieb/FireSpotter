@@ -5,16 +5,29 @@
 //  Created by Ben Gottlieb on 3/2/25.
 //
 
-import Foundation
+import SwiftUI
+
+public struct SpotUserDocumentKey: EnvironmentKey {
+	public static var defaultValue: SpotUserDocument = .empty
+}
+
+extension EnvironmentValues {
+	public var spotUserDocument: SpotUserDocument {
+		  get { self[SpotUserDocumentKey.self] }
+		  set { self[SpotUserDocumentKey.self] = newValue }
+	 }
+}
+
 
 extension AuthorizedUser {
 	@Observable @MainActor public class UI {
 		public static let instance = AuthorizedUser.UI()
 		
-		public var isSignedIn = false
+		public var isSignedIn: Bool { user != nil }
+		public var user: SpotUserDocument?
 		
-		func setIsSignedIn(_ signedIn: Bool) {
-			self.isSignedIn = signedIn
+		func setUser(_ spotUser: SpotUserDocument?) {
+			self.user = spotUser
 		}
 	}
 }

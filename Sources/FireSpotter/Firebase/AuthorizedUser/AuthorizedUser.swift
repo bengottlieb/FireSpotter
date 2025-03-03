@@ -53,9 +53,10 @@ public actor AuthorizedUser {
 			await setupUserRecord(newUser)
 			Notifications.didSignIn.notify()
 		} else {
+			user = nil
 			Notifications.didSignOut.notify()
 		}
-		await UI.instance.setIsSignedIn(newUser != nil)
+		await UI.instance.setUser(user)
 	}
 	
 	init() {

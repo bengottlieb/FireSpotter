@@ -14,6 +14,8 @@ extension UUID {
 }
 
 extension String {
+	public static let EMPTY_ID = "EMPTY"
+	
 	public static func id(prefix: String) -> String {
 		return prefix + "-" + .dateTag + "-" + UUID().id
 	}

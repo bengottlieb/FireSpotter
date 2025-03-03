@@ -20,9 +20,10 @@ public protocol CreatableRecord: SpotRecord {
 	@MainActor static func newRecord(withID id: String) -> Self
 }
 
-//extension SpotRecord {
-//	public static var sampleDocument: SpotDocument<Self> {
-//		SpotDocument(Self(), collection: nil)
-//	}
-//
-//}
+public extension SpotRecord {
+	static var empty: Self {
+		Self.init(id: .EMPTY_ID)
+	}
+
+	var isEmpty: Bool { id == .EMPTY_ID }
+}

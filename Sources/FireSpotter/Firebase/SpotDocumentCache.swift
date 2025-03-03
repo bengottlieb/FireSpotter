@@ -7,8 +7,10 @@
 
 import Foundation
 
-class SpotDocumentCache<Record: SpotRecord> {
+@FireSpotterActor class SpotDocumentCache<Record: SpotRecord> {
 	var cache: [String: SpotDocument<Record>] = [:]
+	
+	nonisolated init() { }
 	
 	subscript(id: String) -> SpotDocument<Record>? {
 		get {
@@ -16,5 +18,9 @@ class SpotDocumentCache<Record: SpotRecord> {
 		} set {
 			cache[id] = newValue
 		}
+	}
+	
+	func store(_ document: SpotDocument<Record>, for id: String) {
+		self[id] = document
 	}
 }

@@ -28,6 +28,10 @@ public struct SpotUserRecord: SpotUser {
 	public init(id: String) {
 		self.id = id
 	}
+	
+	public var fullName: String {
+		[firstName, lastName].compactMap { $0 }.joined(separator: " ")
+	}
 
 	public var description: String { "User: \(id)" }
 	
