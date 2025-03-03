@@ -37,7 +37,7 @@ public class FileStore {
 	
 	enum StorageError: Error { case rootStorageNotAllowed, noImageData, failedToResizeImage }
 	
-	@discardableResult public func upload(image: UXImage, kind: ImageKind = .userSubmitted, to path: String, quality: Double = 0.9, maxSize: CGSize = FileStore.maxUploadedImageSize) async throws -> FirebaseStorage.StorageMetadata {
+	@MainActor @discardableResult public func upload(image: UXImage, kind: ImageKind = .userSubmitted, to path: String, quality: Double = 0.9, maxSize: CGSize = FileStore.maxUploadedImageSize) async throws -> FirebaseStorage.StorageMetadata {
 		var uploadedImage = image
 		if image.size.width > maxSize.width || image.size.width > maxSize.width {
 			#if os(macOS)
