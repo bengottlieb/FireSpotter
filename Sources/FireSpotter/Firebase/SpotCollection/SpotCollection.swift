@@ -24,12 +24,12 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject {
 		base = nil
 	}
 	
-	convenience init(_ path: String, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
+	public convenience init(_ path: String, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
 		let collection = Firestore.firestore().collection(path)
 		self.init(collection, recordType: recordType, monitorChanges: monitorChanges)
 	}
 	
-	init(_ collection: CollectionReference, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
+	public init(_ collection: CollectionReference, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
 		base = collection
 		if monitorChanges {
 			listenerRegistration = collection.addSnapshotListener { snapshot, error in
