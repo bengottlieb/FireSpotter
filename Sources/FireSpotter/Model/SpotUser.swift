@@ -22,6 +22,7 @@ public struct SpotUserRecord: SpotUser {
 	public var id = String.id(for: SpotUserRecord.self)
 	public var firstName: String?
 	public var lastName: String?
+	public var displayName: String?
 	public var emailAddress: String?
 	public var createdAt = Date.now
 	
@@ -30,7 +31,8 @@ public struct SpotUserRecord: SpotUser {
 	}
 	
 	public var fullName: String {
-		[firstName, lastName].compactMap { $0 }.joined(separator: " ")
+		if let displayName, !displayName.isEmpty { return displayName }
+		return [firstName, lastName].compactMap { $0 }.joined(separator: " ")
 	}
 
 	public var description: String { "User: \(id)" }

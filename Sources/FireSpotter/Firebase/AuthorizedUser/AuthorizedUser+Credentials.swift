@@ -67,13 +67,13 @@ extension AuthorizedUser.UI {
 		let credential: AuthCredential = OAuthProvider.appleCredential(withIDToken: idTokenString, rawNonce: nonce, fullName: cred?.fullName)
 
 		let fbUser = try await Auth.auth().signIn(with: credential).user
-		try await storeEmail(cred?.email, in: fbUser)
+		try await storeEmail(cred?.email, firstName: cred?.fullName?.givenName, lastName: cred?.fullName?.familyName, in: fbUser)
 	}
 	
 	public func register(email: String, password: String, logErrors: Bool = true) async throws {
 		do {
 			let fbUser = try await Auth.auth().createUser(withEmail: email, password: password).user
-			try await storeEmail(email, in: fbUser)
+			try await storeEmail(email, displayName: fbUser.displayName, in: fbUser)
 		} catch {
 			if logErrors { FireSpotterLogger.error("*** Registration error: \(error, privacy: .public)") }
 			throw error
@@ -90,10 +90,12 @@ extension AuthorizedUser.UI {
 		}
 	}
 	
-	func storeEmail(_ email: String?, in fbUser: User) async throws {
-		guard let email else { return }
+	func storeEmail(_ email: String? = nil, displayName: String? = nil, firstName: String? = nil, lastName: String? = nil, in fbUser: User) async throws {
 		let user = await FirestoreManager.instance.users[create: fbUser.uid]
-		user.record.emailAddress = email
+		if let email { user.record.emailAddress = email }
+		if let displayName { user.record.displayName = displayName }
+		if let firstName { user.record.firstName = firstName }
+		if let lastName { user.record.lastName = lastName }
 		try await user.save()
 	}
 

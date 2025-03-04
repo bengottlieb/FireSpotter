@@ -25,8 +25,12 @@ extension AuthorizedUser {
 		
 		public var isSignedIn: Bool { user != nil }
 		public var user: SpotUserDocument?
+		public var userID: String { user?.id ?? .EMPTY_ID }
 		
 		func setUser(_ spotUser: SpotUserDocument?) {
+			if spotUser === self.user { return }
+			user?.stopObserving()
+			spotUser?.startObserving()
 			self.user = spotUser
 		}
 	}

@@ -17,7 +17,7 @@ import os.log
 //}
 
 public class SpotCollection<RecordType: SpotRecord>: ObservableObject {
-	private var base: CollectionReference!
+	internal var base: CollectionReference!
 	var listenerRegistration: ListenerRegistration?
 	
 	init(empty: any SpotRecord.Type) {

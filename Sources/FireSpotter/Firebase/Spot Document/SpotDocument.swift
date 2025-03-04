@@ -11,20 +11,64 @@ import FirebaseFirestoreSwift
 import Journalist
 import Suite
 
+@dynamicMemberLookup
 public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifiable, Hashable {
 	typealias RecordCollection = SpotCollection<Record>
 	public typealias ID = String
 	public var record: Record { willSet { objectWillChange.sendOnMain() }}
 	public var json: [String: Any] { willSet { objectWillChange.sendOnMain() }}
 	public var snapshot: Record?
+	var listener: ListenerRegistration?
+	var isDirty = false
 	
 	public var cachedValues: [String: Any] = [:]
 	public var id: ID {
 		get { record.id }
 		set {
 			record.id = newValue
-			json["id"] = newValue
+			self["id"] = newValue
 		}
+	}
+	
+	deinit {
+		stopObserving()
+	}
+	
+	public subscript<T>(dynamicMember keyPath: WritableKeyPath<Record, T>) -> T {
+		get { record[keyPath: keyPath] }
+		set {
+			if isEqual(record[keyPath: keyPath], newValue) { return }
+			record[keyPath: keyPath] = newValue
+			isDirty = true
+		}
+	}
+	
+	public subscript(key: String) -> Any? {
+		get { json[key] }
+		set {
+			if let newValue, let oldValue = json[key], isEqual(oldValue, newValue) { return }
+			if newValue == nil, json[key] == nil { return }
+			json[key] = newValue
+			isDirty = true
+		}
+	}
+
+	func loadSnapshot(_ doc: DocumentSnapshot?) {
+		if let json = doc?.data() {
+			self.loadJSON(json)
+		}
+	}
+	
+	func loadJSON(_ newJSON: [String: Any]) {
+		if let record = try? Record.loadJSON(dictionary: newJSON), record != self.record {
+			self.record = record
+			isDirty = true
+		}
+		for (key, value) in newJSON {
+			self[key] = value
+		}
+		
+		self.objectWillChange.sendOnMain()
 	}
 	
 	public static var empty: SpotDocument<Record> {
@@ -50,11 +94,7 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 //		return collection
 //	}
 //	
-	public subscript(key: String) -> Any? {
-		get { json[key] }
-		set { json[key] = newValue }
-	}
-//	
+//
 //	func merge(_ newJSON: JSONDictionary) {
 //		json.merge(newJSON) { value1, value2 in
 //			value2
@@ -133,9 +173,13 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 //	}
 //	
 	public func save() async throws {
+		if !isDirty { return }
 		if id.isEmpty { throw SpotRecordError.noRecordID }
 		if snapshot != nil { snapshot = record }
-		await report { try await self.collection.save(self) }
+		await report {
+			try await self.collection.save(self)
+			self.isDirty = false
+		}
 	}
 //	
 //	public func delete() async {
