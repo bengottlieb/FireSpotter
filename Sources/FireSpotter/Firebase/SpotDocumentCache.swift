@@ -27,6 +27,10 @@ import Foundation
 		cache.removeValue(forKey: record.id)
 	}
 	
+	func remove(_ recordID: String) {
+		cache.removeValue(forKey: recordID)
+	}
+	
 	func store(_ record: Record) {
 		if let current = self[record.id] {
 			current.loadRecord(record)

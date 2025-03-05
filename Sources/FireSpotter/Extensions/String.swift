@@ -24,6 +24,10 @@ extension String {
 		.id(prefix: String(describing: record))
 	}
 	
+	public static func buildID(from ids: [String]) -> String {
+		ids.sorted().joined(separator: "-")
+	}
+
 	static func randomNonce(length: Int = 32) -> String {
 		precondition(length > 0)
 		let charset: [Character] = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")

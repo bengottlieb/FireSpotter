@@ -43,6 +43,19 @@ public protocol GenericSpotCollection: AnyObject { }
 		if monitorChanges { listenForChanges() }
 	}
 	
+	public func delete(recordID: String) {
+		cache.remove(recordID)
+		base?.document(recordID).delete()
+	}
+	
+	public func delete(document: SpotDocument<RecordType>) {
+		delete(recordID: document.id)
+	}
+	
+	public func delete(record: RecordType) {
+		delete(recordID: record.id)
+	}
+	
 	func listenForChanges(continuation: CheckedContinuation<Void, Never>? = nil) {
 		if let continuation { initialLoadContinuation = continuation }
 		listenerRegistration = base.addSnapshotListener { snapshot, error in
@@ -70,37 +83,6 @@ public protocol GenericSpotCollection: AnyObject { }
 		}
 	}
 	
-	public subscript(create recordID: String, andSave: Bool = true) -> SpotDocument<RecordType> {
-		get async {
-			if let existing = await self[recordID] { return existing }
-			do {
-				return try await insert(RecordType(id: recordID), andSave: andSave)
-			} catch {
-				print("Failed to insert record: \(error)")
-				return .init(RecordType(id: recordID), collection: self)
-			}
-		}
-	}
-	
-	public subscript(recordID: String) -> SpotDocument<RecordType>? {
-		get async {
-			if let cached = cache[recordID] { return cached }
-			do {
-				guard let json = try await base.document(recordID).getDocument().data() else { return nil }
-				let record = try RecordType.loadJSON(dictionary: json.convertingFirebaseTimestampsToDates())
-				
-				let doc = SpotDocument(record, collection: self)
-				doc.json = json
-				await doc.record.awakeFromFetch(in: doc)
-				cache.store(doc)
-				return doc
-			} catch {
-				FireSpotterLogger.error("Failed to get \(RecordType.self) \"\(recordID)\"")
-				return nil
-			}
-		}
-	}
-
 	@discardableResult
 	public func insert(_ record: RecordType, andSave: Bool = true) async throws -> SpotDocument<RecordType> {
 		if let existing = await self[record.id] {
