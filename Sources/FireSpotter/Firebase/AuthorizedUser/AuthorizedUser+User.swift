@@ -10,7 +10,7 @@ import FirebaseAuth
 
 extension AuthorizedUser {
 	func setupUserRecord(_ user: User) async {
-		let spotUser = await FirestoreManager.instance.users[create: user.uid]
+		let spotUser = await FirestoreManager.users[create: user.uid]
 		
 //		if spotUser["createdAt"] == nil {
 //			spotUser["createdAt"] = Date.now

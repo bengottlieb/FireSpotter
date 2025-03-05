@@ -20,7 +20,7 @@ public struct UserView<Content: View>: View {
 	public var body: some View {
 		content(user)
 			.task {
-				user = await FirestoreManager.instance.users[id]
+				user = await FirestoreManager.users[id]
 			}
 	}
 }

@@ -91,7 +91,7 @@ extension AuthorizedUser.UI {
 	}
 	
 	func storeEmail(_ email: String? = nil, displayName: String? = nil, firstName: String? = nil, lastName: String? = nil, in fbUser: User) async throws {
-		let user = await FirestoreManager.instance.users[create: fbUser.uid]
+		let user = await FirestoreManager.users[create: fbUser.uid]
 		if let email { user.record.emailAddress = email }
 		if let displayName { user.record.displayName = displayName }
 		if let firstName { user.record.firstName = firstName }

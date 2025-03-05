@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 
 extension SpotDocument {
-	func startObserving() {
+	@FireSpotterActor func startObserving() {
 		guard listener == nil else { return }
 		listener = collection.base?.document(id).addSnapshotListener { documentSnapshot, error in
 			self.loadSnapshot(documentSnapshot)

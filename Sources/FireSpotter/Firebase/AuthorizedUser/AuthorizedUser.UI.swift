@@ -30,7 +30,7 @@ extension AuthorizedUser {
 		func setUser(_ spotUser: SpotUserDocument?) {
 			if spotUser === self.user { return }
 			user?.stopObserving()
-			spotUser?.startObserving()
+			Task { @FireSpotterActor in spotUser?.startObserving() }
 			self.user = spotUser
 		}
 	}

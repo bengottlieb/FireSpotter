@@ -9,8 +9,11 @@ import Foundation
 
 @FireSpotterActor class SpotDocumentCache<Record: SpotRecord> {
 	var cache: [String: SpotDocument<Record>] = [:]
+	let parent: SpotCollection<Record>
 	
-	nonisolated init() { }
+	nonisolated init(parent: SpotCollection<Record>) {
+		self.parent = parent
+	}
 	
 	subscript(id: String) -> SpotDocument<Record>? {
 		get {
@@ -20,7 +23,19 @@ import Foundation
 		}
 	}
 	
-	func store(_ document: SpotDocument<Record>, for id: String) {
-		self[id] = document
+	func remove(_ record: Record) {
+		cache.removeValue(forKey: record.id)
+	}
+	
+	func store(_ record: Record) {
+		if let current = self[record.id] {
+			current.loadRecord(record)
+		} else {
+			cache[record.id] = SpotDocument(record, collection: parent)
+		}
+	}
+	
+	func store(_ document: SpotDocument<Record>) {
+		self[document.id] = document
 	}
 }

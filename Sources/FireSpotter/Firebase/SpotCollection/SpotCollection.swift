@@ -10,56 +10,85 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import os.log
 
-//public protocol CollectionWrapper: AnyObject {
-//	var path: String { get }
-//	func changePath(to newPath: String) throws
-//	func backup(to backup: FirestoreBackup) async throws
-//}
+public protocol GenericSpotCollection: AnyObject { }
 
-public class SpotCollection<RecordType: SpotRecord>: ObservableObject {
+@FireSpotterActor public class SpotCollection<RecordType: SpotRecord>: ObservableObject, GenericSpotCollection {
 	internal var base: CollectionReference!
 	var listenerRegistration: ListenerRegistration?
+	var isInitialLoadComplete = false
+	var initialLoadContinuation: CheckedContinuation<Void, Never>?
+	nonisolated public let path: String
+	lazy var cache: SpotDocumentCache<RecordType> = SpotDocumentCache<RecordType>(parent: self)
+
+	enum CollectionError: Error { case recordAlreadyExists }
 	
-	init(empty: any SpotRecord.Type) {
-		base = nil
-	}
+	nonisolated init(empty: any SpotRecord.Type) { path = "" }
 	
-	public convenience init(_ path: String, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
+	convenience init(_ path: String, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
 		let collection = Firestore.firestore().collection(path)
 		self.init(collection, recordType: recordType, monitorChanges: monitorChanges)
 	}
 	
-	public init(_ collection: CollectionReference, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
+	convenience init(_ path: String, recordType: any SpotRecord.Type) async {
+		let collection = Firestore.firestore().collection(path)
+		self.init(collection, recordType: recordType, monitorChanges: false)
+		let _: Void = await withCheckedContinuation { continuation in
+			listenForChanges(continuation: continuation)
+		}
+	}
+	
+	init(_ collection: CollectionReference, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
 		base = collection
-		if monitorChanges {
-			listenerRegistration = collection.addSnapshotListener { snapshot, error in
-				print("\(self) changed")
+		path = collection.path
+		if monitorChanges { listenForChanges() }
+	}
+	
+	func listenForChanges(continuation: CheckedContinuation<Void, Never>? = nil) {
+		if let continuation { initialLoadContinuation = continuation }
+		listenerRegistration = base.addSnapshotListener { snapshot, error in
+			Task { @FireSpotterActor  in
+				for change in snapshot?.documentChanges ?? [] {
+					guard let record = try? change.document.data(as: RecordType.self) else { continue }
+					
+					switch change.type {
+					case .added:
+						self.cache.store(record)
+					case .removed:
+						self.cache.remove(record)
+					case .modified:
+						self.cache.store(record)
+					}
+				}
+				self.isInitialLoadComplete = true
+				self.initialLoadContinuation?.resume()
+				self.initialLoadContinuation = nil
 			}
 		}
 	}
 	
-	var cache = SpotDocumentCache<RecordType>()
-	
-	public subscript(create recordID: String) -> SpotDocument<RecordType> {
+	public subscript(create recordID: String, andSave: Bool = true) -> SpotDocument<RecordType> {
 		get async {
 			if let existing = await self[recordID] { return existing }
-			let newRecord = RecordType(id: recordID)
-			let doc = SpotDocument(newRecord, collection: self)
-			await cache.store(doc, for: recordID)
-			return doc
+			do {
+				return try await insert(RecordType(id: recordID), andSave: andSave)
+			} catch {
+				print("Failed to insert record: \(error)")
+				return .init(RecordType(id: recordID), collection: self)
+			}
 		}
 	}
 	
 	public subscript(recordID: String) -> SpotDocument<RecordType>? {
 		get async {
-			if let cached = await cache[recordID] { return cached }
+			if let cached = cache[recordID] { return cached }
 			do {
 				guard let json = try await base.document(recordID).getDocument().data() else { return nil }
 				let record = try RecordType.loadJSON(dictionary: json.convertingFirebaseTimestampsToDates())
 				
 				let doc = SpotDocument(record, collection: self)
 				doc.json = json
-				await cache.store(doc, for: recordID)
+				await doc.record.awakeFromFetch(in: doc)
+				cache.store(doc)
 				return doc
 			} catch {
 				FireSpotterLogger.error("Failed to get \(RecordType.self) \"\(recordID)\"")
@@ -67,12 +96,37 @@ public class SpotCollection<RecordType: SpotRecord>: ObservableObject {
 			}
 		}
 	}
+
+	@discardableResult
+	public func insert(_ record: RecordType, andSave: Bool = true) async throws -> SpotDocument<RecordType> {
+		if let existing = await self[record.id] {
+			existing.loadRecord(record)
+			return existing
+		}
+		let doc = SpotDocument(record, collection: self)
+		try await insert(doc, andSave: andSave)
+		return doc
+	}
+
+	public func insert(_ document: SpotDocument<RecordType>, andSave: Bool = true) async throws {
+		if let _ = await self[document.id] {
+			return
+		}
+		print("Inserting \(String(describing: RecordType.self)), id: \(document.id)w")
+		await document.record.awakeFromFetch(in: document)
+		cache.store(document)
+		if andSave { document.isDirty = true }
+		try await document.save()
+	}
 	
-	
+	public var all: [SpotDocument<RecordType>] {
+		get async {
+			Array(cache.cache.values)
+		}
+	}
 //
 //	var cache = ObjectCache<SpotDocument<RecordType>>()
-	public var path: String { base.path }
-//	
+//
 //	public var cachedDocuments: [SpotDocument<RecordType>] { allCache ?? [] }
 //	public var allCache: [SpotDocument<RecordType>]?
 //	public var cachedCount: Int { cachedDocuments.count }

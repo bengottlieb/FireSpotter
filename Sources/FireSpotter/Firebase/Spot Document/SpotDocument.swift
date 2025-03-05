@@ -52,6 +52,13 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 			isDirty = true
 		}
 	}
+	
+	func loadRecord(_ record: Record) {
+		if record == self.record { return }
+		self.record = record
+		isDirty = true
+		objectWillChange.sendOnMain()
+	}
 
 	func loadSnapshot(_ doc: DocumentSnapshot?) {
 		if let json = doc?.data() {

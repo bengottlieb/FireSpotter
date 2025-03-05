@@ -19,11 +19,12 @@ public class FirestoreManager {
 //	public var cache: [String: CollectionWrapper] = [:]
 	lazy var db = Firestore.firestore()
 	
-	var users: SpotCollection<SpotUserRecord>
+	@FireSpotterActor static var users: SpotCollection<SpotUserRecord> { FirestoreManager.collection(for: "users") }
+
+	
 //	var kinds: [String: FirebaseCollectionInfo] = ["meta": try! .init(firebaseMetaCollectionKind)]
 	
 	init() {
-		users = SpotCollection("users", recordType: SpotUserRecord.self)
 		if ProcessInfo.bool(for: "offline") { goOffline() }
 	}
 	
