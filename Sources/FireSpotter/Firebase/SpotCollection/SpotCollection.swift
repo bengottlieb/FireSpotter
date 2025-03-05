@@ -48,15 +48,19 @@ public protocol GenericSpotCollection: AnyObject { }
 		listenerRegistration = base.addSnapshotListener { snapshot, error in
 			Task { @FireSpotterActor  in
 				for change in snapshot?.documentChanges ?? [] {
-					guard let record = try? change.document.data(as: RecordType.self) else { continue }
-					
-					switch change.type {
-					case .added:
-						self.cache.store(record)
-					case .removed:
-						self.cache.remove(record)
-					case .modified:
-						self.cache.store(record)
+					do {
+						let record = try change.document.data(as: RecordType.self)
+						
+						switch change.type {
+						case .added:
+							self.cache.store(record)
+						case .removed:
+							self.cache.remove(record)
+						case .modified:
+							self.cache.store(record)
+						}
+					} catch {
+						print("Failed to parse record: \(error)")
 					}
 				}
 				self.isInitialLoadComplete = true
