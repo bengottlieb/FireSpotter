@@ -16,7 +16,11 @@ struct DefaultDateKeyProvider: DateKeyProvider {
 	static func isDateKey(_ key: String) -> Bool {
 		let lower = key.lowercased()
 		
-		return lower.contains("date") || lower.contains("timestamp")
+		if lower.contains("date") || lower.contains("timestamp") { return true }
+		if ["createdat", "updatedat", "modifiedat"].contains(lower) { return true }
+		if key.hasSuffix("At") { return true }
+		
+		return false
 	}
 }
 

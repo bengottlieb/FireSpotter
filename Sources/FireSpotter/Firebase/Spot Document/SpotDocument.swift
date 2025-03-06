@@ -43,6 +43,10 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 		}
 	}
 	
+	public subscript<T>(dynamicMember keyPath: KeyPath<Record, T>) -> T {
+		get { record[keyPath: keyPath] }
+	}
+	
 	public subscript(key: String) -> Any? {
 		get { json[key] }
 		set {
@@ -67,7 +71,7 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 	}
 	
 	func loadJSON(_ newJSON: [String: Any]) {
-		if let record = try? Record.loadJSON(dictionary: newJSON), record != self.record {
+		if let record = try? Record.loadJSON(dictionary: newJSON.convertingFirebaseTimestampsToDates()), record != self.record {
 			self.record = record
 			isDirty = true
 		}

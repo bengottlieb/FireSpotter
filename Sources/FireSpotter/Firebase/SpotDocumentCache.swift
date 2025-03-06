@@ -23,6 +23,8 @@ import Foundation
 		}
 	}
 	
+	var count: Int { cache.count }
+	
 	func remove(_ record: Record) {
 		cache.removeValue(forKey: record.id)
 	}

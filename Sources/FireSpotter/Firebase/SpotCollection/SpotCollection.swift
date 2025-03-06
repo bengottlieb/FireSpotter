@@ -79,6 +79,7 @@ public protocol GenericSpotCollection: AnyObject { }
 				self.isInitialLoadComplete = true
 				self.initialLoadContinuation?.resume()
 				self.initialLoadContinuation = nil
+				self.objectWillChange.sendOnMain()
 			}
 		}
 	}

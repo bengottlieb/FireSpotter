@@ -15,7 +15,11 @@ extension AuthorizedUser {
 //		if spotUser["createdAt"] == nil {
 //			spotUser["createdAt"] = Date.now
 //		}
+		
 		self.user = spotUser
+		spotUser.createdAt = user.metadata.creationDate ?? .now
+		spotUser.emailAddress = user.email
+		spotUser.displayName = user.displayName
 		do {
 			try await spotUser.save()
 		} catch {

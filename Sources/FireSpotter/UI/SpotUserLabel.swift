@@ -8,14 +8,18 @@
 import SwiftUI
 
 public struct SpotUserLabel: View {
-	let id: String
+	let id: String?
 	
-	public init(id: String) {
+	public init(id: String?) {
 		self.id = id
 	}
 	public var body: some View {
 		UserView(id: id) { user in
-			Text(user?.record.fullName ?? "Unknown")
+			if let name = user?.fullName, !name.isEmpty {
+				Text(name)
+			} else {
+				Text(user?.emailAddress ?? "Unknown")
+			}
 		}
 	}
 }
