@@ -31,6 +31,14 @@ public actor Vertex {
 	
 	enum VertexError: Error { case noDataReturned }
 
+	public func run(prompt: String) async throws -> String {
+		let model = vertex.generativeModel(modelName: "gemini-1.5-flash")
+		let response = try await model.generateContent([prompt])
+		
+		return response.text ?? ""
+
+	}
+	
 	public func sanitize(text: String) async throws -> SanitizeResponse {
 		let config = GenerationConfig(
 			 responseMIMEType: "application/json",
