@@ -51,7 +51,7 @@ public actor AuthorizedUser {
 		fbUser = newUser
 		if let newUser {
 			await setupUserRecord(newUser)
-			Notifications.didSignIn.notify()
+			Notifications.didSignIn.notify(user)
 		} else {
 			user = nil
 			Notifications.didSignOut.notify()
