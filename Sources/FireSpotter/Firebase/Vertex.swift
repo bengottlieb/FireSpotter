@@ -45,15 +45,8 @@ public actor Vertex {
 			 responseSchema: jsonSchema
 		)
 		
-		let spouseLabel = "husband"
-		let relationshipStatus = "strained"
-		let temp = "cool"
-		
-		let prompt = """
-				I'm writing a message to my \(spouseLabel). Our relationship is currently \(relationshipStatus). Can you please tell me if it's appropriate to send to a spouse, and make sure it's not too harsh, but it should have a \(temp) tone: \(text)
-		"""
 		let model = vertex.generativeModel(modelName: "gemini-1.5-flash", generationConfig: config)
-		let response = try await model.generateContent([prompt])
+		let response = try await model.generateContent([text])
 
 		guard let data = response.text?.data(using: .utf8) else { throw VertexError.noDataReturned }
 		
