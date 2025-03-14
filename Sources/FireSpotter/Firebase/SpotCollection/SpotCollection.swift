@@ -56,6 +56,10 @@ public protocol GenericSpotCollection: AnyObject { }
 		delete(recordID: record.id)
 	}
 	
+	public func document(_ record: RecordType) -> SpotDocument<RecordType> {
+		cache.store(record)
+	}
+	
 	func listenForChanges(continuation: CheckedContinuation<Void, Never>? = nil) {
 		if let continuation { initialLoadContinuation = continuation }
 		listenerRegistration = base.addSnapshotListener { snapshot, error in

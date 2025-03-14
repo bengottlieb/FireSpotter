@@ -33,11 +33,14 @@ import Foundation
 		cache.removeValue(forKey: recordID)
 	}
 	
-	func store(_ record: Record) {
+	@discardableResult func store(_ record: Record) -> SpotDocument<Record> {
 		if let current = self[record.id] {
 			current.loadRecord(record)
+			return current
 		} else {
-			cache[record.id] = SpotDocument(record, collection: parent)
+			let doc = SpotDocument(record, collection: parent)
+			cache[record.id] = doc
+			return doc
 		}
 	}
 	

@@ -8,17 +8,30 @@
 import SwiftUI
 
 public struct DeferredDocumentView<Record: SpotRecord, Content: View>: View {
-	var deferredDocument: SpotCollection<Record>.DeferredDocument
-	@ViewBuilder var buildContent: (SpotDocument<Record>) -> Content
+	let fetch: () async -> SpotDocument<Record>?
+	@State private var document: SpotDocument<Record>?
+	@ViewBuilder var builder: (SpotDocument<Record>) -> Content
 	
-	public init(_ doc: SpotCollection<Record>.DeferredDocument, @ViewBuilder content: @escaping (SpotDocument<Record>) -> Content) {
-		self.deferredDocument = doc
-		self.buildContent = content
+	public init(collection: @escaping () async -> SpotCollection<Record>, record: Record, @ViewBuilder builder: @escaping (SpotDocument<Record>) -> Content) {
+		self.fetch = {
+			await collection().document(record)
+		}
+		self.builder = builder
+	}
+	
+	public init(fetch: @escaping () async -> SpotDocument<Record>, record: Record, @ViewBuilder builder: @escaping (SpotDocument<Record>) -> Content) {
+		self.fetch = fetch
+		self.builder = builder
 	}
 	
 	public var body: some View {
-		if let doc = deferredDocument.document {
-			buildContent(doc)
+		Group {
+			if let document {
+				builder(document)
+			}
+		}
+		.task {
+			document = await fetch()
 		}
 	}
 }

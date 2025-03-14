@@ -25,9 +25,11 @@ extension AuthorizedUser {
 		
 		public var isSignedIn: Bool { user != nil }
 		public var user: SpotUserDocument?
+		public var isSetup = false
 		public var userID: String { user?.id ?? .EMPTY_ID }
 		
 		func setUser(_ spotUser: SpotUserDocument?) {
+			isSetup = true
 			if spotUser === self.user { return }
 			user?.stopObserving()
 			Task { @FireSpotterActor in spotUser?.startObserving() }
