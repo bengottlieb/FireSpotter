@@ -8,7 +8,6 @@
 import Foundation
 import FirebaseCore
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 public class FirestoreManager {
 	public static let instance = FirestoreManager()

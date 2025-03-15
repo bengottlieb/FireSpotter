@@ -7,7 +7,6 @@
 
 import Suite
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 import os.log
 
 public protocol GenericSpotCollection: AnyObject { }

@@ -35,6 +35,7 @@ public actor AuthorizedUser {
 	public nonisolated var currentUserID: String? { Self.currentUserID }
 	public var apnsToken: String? { didSet { Task { await didUpdateDeviceInfo() } }}
 	
+    var listenerToken: NSObjectProtocol?
 	public var user: SpotUserDocument?
 	var rawUserJSON: [String: Any] = [:]
 	
@@ -59,10 +60,14 @@ public actor AuthorizedUser {
 		await UI.instance.setUser(user)
 	}
 	
+    func setupListener() {
+        listenerToken = Auth.auth().addStateDidChangeListener { auth, user in
+            Task { await self.handleAuthStateChanged(for: user) }
+        }
+    }
+    
 	init() {
-		Auth.auth().addStateDidChangeListener { auth, user in
-			Task { await self.handleAuthStateChanged(for: user) }
-		}
+        Task { await self.setupListener() }
 //		fbUser = Auth.auth().currentUser
 //		if fbUser != nil {
 //			Task { @MainActor in UI.instance.isSignedIn = true }

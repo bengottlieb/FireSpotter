@@ -19,7 +19,7 @@ let package = Package(
 				
 				"FBLPromises", "FirebaseAnalytics", "FirebaseCore", "FirebaseCoreInternal", "FirebaseInstallations", "GoogleAppMeasurement", "GoogleAppMeasurementIdentitySupport", "GoogleUtilities", "nanopb",
 				
-				"FirebaseAuth", "RecaptchaInterop", "GTMSessionFetcher",
+				"FirebaseAuth", "GTMSessionFetcher", "FirebaseCoreExtension", "RecaptchaInterop",
 				
 				"FirebaseCrashlytics", "FirebaseRemoteConfigInterop", "FirebaseSessions", "GoogleDataTransport", "Promises",
 				
@@ -62,6 +62,7 @@ let package = Package(
 		.binaryTarget(name: "nanopb", path: "Frameworks/FirebaseAnalytics/nanopb.xcframework"),
 		
 		.binaryTarget(name: "FirebaseAuth", path: "Frameworks/FirebaseAuth/FirebaseAuth.xcframework"),
+        .binaryTarget(name: "FirebaseCoreExtension", path: "Frameworks/FirebaseAuth/FirebaseCoreExtension.xcframework"),
 		.binaryTarget(name: "RecaptchaInterop", path: "Frameworks/FirebaseAuth/RecaptchaInterop.xcframework"),
 		.binaryTarget(name: "GTMSessionFetcher", path: "Frameworks/FirebaseAuth/GTMSessionFetcher.xcframework"),
 		
@@ -72,7 +73,7 @@ let package = Package(
 		.binaryTarget(name: "Promises", path: "Frameworks/FirebaseCrashlytics/Promises.xcframework"),
 		
 		.binaryTarget(name: "absl", path: "Frameworks/FirebaseFireStore/absl.xcframework"),
-		.binaryTarget(name: "FirebaseFirestore", path: "Frameworks/FirebaseFireStore/FirebaseFirestore.xcframework"),
+        .binaryTarget(name: "FirebaseFirestore", path: "Frameworks/FirebaseFireStore/FirebaseFirestore.xcframework"),
 		.binaryTarget(name: "FirebaseFirestoreInternal", path: "Frameworks/FirebaseFireStore/FirebaseFirestoreInternal.xcframework"),
 		.binaryTarget(name: "FirebaseSharedSwift", path: "Frameworks/FirebaseFireStore/FirebaseSharedSwift.xcframework"),
 		.binaryTarget(name: "grpc", path: "Frameworks/FirebaseFireStore/grpc.xcframework"),
