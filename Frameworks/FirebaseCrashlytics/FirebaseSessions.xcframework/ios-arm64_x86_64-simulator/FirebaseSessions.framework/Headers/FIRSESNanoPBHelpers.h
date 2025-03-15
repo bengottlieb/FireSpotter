@@ -49,12 +49,12 @@ NSData* _Nullable FIRSESEncodeProto(const pb_field_t fields[],
                                     NSError** error);
 #pragma clang diagnostic pop
 
-/// Mallocs a pb_bytes_array and copies the given NSData bytes into the bytes array.
+/// Callocs a pb_bytes_array and copies the given NSData bytes into the bytes array.
 /// @note Memory needs to be freed manually, through pb_free or pb_release.
 /// @param data The data to copy into the new bytes array.
 pb_bytes_array_t* _Nullable FIRSESEncodeData(NSData* _Nullable data);
 
-/// Mallocs a pb_bytes_array and copies the given NSString's bytes into the bytes array.
+/// Callocs a pb_bytes_array and copies the given NSString's bytes into the bytes array.
 /// @note Memory needs to be freed manually, through pb_free or pb_release.
 /// @param string The string to encode as pb_bytes.
 pb_bytes_array_t* _Nullable FIRSESEncodeString(NSString* _Nullable string);
@@ -90,6 +90,9 @@ pb_size_t FIRSESGetAppleApplicationInfoTag(void);
 /// Returns sysctl entry, useful for obtaining OS build version from the kernel. Copied from a
 /// private method in GULAppEnvironmentUtil.
 NSString* _Nullable FIRSESGetSysctlEntry(const char* sysctlKey);
+
+/// C function to bridge from Swift to do nanopb bytes transfer.
+NSData* FIRSESTransportBytes(const void* _Nonnull proto);
 
 NS_ASSUME_NONNULL_END
 

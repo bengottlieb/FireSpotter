@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
-// swift-module-flags: -target arm64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FirebaseSessions
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+// swift-module-flags: -target arm64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FirebaseSessions
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 @_exported import FirebaseSessions
 import Foundation
@@ -8,6 +8,7 @@ import Swift
 import UIKit
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 extension FirebaseSessions._firebase_appquality_sessions_EventType : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
@@ -44,7 +45,7 @@ extension Swift.Optional : Swift.CustomStringConvertible where Wrapped == Swift.
   @objc deinit
 }
 @objc(FIRSessionsProvider) public protocol SessionsProvider {
-  @objc func register(subscriber: FirebaseSessions.SessionsSubscriber)
+  @objc func register(subscriber: any FirebaseSessions.SessionsSubscriber)
 }
 @objc(FIRSessionsSubscriber) public protocol SessionsSubscriber {
   @objc func onSessionChanged(_ session: FirebaseSessions.SessionDetails)

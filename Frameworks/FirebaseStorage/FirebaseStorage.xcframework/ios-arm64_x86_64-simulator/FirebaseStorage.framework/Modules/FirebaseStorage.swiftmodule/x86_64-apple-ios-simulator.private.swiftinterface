@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
-// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FirebaseStorage
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name FirebaseStorage
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import FirebaseAppCheckInterop
 import FirebaseAuthInterop
@@ -12,6 +12,7 @@ import MobileCoreServices
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
 extension FirebaseStorage.StorageReference {
   #if compiler(>=5.3) && $AsyncAwait
@@ -33,23 +34,25 @@ extension FirebaseStorage.StorageReference {
   public func list(maxResults: Swift.Int64, pageToken: Swift.String) async throws -> FirebaseStorage.StorageListResult
   #endif
 }
+@available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
 extension FirebaseStorage.StorageReference {
-  public func downloadURL(completion: @escaping (Swift.Result<Foundation.URL, Swift.Error>) -> Swift.Void)
+  public func downloadURL(completion: @escaping (Swift.Result<Foundation.URL, any Swift.Error>) -> Swift.Void)
   @discardableResult
-  public func getData(maxSize: Swift.Int64, completion: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void) -> FirebaseStorage.StorageDownloadTask
-  public func getMetadata(completion: @escaping (Swift.Result<FirebaseStorage.StorageMetadata, Swift.Error>) -> Swift.Void)
-  public func list(maxResults: Swift.Int64, pageToken: Swift.String, completion: @escaping (Swift.Result<FirebaseStorage.StorageListResult, Swift.Error>) -> Swift.Void)
-  public func list(maxResults: Swift.Int64, completion: @escaping (Swift.Result<FirebaseStorage.StorageListResult, Swift.Error>) -> Swift.Void)
-  public func listAll(completion: @escaping (Swift.Result<FirebaseStorage.StorageListResult, Swift.Error>) -> Swift.Void)
+  public func getData(maxSize: Swift.Int64, completion: @escaping (Swift.Result<Foundation.Data, any Swift.Error>) -> Swift.Void) -> FirebaseStorage.StorageDownloadTask
+  public func getMetadata(completion: @escaping (Swift.Result<FirebaseStorage.StorageMetadata, any Swift.Error>) -> Swift.Void)
+  public func list(maxResults: Swift.Int64, pageToken: Swift.String, completion: @escaping (Swift.Result<FirebaseStorage.StorageListResult, any Swift.Error>) -> Swift.Void)
+  public func list(maxResults: Swift.Int64, completion: @escaping (Swift.Result<FirebaseStorage.StorageListResult, any Swift.Error>) -> Swift.Void)
+  public func listAll(completion: @escaping (Swift.Result<FirebaseStorage.StorageListResult, any Swift.Error>) -> Swift.Void)
   @discardableResult
-  public func putData(_ uploadData: Foundation.Data, metadata: FirebaseStorage.StorageMetadata? = nil, completion: @escaping (Swift.Result<FirebaseStorage.StorageMetadata, Swift.Error>) -> Swift.Void) -> FirebaseStorage.StorageUploadTask
+  public func putData(_ uploadData: Foundation.Data, metadata: FirebaseStorage.StorageMetadata? = nil, completion: @escaping (Swift.Result<FirebaseStorage.StorageMetadata, any Swift.Error>) -> Swift.Void) -> FirebaseStorage.StorageUploadTask
   @discardableResult
-  public func putFile(from: Foundation.URL, metadata: FirebaseStorage.StorageMetadata? = nil, completion: @escaping (Swift.Result<FirebaseStorage.StorageMetadata, Swift.Error>) -> Swift.Void) -> FirebaseStorage.StorageUploadTask
-  public func updateMetadata(_ metadata: FirebaseStorage.StorageMetadata, completion: @escaping (Swift.Result<FirebaseStorage.StorageMetadata, Swift.Error>) -> Swift.Void)
+  public func putFile(from: Foundation.URL, metadata: FirebaseStorage.StorageMetadata? = nil, completion: @escaping (Swift.Result<FirebaseStorage.StorageMetadata, any Swift.Error>) -> Swift.Void) -> FirebaseStorage.StorageUploadTask
+  public func updateMetadata(_ metadata: FirebaseStorage.StorageMetadata, completion: @escaping (Swift.Result<FirebaseStorage.StorageMetadata, any Swift.Error>) -> Swift.Void)
   @discardableResult
-  public func write(toFile: Foundation.URL, completion: @escaping (Swift.Result<Foundation.URL, Swift.Error>) -> Swift.Void) -> FirebaseStorage.StorageDownloadTask
+  public func write(toFile: Foundation.URL, completion: @escaping (Swift.Result<Foundation.URL, any Swift.Error>) -> Swift.Void) -> FirebaseStorage.StorageDownloadTask
 }
-@_hasMissingDesignatedInitializers @objc(FIRStorage) open class Storage : ObjectiveC.NSObject {
+@_hasMissingDesignatedInitializers @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
+@objc(FIRStorage) open class Storage : ObjectiveC.NSObject {
   @objc(storage) open class func storage() -> FirebaseStorage.Storage
   @objc(storageWithURL:) open class func storage(url: Swift.String) -> FirebaseStorage.Storage
   @objc(storageForApp:) open class func storage(app: FirebaseCore.FirebaseApp) -> FirebaseStorage.Storage
@@ -68,11 +71,10 @@ extension FirebaseStorage.StorageReference {
     @objc set
   }
   @objc public var uploadChunkSizeBytes: Swift.Int64
-  @objc public var callbackQueue: Dispatch.DispatchQueue {
-    @objc get
-    @objc set(newValue)
-  }
+  @objc public var callbackQueue: Dispatch.DispatchQueue
+  @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
   @objc open func reference() -> FirebaseStorage.StorageReference
+  @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
   @objc open func reference(forURL url: Swift.String) -> FirebaseStorage.StorageReference
   open func reference(for url: Foundation.URL) throws -> FirebaseStorage.StorageReference
   @objc(referenceWithPath:) open func reference(withPath path: Swift.String) -> FirebaseStorage.StorageReference
@@ -97,7 +99,8 @@ extension FirebaseStorage.StorageReference {
     get
   }
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc(FIRStorageDownloadTask) open class StorageDownloadTask : FirebaseStorage.StorageObservableTask, FirebaseStorage.StorageTaskManagement {
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
+@objc(FIRStorageDownloadTask) open class StorageDownloadTask : FirebaseStorage.StorageObservableTask, FirebaseStorage.StorageTaskManagement {
   @objc open func enqueue()
   @objc open func pause()
   @objc open func cancel()
@@ -105,6 +108,7 @@ extension FirebaseStorage.StorageReference {
   @objc deinit
 }
 public let StorageErrorDomain: Swift.String
+@available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
 @objc(FIRStorageErrorCode) public enum StorageErrorCode : Swift.Int, Swift.Error {
   case unknown = -13000
   case objectNotFound = -13010
@@ -118,6 +122,9 @@ public let StorageErrorDomain: Swift.String
   case downloadSizeExceeded = -13032
   case cancelled = -13040
   case invalidArgument = -13050
+  case bucketMismatch = -13051
+  case internalError = -13052
+  case pathError = -13053
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public static var _nsErrorDomain: Swift.String {
@@ -127,31 +134,43 @@ public let StorageErrorDomain: Swift.String
     get
   }
 }
-public enum StorageError : Swift.Error {
-  case unknown(Swift.String)
-  case objectNotFound(Swift.String)
-  case bucketNotFound(Swift.String)
-  case projectNotFound(Swift.String)
-  case quotaExceeded(Swift.String)
-  case unauthenticated
-  case unauthorized(Swift.String, Swift.String)
+@available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
+public enum StorageError : Swift.Error, Foundation.CustomNSError {
+  case unknown(message: Swift.String, serverError: [Swift.String : Any])
+  case objectNotFound(object: Swift.String, serverError: [Swift.String : Any])
+  case bucketNotFound(bucket: Swift.String)
+  case projectNotFound(project: Swift.String)
+  case quotaExceeded(bucket: Swift.String, serverError: [Swift.String : Any])
+  case unauthenticated(serverError: [Swift.String : Any])
+  case unauthorized(bucket: Swift.String, object: Swift.String, serverError: [Swift.String : Any])
   case retryLimitExceeded
   case nonMatchingChecksum
-  case downloadSizeExceeded(Swift.Int64, Swift.Int64)
+  case downloadSizeExceeded(total: Swift.Int64, maxSize: Swift.Int64)
   case cancelled
-  case invalidArgument(Swift.String)
-  case internalError(Swift.String)
-  case bucketMismatch(Swift.String)
-  case pathError(Swift.String)
+  case invalidArgument(message: Swift.String)
+  case internalError(message: Swift.String)
+  case bucketMismatch(message: Swift.String)
+  case pathError(message: Swift.String)
+  public static var errorDomain: Swift.String {
+    get
+  }
+  public var errorCode: Swift.Int {
+    get
+  }
+  public var errorUserInfo: [Swift.String : Any] {
+    get
+  }
 }
-@_hasMissingDesignatedInitializers @objc(FIRStorageListResult) open class StorageListResult : ObjectiveC.NSObject {
+@_hasMissingDesignatedInitializers @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
+@objc(FIRStorageListResult) open class StorageListResult : ObjectiveC.NSObject {
   @objc final public let prefixes: [FirebaseStorage.StorageReference]
   @objc final public let items: [FirebaseStorage.StorageReference]
   @objc final public let pageToken: Swift.String?
   @objc override dynamic open func copy() -> Any
   @objc deinit
 }
-@_inheritsConvenienceInitializers @objc(FIRStorageMetadata) open class StorageMetadata : ObjectiveC.NSObject {
+@_inheritsConvenienceInitializers @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
+@objc(FIRStorageMetadata) open class StorageMetadata : ObjectiveC.NSObject {
   @objc final public let bucket: Swift.String
   @objc public var cacheControl: Swift.String?
   @objc public var contentDisposition: Swift.String?
@@ -192,7 +211,8 @@ public enum StorageError : Swift.Error {
   }
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @objc(FIRStorageObservableTask) open class StorageObservableTask : FirebaseStorage.StorageTask {
+@_hasMissingDesignatedInitializers @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
+@objc(FIRStorageObservableTask) open class StorageObservableTask : FirebaseStorage.StorageTask {
   @discardableResult
   @objc(observeStatus:handler:) open func observe(_ status: FirebaseStorage.StorageTaskStatus, handler: @escaping (FirebaseStorage.StorageTaskSnapshot) -> Swift.Void) -> Swift.String
   @objc(removeObserverWithHandle:) open func removeObserver(withHandle handle: Swift.String)
@@ -200,7 +220,8 @@ public enum StorageError : Swift.Error {
   @objc open func removeAllObservers()
   @objc deinit
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc(FIRStorageReference) open class StorageReference : ObjectiveC.NSObject {
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
+@objc(FIRStorageReference) open class StorageReference : ObjectiveC.NSObject {
   @objc final public let storage: FirebaseStorage.Storage
   @objc public var bucket: Swift.String {
     @objc get
@@ -219,44 +240,39 @@ public enum StorageError : Swift.Error {
   @discardableResult
   @objc(putData:) open func __putData(_ uploadData: Foundation.Data) -> FirebaseStorage.StorageUploadTask
   @discardableResult
-  @objc(putData:metadata:completion:) open func putData(_ uploadData: Foundation.Data, metadata: FirebaseStorage.StorageMetadata? = nil, completion: ((FirebaseStorage.StorageMetadata?, Swift.Error?) -> Swift.Void)?) -> FirebaseStorage.StorageUploadTask
+  @objc(putData:metadata:completion:) open func putData(_ uploadData: Foundation.Data, metadata: FirebaseStorage.StorageMetadata? = nil, completion: ((FirebaseStorage.StorageMetadata?, (any Swift.Error)?) -> Swift.Void)?) -> FirebaseStorage.StorageUploadTask
   @discardableResult
   @objc(putFile:metadata:) open func putFile(from fileURL: Foundation.URL, metadata: FirebaseStorage.StorageMetadata? = nil) -> FirebaseStorage.StorageUploadTask
   @discardableResult
   @objc(putFile:) open func __putFile(from fileURL: Foundation.URL) -> FirebaseStorage.StorageUploadTask
   @discardableResult
-  @objc(putFile:metadata:completion:) open func putFile(from fileURL: Foundation.URL, metadata: FirebaseStorage.StorageMetadata? = nil, completion: ((FirebaseStorage.StorageMetadata?, Swift.Error?) -> Swift.Void)?) -> FirebaseStorage.StorageUploadTask
+  @objc(putFile:metadata:completion:) open func putFile(from fileURL: Foundation.URL, metadata: FirebaseStorage.StorageMetadata? = nil, completion: ((FirebaseStorage.StorageMetadata?, (any Swift.Error)?) -> Swift.Void)?) -> FirebaseStorage.StorageUploadTask
   @discardableResult
-  @objc(dataWithMaxSize:completion:) open func getData(maxSize: Swift.Int64, completion: @escaping ((Foundation.Data?, Swift.Error?) -> Swift.Void)) -> FirebaseStorage.StorageDownloadTask
-  @objc(downloadURLWithCompletion:) open func downloadURL(completion: @escaping ((Foundation.URL?, Swift.Error?) -> Swift.Void))
+  @objc(dataWithMaxSize:completion:) open func getData(maxSize: Swift.Int64, completion: @escaping ((Foundation.Data?, (any Swift.Error)?) -> Swift.Void)) -> FirebaseStorage.StorageDownloadTask
+  @objc(downloadURLWithCompletion:) open func downloadURL(completion: @escaping ((Foundation.URL?, (any Swift.Error)?) -> Swift.Void))
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 13, tvOS 13, macOS 10.15, watchOS 8, *)
   open func downloadURL() async throws -> Foundation.URL
   #endif
   @discardableResult
   @objc(writeToFile:) open func write(toFile fileURL: Foundation.URL) -> FirebaseStorage.StorageDownloadTask
   @discardableResult
-  @objc(writeToFile:completion:) open func write(toFile fileURL: Foundation.URL, completion: ((Foundation.URL?, Swift.Error?) -> Swift.Void)?) -> FirebaseStorage.StorageDownloadTask
-  @objc(listAllWithCompletion:) open func listAll(completion: @escaping ((FirebaseStorage.StorageListResult?, Swift.Error?) -> Swift.Void))
+  @objc(writeToFile:completion:) open func write(toFile fileURL: Foundation.URL, completion: ((Foundation.URL?, (any Swift.Error)?) -> Swift.Void)?) -> FirebaseStorage.StorageDownloadTask
+  @objc(listAllWithCompletion:) open func listAll(completion: @escaping ((FirebaseStorage.StorageListResult?, (any Swift.Error)?) -> Swift.Void))
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 13, tvOS 13, macOS 10.15, watchOS 8, *)
   open func listAll() async throws -> FirebaseStorage.StorageListResult
   #endif
-  @objc(listWithMaxResults:completion:) open func list(maxResults: Swift.Int64, completion: @escaping ((FirebaseStorage.StorageListResult?, Swift.Error?) -> Swift.Void))
-  @objc(listWithMaxResults:pageToken:completion:) open func list(maxResults: Swift.Int64, pageToken: Swift.String, completion: @escaping ((FirebaseStorage.StorageListResult?, Swift.Error?) -> Swift.Void))
-  @objc(metadataWithCompletion:) open func getMetadata(completion: @escaping ((FirebaseStorage.StorageMetadata?, Swift.Error?) -> Swift.Void))
+  @objc(listWithMaxResults:completion:) open func list(maxResults: Swift.Int64, completion: @escaping ((FirebaseStorage.StorageListResult?, (any Swift.Error)?) -> Swift.Void))
+  @objc(listWithMaxResults:pageToken:completion:) open func list(maxResults: Swift.Int64, pageToken: Swift.String, completion: @escaping ((FirebaseStorage.StorageListResult?, (any Swift.Error)?) -> Swift.Void))
+  @objc(metadataWithCompletion:) open func getMetadata(completion: @escaping ((FirebaseStorage.StorageMetadata?, (any Swift.Error)?) -> Swift.Void))
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 13, tvOS 13, macOS 10.15, watchOS 8, *)
   open func getMetadata() async throws -> FirebaseStorage.StorageMetadata
   #endif
-  @objc(updateMetadata:completion:) open func updateMetadata(_ metadata: FirebaseStorage.StorageMetadata, completion: ((FirebaseStorage.StorageMetadata?, Swift.Error?) -> Swift.Void)?)
+  @objc(updateMetadata:completion:) open func updateMetadata(_ metadata: FirebaseStorage.StorageMetadata, completion: ((FirebaseStorage.StorageMetadata?, (any Swift.Error)?) -> Swift.Void)?)
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 13, tvOS 13, macOS 10.15, watchOS 8, *)
   open func updateMetadata(_ metadata: FirebaseStorage.StorageMetadata) async throws -> FirebaseStorage.StorageMetadata
   #endif
-  @objc(deleteWithCompletion:) open func delete(completion: ((Swift.Error?) -> Swift.Void)?)
+  @objc(deleteWithCompletion:) open func delete(completion: (((any Swift.Error)?) -> Swift.Void)?)
   #if compiler(>=5.3) && $AsyncAwait
-  @available(iOS 13, tvOS 13, macOS 10.15, watchOS 8, *)
   open func delete() async throws
   #endif
   @objc override dynamic open func copy() -> Any
@@ -269,7 +285,8 @@ public enum StorageError : Swift.Error {
   }
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @objc(FIRStorageTask) open class StorageTask : ObjectiveC.NSObject {
+@_hasMissingDesignatedInitializers @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
+@objc(FIRStorageTask) open class StorageTask : ObjectiveC.NSObject {
   @objc public var snapshot: FirebaseStorage.StorageTaskSnapshot {
     @objc get
   }
@@ -281,19 +298,21 @@ public enum StorageError : Swift.Error {
   @objc optional func cancel()
   @objc optional func resume()
 }
-@_hasMissingDesignatedInitializers @objc(FIRStorageTaskSnapshot) open class StorageTaskSnapshot : ObjectiveC.NSObject {
+@_hasMissingDesignatedInitializers @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
+@objc(FIRStorageTaskSnapshot) open class StorageTaskSnapshot : ObjectiveC.NSObject {
   @objc final public let task: FirebaseStorage.StorageTask
   @objc final public let metadata: FirebaseStorage.StorageMetadata?
   @objc final public let reference: FirebaseStorage.StorageReference
   @objc final public let progress: Foundation.Progress?
-  @objc final public let error: Swift.Error?
+  @objc final public let error: (any Swift.Error)?
   @objc final public let status: FirebaseStorage.StorageTaskStatus
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @objc(FIRStorageUploadTask) open class StorageUploadTask : FirebaseStorage.StorageObservableTask, FirebaseStorage.StorageTaskManagement {
+@_hasMissingDesignatedInitializers @available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
+@objc(FIRStorageUploadTask) open class StorageUploadTask : FirebaseStorage.StorageObservableTask, FirebaseStorage.StorageTaskManagement {
   @objc open func enqueue()
   @objc open func pause()
   @objc open func cancel()
@@ -303,6 +322,9 @@ public enum StorageError : Swift.Error {
 extension FirebaseStorage.StorageTaskStatus : Swift.Equatable {}
 extension FirebaseStorage.StorageTaskStatus : Swift.Hashable {}
 extension FirebaseStorage.StorageTaskStatus : Swift.RawRepresentable {}
+@available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
 extension FirebaseStorage.StorageErrorCode : Swift.Equatable {}
+@available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
 extension FirebaseStorage.StorageErrorCode : Swift.Hashable {}
+@available(iOS 13, tvOS 13, macOS 10.15, macCatalyst 13, watchOS 7, *)
 extension FirebaseStorage.StorageErrorCode : Swift.RawRepresentable {}

@@ -15,20 +15,23 @@ let package = Package(
 		.library(
 			name: "FireSpotter",
 			targets: [
-				"FireSpotter", "FBLPromises", "FirebaseAnalytics", "FirebaseAnalyticsSwift", "FirebaseCore", "FirebaseCoreInternal", "FirebaseInstallations", "GoogleAppMeasurement", "GoogleAppMeasurementIdentitySupport", "GoogleUtilities", "nanopb",
+				"FireSpotter",
 				
-				"FirebaseAuth", "GTMSessionFetcher",
+				"FBLPromises", "FirebaseAnalytics", "FirebaseCore", "FirebaseCoreInternal", "FirebaseInstallations", "GoogleAppMeasurement", "GoogleAppMeasurementIdentitySupport", "GoogleUtilities", "nanopb",
 				
-				"FirebaseCrashlytics", "FirebaseSessions", "GoogleDataTransport", "PromisesSwift",
+				"FirebaseAuth", "RecaptchaInterop", "GTMSessionFetcher",
 				
-				"abseil", "BoringSSL-GRPC", "FirebaseCoreExtension", "FirebaseFirestore", "FirebaseFirestoreSwift", "FirebaseSharedSwift", "gRPC-C++", "gRPC-Core", "leveldb-library", "Libuv-gRPC",
+				"FirebaseCrashlytics", "FirebaseRemoteConfigInterop", "FirebaseSessions", "GoogleDataTransport", "Promises",
+				
+				"absl", "FirebaseFirestore", "FirebaseFirestoreInternal", "FirebaseSharedSwift", "grpc", "grpcpp", "leveldb", "openssl_grpc",
 				
 				"FirebaseAppCheckInterop", "FirebaseAuthInterop", "FirebaseStorage",
 				
-				"FirebaseDatabase", "FirebaseDatabaseSwift",
+				"FirebaseDatabase",
 				
-				"FirebaseVertexAI"
+				"FirebaseVertexAI",
 				
+				"FirebaseMessaging"
 				
 			]),
 	],
@@ -50,7 +53,6 @@ let package = Package(
 		]),
 		.binaryTarget(name: "FBLPromises", path: "Frameworks/FirebaseAnalytics/FBLPromises.xcframework"),
 		.binaryTarget(name: "FirebaseAnalytics", path: "Frameworks/FirebaseAnalytics/FirebaseAnalytics.xcframework"),
-		.binaryTarget(name: "FirebaseAnalyticsSwift", path: "Frameworks/FirebaseAnalytics/FirebaseAnalyticsSwift.xcframework"),
 		.binaryTarget(name: "FirebaseCore", path: "Frameworks/FirebaseAnalytics/FirebaseCore.xcframework"),
 		.binaryTarget(name: "FirebaseCoreInternal", path: "Frameworks/FirebaseAnalytics/FirebaseCoreInternal.xcframework"),
 		.binaryTarget(name: "FirebaseInstallations", path: "Frameworks/FirebaseAnalytics/FirebaseInstallations.xcframework"),
@@ -60,31 +62,32 @@ let package = Package(
 		.binaryTarget(name: "nanopb", path: "Frameworks/FirebaseAnalytics/nanopb.xcframework"),
 		
 		.binaryTarget(name: "FirebaseAuth", path: "Frameworks/FirebaseAuth/FirebaseAuth.xcframework"),
+		.binaryTarget(name: "RecaptchaInterop", path: "Frameworks/FirebaseAuth/RecaptchaInterop.xcframework"),
 		.binaryTarget(name: "GTMSessionFetcher", path: "Frameworks/FirebaseAuth/GTMSessionFetcher.xcframework"),
 		
 		.binaryTarget(name: "FirebaseCrashlytics", path: "Frameworks/FirebaseCrashlytics/FirebaseCrashlytics.xcframework"),
 		.binaryTarget(name: "FirebaseSessions", path: "Frameworks/FirebaseCrashlytics/FirebaseSessions.xcframework"),
+		.binaryTarget(name: "FirebaseRemoteConfigInterop", path: "Frameworks/FirebaseCrashlytics/FirebaseRemoteConfigInterop.xcframework"),
 		.binaryTarget(name: "GoogleDataTransport", path: "Frameworks/FirebaseCrashlytics/GoogleDataTransport.xcframework"),
-		.binaryTarget(name: "PromisesSwift", path: "Frameworks/FirebaseCrashlytics/PromisesSwift.xcframework"),
+		.binaryTarget(name: "Promises", path: "Frameworks/FirebaseCrashlytics/Promises.xcframework"),
 		
-		.binaryTarget(name: "abseil", path: "Frameworks/FirebaseFireStore/abseil.xcframework"),
-		.binaryTarget(name: "BoringSSL-GRPC", path: "Frameworks/FirebaseFireStore/BoringSSL-GRPC.xcframework"),
-		.binaryTarget(name: "FirebaseCoreExtension", path: "Frameworks/FirebaseFireStore/FirebaseCoreExtension.xcframework"),
+		.binaryTarget(name: "absl", path: "Frameworks/FirebaseFireStore/absl.xcframework"),
 		.binaryTarget(name: "FirebaseFirestore", path: "Frameworks/FirebaseFireStore/FirebaseFirestore.xcframework"),
-		.binaryTarget(name: "FirebaseFirestoreSwift", path: "Frameworks/FirebaseFireStore/FirebaseFirestoreSwift.xcframework"),
+		.binaryTarget(name: "FirebaseFirestoreInternal", path: "Frameworks/FirebaseFireStore/FirebaseFirestoreInternal.xcframework"),
 		.binaryTarget(name: "FirebaseSharedSwift", path: "Frameworks/FirebaseFireStore/FirebaseSharedSwift.xcframework"),
-		.binaryTarget(name: "gRPC-C++", path: "Frameworks/FirebaseFireStore/gRPC-C++.xcframework"),
-		.binaryTarget(name: "gRPC-Core", path: "Frameworks/FirebaseFireStore/gRPC-Core.xcframework"),
-		.binaryTarget(name: "leveldb-library", path: "Frameworks/FirebaseFireStore/leveldb-library.xcframework"),
-		.binaryTarget(name: "Libuv-gRPC", path: "Frameworks/FirebaseFireStore/Libuv-gRPC.xcframework"),
+		.binaryTarget(name: "grpc", path: "Frameworks/FirebaseFireStore/grpc.xcframework"),
+		.binaryTarget(name: "grpcpp", path: "Frameworks/FirebaseFireStore/grpcpp.xcframework"),
+		.binaryTarget(name: "leveldb", path: "Frameworks/FirebaseFireStore/leveldb.xcframework"),
+		.binaryTarget(name: "openssl_grpc", path: "Frameworks/FirebaseFireStore/openssl_grpc.xcframework"),
 
 		.binaryTarget(name: "FirebaseAppCheckInterop", path: "Frameworks/FirebaseStorage/FirebaseAppCheckInterop.xcframework"),
 		.binaryTarget(name: "FirebaseAuthInterop", path: "Frameworks/FirebaseStorage/FirebaseAuthInterop.xcframework"),
 		.binaryTarget(name: "FirebaseStorage", path: "Frameworks/FirebaseStorage/FirebaseStorage.xcframework"),
 
 		.binaryTarget(name: "FirebaseDatabase", path: "Frameworks/FirebaseDatabase/FirebaseDatabase.xcframework"),
-		.binaryTarget(name: "FirebaseDatabaseSwift", path: "Frameworks/FirebaseDatabase/FirebaseDatabaseSwift.xcframework"),
 
 		.binaryTarget(name: "FirebaseVertexAI", path: "Frameworks/FirebaseVertexAI/FirebaseVertexAI.xcframework"),
+
+		.binaryTarget(name: "FirebaseMessaging", path: "Frameworks/FirebaseMessaging/FirebaseMessaging.xcframework"),
 	]
 )

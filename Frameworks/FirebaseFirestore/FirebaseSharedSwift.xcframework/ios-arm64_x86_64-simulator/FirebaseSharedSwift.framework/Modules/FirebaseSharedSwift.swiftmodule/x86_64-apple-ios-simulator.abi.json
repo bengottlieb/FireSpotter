@@ -234,15 +234,7 @@
                 "usr": "s:19FirebaseSharedSwift0A11DataEncoderC20DateEncodingStrategyO7iso8601yA2EmF",
                 "mangledName": "$s19FirebaseSharedSwift0A11DataEncoderC20DateEncodingStrategyO7iso8601yA2EmF",
                 "moduleName": "FirebaseSharedSwift",
-                "intro_Macosx": "10.12",
-                "intro_iOS": "10.0",
-                "intro_tvOS": "10.0",
-                "intro_watchOS": "3.0",
                 "declAttributes": [
-                  "Available",
-                  "Available",
-                  "Available",
-                  "Available",
                   "RawDocComment"
                 ]
               },
@@ -1705,15 +1697,7 @@
                 "usr": "s:19FirebaseSharedSwift0A11DataDecoderC20DateDecodingStrategyO7iso8601yA2EmF",
                 "mangledName": "$s19FirebaseSharedSwift0A11DataDecoderC20DateDecodingStrategyO7iso8601yA2EmF",
                 "moduleName": "FirebaseSharedSwift",
-                "intro_Macosx": "10.12",
-                "intro_iOS": "10.0",
-                "intro_tvOS": "10.0",
-                "intro_watchOS": "3.0",
                 "declAttributes": [
-                  "Available",
-                  "Available",
-                  "Available",
-                  "Available",
                   "RawDocComment"
                 ]
               },
@@ -3511,60 +3495,1831 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/var\/folders\/24\/8k48jl6d249_n_qfxwsl6xvm0000gn\/T\/ZipRelease\/2023-09-06T04-05-41\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "BooleanLiteral",
+      "offset": 884,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 1513,
+      "length": 87,
+      "value": "\"Expected to decode \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 1547,
+      "length": 3,
+      "value": "\" but found \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 1590,
+      "length": 7,
+      "value": "\" instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 2063,
+      "length": 14,
+      "value": "\"a null value\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 2263,
+      "length": 10,
+      "value": "\"a number\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 2319,
+      "length": 15,
+      "value": "\"a string\/data\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 2379,
+      "length": 10,
+      "value": "\"an array\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 2443,
+      "length": 14,
+      "value": "\"a dictionary\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 2484,
+      "length": 20,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 2503,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "Array",
+      "offset": 8596,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "Array",
+      "offset": 9224,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "Array",
+      "offset": 9577,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 10979,
+      "length": 3,
+      "value": "\"_\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
       "kind": "Dictionary",
-      "offset": 12051,
+      "offset": 11986,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/var\/folders\/24\/8k48jl6d249_n_qfxwsl6xvm0000gn\/T\/ZipRelease\/2023-09-06T04-05-41\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
       "kind": "Array",
-      "offset": 14880,
+      "offset": 13822,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/var\/folders\/24\/8k48jl6d249_n_qfxwsl6xvm0000gn\/T\/ZipRelease\/2023-09-06T04-05-41\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
-      "kind": "Array",
-      "offset": 17954,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/var\/folders\/24\/8k48jl6d249_n_qfxwsl6xvm0000gn\/T\/ZipRelease\/2023-09-06T04-05-41\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
       "kind": "StringLiteral",
-      "offset": 40844,
+      "offset": 13844,
+      "length": 48,
+      "value": "\"Top-level \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 13864,
+      "length": 3,
+      "value": "\" did not encode any values.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "Array",
+      "offset": 14815,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 16462,
+      "length": 92,
+      "value": "\"Attempt to push new keyed encoding container when already previously encoded at this path.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 17241,
+      "length": 94,
+      "value": "\"Attempt to push new unkeyed encoding container when already previously encoded at this path.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "Array",
+      "offset": 17889,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 18645,
+      "length": 24,
+      "value": "\"Empty container stack.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 23321,
+      "length": 159,
+      "value": "\"Attempt to re-encode into nested KeyedEncodingContainer<\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 23389,
+      "length": 1,
+      "value": "\"> for key \"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 23416,
+      "length": 1,
+      "value": "\"\" is invalid: non-keyed container already encoded for this key\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 24231,
+      "length": 157,
+      "value": "\"Attempt to re-encode into nested UnkeyedEncodingContainer for key \"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 24315,
+      "length": 1,
+      "value": "\"\" is invalid: keyed container\/single value already encoded for this key\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 29422,
+      "length": 95,
+      "value": "\"Attempt to encode value through single value container when previously value already encoded.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "FloatLiteral",
+      "offset": 34844,
+      "length": 6,
+      "value": "1000.0"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 42442,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 42649,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 42684,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 42747,
+      "length": 68,
+      "value": "\"Referencing encoder deallocated with multiple containers on stack.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 40608,
       "length": 24,
       "value": "\"FirebaseSharedSwift.__JSONReferencingEncoder\""
     },
     {
-      "filePath": "\/var\/folders\/24\/8k48jl6d249_n_qfxwsl6xvm0000gn\/T\/ZipRelease\/2023-09-06T04-05-41\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 47112,
+      "length": 3,
+      "value": "\"_\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 47416,
+      "length": 3,
+      "value": "\"_\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 47784,
+      "length": 3,
+      "value": "\"_\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 47850,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 48039,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 48069,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
       "kind": "Dictionary",
-      "offset": 50174,
+      "offset": 49873,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/var\/folders\/24\/8k48jl6d249_n_qfxwsl6xvm0000gn\/T\/ZipRelease\/2023-09-06T04-05-41\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
       "kind": "Array",
-      "offset": 53060,
+      "offset": 51755,
       "length": 2,
       "value": "[]"
     },
     {
-      "filePath": "\/var\/folders\/24\/8k48jl6d249_n_qfxwsl6xvm0000gn\/T\/ZipRelease\/2023-09-06T04-05-41\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
-      "kind": "Array",
-      "offset": 55989,
-      "length": 2,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/var\/folders\/24\/8k48jl6d249_n_qfxwsl6xvm0000gn\/T\/ZipRelease\/2023-09-06T04-05-41\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
       "kind": "StringLiteral",
-      "offset": 108915,
+      "offset": 51777,
+      "length": 51,
+      "value": "\"The given data did not contain a top-level value.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "Array",
+      "offset": 52764,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 53384,
+      "length": 66,
+      "value": "\"Cannot get keyed decoding container -- found null value instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 54603,
+      "length": 68,
+      "value": "\"Cannot get unkeyed decoding container -- found null value instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "Array",
+      "offset": 55693,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 55980,
+      "length": 24,
+      "value": "\"Empty container stack.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 56234,
+      "length": 24,
+      "value": "\"Empty container stack.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58630,
+      "length": 26,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58637,
+      "length": 1,
+      "value": "\" (\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58652,
+      "length": 1,
+      "value": "\"\")\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58712,
+      "length": 53,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58719,
+      "length": 1,
+      "value": "\" (\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58734,
+      "length": 1,
+      "value": "\"\"), converted to \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58764,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58796,
+      "length": 97,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58803,
+      "length": 1,
+      "value": "\" (\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58818,
+      "length": 1,
+      "value": "\"\"), with divergent representation \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58865,
+      "length": 1,
+      "value": "\", converted to \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58892,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58981,
+      "length": 33,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 58988,
+      "length": 1,
+      "value": "\" (\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 59010,
+      "length": 1,
+      "value": "\"\")\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 59265,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 59324,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 59623,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 59682,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 59983,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 60000,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 60316,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 60375,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 60675,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 60692,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 61010,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 61069,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 61370,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 61387,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 61707,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 61766,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 62068,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 62085,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 62405,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 62464,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 62766,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 62783,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 63103,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 63162,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 63464,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 63481,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 63799,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 63858,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 64159,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 64176,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 64496,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 64555,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 64857,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 64874,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 65196,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 65255,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 65558,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 65575,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 65897,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 65956,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 66259,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 66276,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 66598,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 66657,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 66960,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 66977,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 67297,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 67356,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 67658,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 67675,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 67997,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 68056,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 68359,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 68376,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 68698,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 68757,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 69060,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 69077,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 69624,
+      "length": 61,
+      "value": "\"No value associated with key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 69683,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 69979,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 69996,
+      "length": 5,
+      "value": "\" value but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 70556,
+      "length": 110,
+      "value": "\"Cannot get \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 70609,
+      "length": 2,
+      "value": "\" -- no value found for key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 70665,
+      "length": 3,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 71465,
+      "length": 93,
+      "value": "\"Cannot get UnkeyedDecodingContainer -- no value found for key \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 71557,
+      "length": 3,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 73187,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 73633,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 73753,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "BooleanLiteral",
+      "offset": 73768,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "BooleanLiteral",
+      "offset": 73799,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 74075,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 74504,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 74521,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 74581,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 74864,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 75292,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 75309,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 75369,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 75654,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 76083,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 76100,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 76160,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 76447,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 76877,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 76894,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 76954,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 77241,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 77671,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 77688,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 77748,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 78035,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 78465,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 78482,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 78542,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 78827,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 79256,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 79273,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 79333,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 79620,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 80050,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 80067,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 80127,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 80416,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 80847,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 80864,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 80924,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 81213,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 81644,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 81661,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 81721,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 82010,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 82441,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 82458,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 82518,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 82805,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 83235,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 83252,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 83312,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 83601,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 84032,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 84049,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 84109,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 84398,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 84829,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 84846,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 84906,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 85200,
+      "length": 30,
+      "value": "\"Unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 85624,
+      "length": 42,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 85641,
+      "length": 3,
+      "value": "\" but found null instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 85701,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 86258,
+      "length": 67,
+      "value": "\"Cannot get nested keyed container -- unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 86672,
+      "length": 66,
+      "value": "\"Cannot get keyed decoding container -- found null value instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 86950,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 87591,
+      "length": 67,
+      "value": "\"Cannot get nested keyed container -- unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 87996,
+      "length": 66,
+      "value": "\"Cannot get keyed decoding container -- found null value instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 88251,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 88780,
+      "length": 59,
+      "value": "\"Cannot get superDecoder() -- unkeyed container is at end.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "IntegerLiteral",
+      "offset": 88924,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 89351,
+      "length": 48,
+      "value": "\"Expected \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 89368,
+      "length": 3,
+      "value": "\" but found null value instead.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "BooleanLiteral",
+      "offset": 92549,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "BooleanLiteral",
+      "offset": 92626,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 93850,
+      "length": 57,
+      "value": "\"Parsed JSON number <\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 93880,
+      "length": 1,
+      "value": "\"> does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 93905,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 94302,
+      "length": 57,
+      "value": "\"Parsed JSON number <\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 94332,
+      "length": 1,
+      "value": "\"> does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 94357,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 94760,
+      "length": 57,
+      "value": "\"Parsed JSON number <\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 94790,
+      "length": 1,
+      "value": "\"> does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 94815,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 95219,
+      "length": 57,
+      "value": "\"Parsed JSON number <\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 95249,
+      "length": 1,
+      "value": "\"> does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 95274,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 95678,
+      "length": 57,
+      "value": "\"Parsed JSON number <\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 95708,
+      "length": 1,
+      "value": "\"> does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 95733,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 96132,
+      "length": 57,
+      "value": "\"Parsed JSON number <\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 96162,
+      "length": 1,
+      "value": "\"> does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 96187,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 96590,
+      "length": 57,
+      "value": "\"Parsed JSON number <\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 96620,
+      "length": 1,
+      "value": "\"> does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 96645,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 97054,
+      "length": 57,
+      "value": "\"Parsed JSON number <\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 97084,
+      "length": 1,
+      "value": "\"> does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 97109,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 97519,
+      "length": 57,
+      "value": "\"Parsed JSON number <\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 97549,
+      "length": 1,
+      "value": "\"> does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 97574,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 97984,
+      "length": 57,
+      "value": "\"Parsed JSON number <\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 98014,
+      "length": 1,
+      "value": "\"> does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 98039,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 99038,
+      "length": 55,
+      "value": "\"Parsed JSON number \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 99067,
+      "length": 4,
+      "value": "\" does not fit in \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 99091,
+      "length": 1,
+      "value": "\".\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "FloatLiteral",
+      "offset": 102617,
+      "length": 6,
+      "value": "1000.0"
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 102888,
+      "length": 47,
+      "value": "\"Expected date string to be ISO8601-formatted.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 103235,
+      "length": 58,
+      "value": "\"Date string does not match format expected by formatter.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 104254,
+      "length": 39,
+      "value": "\"Encountered Data is not valid Base64.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 107063,
+      "length": 21,
+      "value": "\"Invalid URL string.\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 108117,
+      "length": 13,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 108129,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 108343,
+      "length": 16,
+      "value": "\"Index \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 108358,
+      "length": 1,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 108448,
       "length": 7,
       "value": "\"super\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 109852,
+      "length": 20,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 109862,
+      "length": 1,
+      "value": "\".infinity\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 109935,
+      "length": 21,
+      "value": "\"-\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 109946,
+      "length": 1,
+      "value": "\".infinity\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 109995,
+      "length": 15,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 110005,
+      "length": 1,
+      "value": "\".nan\""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 110045,
+      "length": 167,
+      "value": "\"Unable to encode \""
+    },
+    {
+      "filePath": "\/var\/folders\/2s\/h6hvv9ps03xgz_krkkstvq_r0000gn\/T\/ZipRelease\/2025-02-20T04-01-34\/project-ios\/Pods\/FirebaseSharedSwift\/FirebaseSharedSwift\/Sources\/third_party\/FirebaseDataEncoder\/FirebaseDataEncoder.swift",
+      "kind": "StringLiteral",
+      "offset": 110082,
+      "length": 8,
+      "value": "\" directly in JSON. Use JSONEncoder.NonConformingFloatEncodingStrategy.convertToString to specify how the value should be encoded.\""
     }
   ]
 }
