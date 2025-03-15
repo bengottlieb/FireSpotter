@@ -9,7 +9,7 @@
 
 import UIKit
 
-open class FireSpotterAppDelegate: NSObject, UIApplicationDelegate {
+@MainActor open class FireSpotterAppDelegate: NSObject, UIApplicationDelegate {
 	open func application(_ application: UIApplication,
 						  didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 		application.registerForRemoteNotifications()
@@ -17,11 +17,20 @@ open class FireSpotterAppDelegate: NSObject, UIApplicationDelegate {
 	}
 	
 	open func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+		
+		APNSManager.instance.didReceive(deviceToken: deviceToken)
 //		AuthorizedUser.instance.apnsToken = deviceToken.hexString
 	}
 	
 	open func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-//		FireSpotterLogger.warning("Failed to register for remove notifications: \(error, privacy: .public)")
+		FireSpotterLogger.warning("Failed to register for remove notifications: \(error, privacy: .public)")
+	}
+	
+	open func application(_ application: UIApplication,
+						  didReceiveRemoteNotification userInfo: [AnyHashable: Any]) async -> UIBackgroundFetchResult {
+		
+		APNSManager.instance.appDidReceiveMessage(userInfo)
+		return .newData
 	}
 }
 
