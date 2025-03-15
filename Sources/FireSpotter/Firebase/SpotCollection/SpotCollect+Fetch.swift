@@ -9,7 +9,17 @@ import Foundation
 import FirebaseFirestore
 
 public extension SpotCollection {
-	subscript(create recordID: String, andSave: Bool = true) -> SpotDocument<RecordType> {
+    func documents(for ids: [String]) async -> [String: SpotDocument<RecordType>] {
+        var result: [String: SpotDocument<RecordType>] = [:]
+        for id in ids {
+            if let doc = await self[id] {
+                result[id] = doc
+            }
+        }
+        return result
+    }
+        
+    subscript(create recordID: String, andSave: Bool = true) -> SpotDocument<RecordType> {
 		get async {
 			if let existing = await self[recordID] { return existing }
 			do {
@@ -39,7 +49,6 @@ public extension SpotCollection {
 			}
 		}
 	}
-	
 	
 	subscript(recordIDs: [String]) -> [SpotDocument<RecordType>] {
 		get async {

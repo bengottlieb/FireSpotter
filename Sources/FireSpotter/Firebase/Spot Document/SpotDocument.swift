@@ -97,7 +97,8 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 	var isSaved = true
 	
 	public func hash(into hasher: inout Hasher) {
-		hasher.combine(record)
+        hasher.combine(record.id)
+        hasher.combine(String(describing: Record.self))
 	}
 //	
 //	public func childCollection<Element: SpotRecord>(at name: String, kind: FirebaseCollectionKind<Element>) -> SpotCollection<Element> {
@@ -192,7 +193,17 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 			self.isDirty = false
 		}
 	}
-//	
+    
+    public func reportedSave() {
+        Task {
+            do {
+                try await save()
+            } catch {
+                print("Failed to save \(self): \(error)")
+            }
+        }
+    }
+//
 //	public func delete() async {
 //		do {
 //			try await collection.remove(self)

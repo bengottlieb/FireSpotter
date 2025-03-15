@@ -55,6 +55,12 @@ public protocol GenericSpotCollection: AnyObject { }
 	public func delete(record: RecordType) {
 		delete(recordID: record.id)
 	}
+    
+    public func deleteAllRecords() {
+        for doc in cache.cache.values {
+            delete(record: doc.record)
+        }
+    }
 	
 	public func document(_ record: RecordType) -> SpotDocument<RecordType> {
 		cache.store(record)
