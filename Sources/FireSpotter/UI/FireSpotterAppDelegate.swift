@@ -41,6 +41,20 @@ import UIKit
 import Cocoa
 
 open class FireSpotterAppDelegate: NSObject, NSApplicationDelegate {
-	
+    public func applicationDidFinishLaunching(_ notification: Notification) {
+        NSApp.registerForRemoteNotifications()
+    }
+    
+    public func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        APNSManager.instance.didReceive(deviceToken: deviceToken)
+    }
+    
+    public func application(_ application: NSApplication, didFailToRegisterForRemoteNotificationsWithError error: any Error) {
+        FireSpotterLogger.warning("Failed to register for remove notifications: \(error, privacy: .public)")
+    }
+    
+    public func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String : Any]) {
+        APNSManager.instance.appDidReceiveMessage(userInfo)
+    }
 }
 #endif

@@ -5,10 +5,9 @@
 //  Created by Ben Gottlieb on 3/15/25.
 //
 
-import Foundation
 import UserNotifications
-import SwiftUI
 import FirebaseMessaging
+import Suite
 
 public class APNSManager: NSObject {
 	public static let instance = APNSManager()
@@ -26,16 +25,22 @@ public class APNSManager: NSObject {
 		Messaging.messaging().delegate = self
 
 		let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-		try await UNUserNotificationCenter.current().requestAuthorization(options: authOptions)
-
+        do {
+            try await UNUserNotificationCenter.current().requestAuthorization(options: authOptions)
+        } catch {
+            print("Failed to get notification authorization: \(error)")
+        }
 		#if os(iOS)
 			await UIApplication.shared.registerForRemoteNotifications()
+        #else
+            await NSApp.registerForRemoteNotifications()
+            print("Registered: \(await NSApp.isRegisteredForRemoteNotifications)")
 		#endif
 	}
 }
 
 extension APNSManager: UNUserNotificationCenterDelegate {
-	public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+	@MainActor public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
 		
 		let userInfo = notification.request.content.userInfo
 		Messaging.messaging().appDidReceiveMessage(userInfo)
@@ -52,5 +57,7 @@ extension APNSManager: UNUserNotificationCenterDelegate {
 }
 
 extension APNSManager: MessagingDelegate {
-	
+    public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("FCM Token: \(fcmToken ?? "--")")
+    }
 }
