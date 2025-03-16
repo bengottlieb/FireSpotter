@@ -58,6 +58,6 @@ extension APNSManager: UNUserNotificationCenterDelegate {
 
 extension APNSManager: MessagingDelegate {
     public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("FCM Token: \(fcmToken ?? "--")")
+		 Task { await AuthorizedUser.instance.didReceiveFCMToken(fcmToken) }
     }
 }

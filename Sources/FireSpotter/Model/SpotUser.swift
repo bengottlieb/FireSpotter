@@ -13,7 +13,7 @@ public protocol SpotUser: SpotRecord {
 	var lastName: String? { get }
 	var emailAddress: String? { get }
 	var profileImageURL: URL?  { get async throws }
-	var apnsTokens: [APNSDeviceInfo]? { get }
+	var pushTokens: [PushTokenInfo] { get }
 }
 
 public typealias SpotUserDocument = SpotDocument<SpotUserRecord>
@@ -25,6 +25,7 @@ public struct SpotUserRecord: SpotUser {
 	public var displayName: String?
 	public var emailAddress: String?
 	public var createdAt = Date.now
+	public var pushTokens: [PushTokenInfo] = []
 	
 	public init(id: String) {
 		self.id = id
@@ -43,8 +44,6 @@ public struct SpotUserRecord: SpotUser {
 		}
 	}
 	
-	public var apnsTokens: [APNSDeviceInfo]?
-		
 	public func awakeFromFetch(in document: SpotDocument<Self>) async { }
 }
 

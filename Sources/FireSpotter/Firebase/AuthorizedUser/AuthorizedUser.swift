@@ -34,6 +34,7 @@ public actor AuthorizedUser {
 	public var userDefaults = UserDefaults.standard
 	public nonisolated var currentUserID: String? { Self.currentUserID }
 	public var apnsToken: String? { didSet { Task { await didUpdateDeviceInfo() } }}
+	var fcmToken: String? { didSet { Task { await didUpdateDeviceInfo() } }}
 	
     var listenerToken: NSObjectProtocol?
 	public var user: SpotUserDocument?
@@ -65,6 +66,10 @@ public actor AuthorizedUser {
             Task { await self.handleAuthStateChanged(for: user) }
         }
     }
+	
+	func didReceiveFCMToken(_ token: String?) {
+		fcmToken = token
+	}
     
 	init() {
         Task { await self.setupListener() }
@@ -98,10 +103,7 @@ public actor AuthorizedUser {
 	}
 	
 	func didUpdateDeviceInfo() async {
-//		let deviceID = await Gestalt.deviceID
-//		if isSignedIn {
-//			addToken(token: apnsToken, deviceID: deviceID)
-//		}
+		await self.user?.addPushToken(fcmToken)
 	}
 	
 	func saveUserDefaults() {

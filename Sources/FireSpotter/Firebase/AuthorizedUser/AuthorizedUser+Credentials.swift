@@ -13,12 +13,13 @@ import CloudKit
 import Journalist
 
 extension AuthorizedUser {
-	func store(userInfo: SpotUserRecord) {
-		self.user?.record = userInfo
-//		addToken(token: self.apnsToken, deviceID: self.deviceID)
-//		asyncReport { try await self.saveUser() }
-		saveUserDefaults()
-	}
+//	func store(userInfo: SpotUserRecord) async {
+//		self.user?.record = userInfo
+//		await self.user?.addPushToken(fcmToken)
+////		addToken(token: self.apnsToken, deviceID: self.deviceID)
+////		asyncReport { try await self.saveUser() }
+//		saveUserDefaults()
+//	}
 }
 
 extension AuthorizedUser.UI {

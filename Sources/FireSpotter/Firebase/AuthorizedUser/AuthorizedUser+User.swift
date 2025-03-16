@@ -20,6 +20,8 @@ extension AuthorizedUser {
 		spotUser.createdAt = user.metadata.creationDate ?? .now
 		spotUser.emailAddress = user.email
 		spotUser.displayName = user.displayName
+		await spotUser.addPushToken(fcmToken)
+
 		do {
 			try await spotUser.save()
 		} catch {
