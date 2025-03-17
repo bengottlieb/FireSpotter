@@ -47,6 +47,7 @@ open class FireSpotterAppDelegate: NSObject, NSApplicationDelegate {
     
     public func application(_ application: NSApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         APNSManager.instance.didReceive(deviceToken: deviceToken)
+        Task { await AuthorizedUser.instance.didReceiveAPNSToken(deviceToken) }
     }
     
     public func application(_ application: NSApplication, didFailToRegisterForRemoteNotificationsWithError error: any Error) {

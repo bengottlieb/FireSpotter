@@ -8,6 +8,8 @@
 import Foundation
 
 public struct PushTokenInfo: Codable, Equatable, Sendable, Hashable {
+    public enum Kind: String, Codable, Equatable, Sendable, Hashable { case apns, fcm }
+    public var kind: Kind
 	public var deviceID: String
 	public var token: String
 }

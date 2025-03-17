@@ -71,6 +71,10 @@ public actor AuthorizedUser {
 		fcmToken = token
 	}
     
+    public func didReceiveAPNSToken(_ token: Data?) {
+        apnsToken = token?.hexString
+    }
+    
 	init() {
         Task { await self.setupListener() }
 //		fbUser = Auth.auth().currentUser
@@ -103,7 +107,8 @@ public actor AuthorizedUser {
 	}
 	
 	func didUpdateDeviceInfo() async {
-		await self.user?.addPushToken(fcmToken)
+        await self.user?.addPushToken(fcmToken, kind: .fcm)
+        await self.user?.addPushToken(apnsToken, kind: .apns)
 	}
 	
 	func saveUserDefaults() {
