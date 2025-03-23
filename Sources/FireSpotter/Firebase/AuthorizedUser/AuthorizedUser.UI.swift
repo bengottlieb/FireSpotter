@@ -25,9 +25,14 @@ extension AuthorizedUser {
 		
 		public var isSignedIn: Bool { user != nil }
 		public var user: SpotUserDocument?
-		public var isSetup = false
+        public var isSetup = false
+        public var apns: String?
 		public var userID: String { user?.id ?? .EMPTY_ID }
 		
+        func setAPNSToken(_ token: String?) {
+            self.apns = token
+        }
+        
 		func setUser(_ spotUser: SpotUserDocument?) {
 			isSetup = true
 			if spotUser === self.user { return }

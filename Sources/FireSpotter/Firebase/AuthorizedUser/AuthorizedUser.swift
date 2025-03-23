@@ -109,6 +109,7 @@ public actor AuthorizedUser {
 	func didUpdateDeviceInfo() async {
         await self.user?.addPushToken(fcmToken, kind: .fcm)
         await self.user?.addPushToken(apnsToken, kind: .apns)
+        await UI.instance.setAPNSToken(apnsToken)
 	}
 	
 	func saveUserDefaults() {
