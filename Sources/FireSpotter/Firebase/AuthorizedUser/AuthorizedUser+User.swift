@@ -20,7 +20,7 @@ extension AuthorizedUser {
 		spotUser.createdAt = user.metadata.creationDate ?? .now
 		spotUser.emailAddress = user.email
 		spotUser.displayName = user.displayName
-        await didUpdateDeviceInfo()
+		await didUpdateDeviceInfo()
 
 		do {
 			try await spotUser.save()

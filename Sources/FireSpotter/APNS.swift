@@ -14,6 +14,7 @@ public class APNSManager: NSObject {
 	
 	public func didReceive(deviceToken: Data) {
 		Messaging.messaging().apnsToken = deviceToken
+		Task { await AuthorizedUser.instance.didReceiveAPNSToken(deviceToken) }
 	}
 	
 	public func appDidReceiveMessage(_ info: [AnyHashable: Any]) {

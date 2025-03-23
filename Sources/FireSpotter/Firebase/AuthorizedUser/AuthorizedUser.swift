@@ -72,7 +72,7 @@ public actor AuthorizedUser {
 	}
     
     public func didReceiveAPNSToken(_ token: Data?) {
-        apnsToken = token?.hexString
+		apnsToken = token?.hexString
     }
     
 	init() {
