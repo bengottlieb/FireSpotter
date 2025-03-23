@@ -7,7 +7,17 @@
 
 import Suite
 
-extension SpotUserDocument {
+public extension SpotUserDocument {
+    var canSendAPNSTo: Bool {
+        record.pushTokens.count > 0
+    }
+    
+    var apnsTokens: [String] {
+        record.pushTokens.compactMap {
+            $0.kind == .apns ? $0.token : nil
+        }
+    }
+    
     func addPushToken(_ token: String?, kind: PushTokenInfo.Kind) async {
 		guard let token, let deviceID = await Gestalt.deviceID else { return }
 		
