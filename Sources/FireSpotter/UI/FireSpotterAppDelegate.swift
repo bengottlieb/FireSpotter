@@ -63,7 +63,7 @@ open class FireSpotterAppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	public func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String : Any]) {
-        print("Application did receive remote notification: \(userInfo)")
+        print("Application did receive remote notification at \(Date.now.formatted()): \(userInfo)")
 		APNSManager.instance.appDidReceiveMessage(userInfo)
 	}
 }

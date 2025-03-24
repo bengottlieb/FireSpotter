@@ -10,6 +10,7 @@ import FirebaseFirestore
 import os.log
 
 public protocol GenericSpotCollection: AnyObject { }
+public typealias SpotCollectionQueryBuilder = (Query) -> Query
 
 @FireSpotterActor public class SpotCollection<RecordType: SpotRecord>: ObservableObject, GenericSpotCollection {
 	internal var base: CollectionReference!
@@ -23,9 +24,9 @@ public protocol GenericSpotCollection: AnyObject { }
 	
 	nonisolated init(empty: any SpotRecord.Type) { path = "" }
 	
-	convenience init(_ path: String, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
+    convenience init(_ path: String, recordType: any SpotRecord.Type, monitorChanges: Bool = false, query: SpotCollectionQueryBuilder? = nil) {
 		let collection = Firestore.firestore().collection(path)
-		self.init(collection, recordType: recordType, monitorChanges: monitorChanges)
+        self.init(collection, recordType: recordType, monitorChanges: monitorChanges, query: query)
 	}
 	
 	convenience init(_ path: String, recordType: any SpotRecord.Type) async {
@@ -36,10 +37,10 @@ public protocol GenericSpotCollection: AnyObject { }
 		}
 	}
 	
-	init(_ collection: CollectionReference, recordType: any SpotRecord.Type, monitorChanges: Bool = false) {
+    init(_ collection: CollectionReference, recordType: any SpotRecord.Type, monitorChanges: Bool = false, query: SpotCollectionQueryBuilder? = nil) {
 		base = collection
 		path = collection.path
-		if monitorChanges { listenForChanges() }
+        if monitorChanges { listenForChanges(query: query) }
 	}
 	
 	public func delete(recordID: String) {
@@ -64,10 +65,10 @@ public protocol GenericSpotCollection: AnyObject { }
 	public func document(_ record: RecordType) -> SpotDocument<RecordType> {
 		cache.store(record)
 	}
-	
-	func listenForChanges(continuation: CheckedContinuation<Void, Never>? = nil) {
+    	
+    func listenForChanges(continuation: CheckedContinuation<Void, Never>? = nil, query: SpotCollectionQueryBuilder? = nil) {
 		if let continuation { initialLoadContinuation = continuation }
-		listenerRegistration = base.addSnapshotListener { snapshot, error in
+		listenerRegistration = (query?(base) ?? base).addSnapshotListener { snapshot, error in
 			Task { @FireSpotterActor  in
 				for change in snapshot?.documentChanges ?? [] {
 					do {

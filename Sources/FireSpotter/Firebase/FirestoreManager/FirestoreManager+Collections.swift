@@ -14,10 +14,12 @@ public extension FirestoreManager {
 		collections[path]?.collection
 	}
 	
-	@FireSpotterActor static func collection<T>(for path: String, monitorChanges: Bool = false) -> SpotCollection<T> {
-		if let boxed = collections[path]?.collection, let existing: SpotCollection<T> = boxed as? SpotCollection<T> { return existing }
+    @FireSpotterActor static func collection<T>(for path: String, monitorChanges: Bool = false, query: SpotCollectionQueryBuilder? = nil) -> SpotCollection<T> {
+		if let boxed = collections[path]?.collection, let existing: SpotCollection<T> = boxed as? SpotCollection<T> {
+            return existing
+        }
 		
-		let new: SpotCollection<T> = SpotCollection(path, recordType: T.self, monitorChanges: monitorChanges)
+        let new: SpotCollection<T> = SpotCollection(path, recordType: T.self, monitorChanges: monitorChanges || query != nil, query: query)
 		collections[path] = Box(new)
 		return new
 	}

@@ -144,21 +144,21 @@ public final class SpotDocument<Record: SpotRecord>: ObservableObject, Identifia
 //		return snapshot != record
 //	}
 //	
-//	@MainActor public func update() async -> Bool {
-//		do {
-//			guard !id.isEmpty, let raw = try await collection.base.document(id).getDocument().data() else { return false }
-//			
-//			if !raw.isEqual(to: json) {
-//				record = try Record.loadJSON(dictionary: raw, using: .firebaseDecoder)
-//				json = raw
-//				await awakeFromFetch()
-//				return true
-//			}
-//		} catch {
-//			FireSpotterLogger.error("Failed to update \(self, privacy: .public): \(error, privacy: .public)")
-//		}
-//		return false
-//	}
+    @discardableResult public func refresh() async -> Bool {
+		do {
+			guard !id.isEmpty, let raw = try await collection.base.document(id).getDocument().data() else { return false }
+			
+			if !isEqual(raw, json) {
+                loadJSON(raw)
+				json = raw
+                await record.awakeFromFetch(in: self)
+				return true
+			}
+		} catch {
+			FireSpotterLogger.error("Failed to update \(self, privacy: .public): \(error, privacy: .public)")
+		}
+		return false
+	}
 //	
 	var jsonPayload: [String: Any] {
 		var base = json
