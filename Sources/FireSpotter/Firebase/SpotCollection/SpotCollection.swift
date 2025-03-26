@@ -61,7 +61,13 @@ public typealias SpotCollectionQueryBuilder = (Query) -> Query
             delete(record: doc.record)
         }
     }
-	
+    
+    public func deleteCachedRecords() {
+        for doc in cache.cache.values {
+            delete(record: doc.record)
+        }
+    }
+    
 	public func document(_ record: RecordType) -> SpotDocument<RecordType> {
 		cache.store(record)
 	}
@@ -193,7 +199,7 @@ public typealias SpotCollectionQueryBuilder = (Query) -> Query
 //	
 	@discardableResult public func save(_ record: RecordType, json: [String: Any]? = nil) async throws -> SpotDocument<RecordType> {
 		
-		let cached = await self[create: record.id]
+        let cached = await self[create: record.id, andSave: false]
 		cached.record = record
 		try await save(cached)
 		return cached

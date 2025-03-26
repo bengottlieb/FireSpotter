@@ -19,11 +19,11 @@ public extension SpotCollection {
         return result
     }
         
-    subscript(create recordID: String, andSave: Bool = true) -> SpotDocument<RecordType> {
+    subscript(create recordID: String, andSave save: Bool = true) -> SpotDocument<RecordType> {
 		get async {
 			if let existing = await self[recordID] { return existing }
 			do {
-				return try await insert(RecordType(id: recordID), andSave: andSave)
+				return try await insert(RecordType(id: recordID), andSave: save)
 			} catch {
 				print("Failed to insert record: \(error)")
 				return .init(RecordType(id: recordID), collection: self)
