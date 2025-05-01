@@ -41,11 +41,14 @@ extension CredentialsScreen {
 		var body: some View {
 			VStack {
 				TextField("Email", text: $email)
-					.addTextContentType(.emailAddress)
-
+					#if os(iOS)
+						.addTextContentType(.emailAddress)
+					#endif
 				TextField("Password", text: $password)
-					.addTextContentType(.password)
-
+					#if os(iOS)
+						.addTextContentType(.password)
+					#endif
+				
 				if let displayedError {
 					Text(displayedError.localizedDescription)
 						.foregroundColor(.red)

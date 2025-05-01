@@ -41,7 +41,7 @@ public class FileStore {
 		var uploadedImage = image
 		if image.size.width > maxSize.width || image.size.width > maxSize.width {
 			#if os(macOS)
-				guard let resized = image.resized(to: maxSize, trimmed: true, changeScaleTo: 1) else { throw StorageError.failedToResizeImage }
+				guard let resized = await image.resized(to: maxSize, trimmed: true, changeScaleTo: 1) else { throw StorageError.failedToResizeImage }
 			#else
 				guard let resized = await image.resized(to: maxSize, trimmed: true, changeScaleTo: 1) else { throw StorageError.failedToResizeImage }
 			#endif

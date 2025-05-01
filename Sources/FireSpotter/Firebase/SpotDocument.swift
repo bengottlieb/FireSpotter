@@ -97,7 +97,7 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 		do {
 			guard !id.isEmpty, let raw = try await collection.base.document(id).getDocument().data() else { return false }
 			
-			if !raw.isEqual(to: json) {
+			if !isEqual(raw, json) {
 				record = try Record.loadJSON(dictionary: raw, using: .firebaseDecoder)
 				json = raw
 				await awakeFromFetch()
@@ -109,7 +109,7 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 		return false
 	}
 	
-	var jsonPayload: [String: Any] {
+	var jsonPayload: [String: JSONRequirements] {
 		var base = json
 		let raw = (try? record.asJSON()) ?? [:]
 		
@@ -123,7 +123,11 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 		assert(Gestalt.isInPreview || collection != nil, "Cannot use a nil collection for a SpotDocument<\(Record.self)>")
 		self.record = subject
 		self.collection = collection
-		self.json = json ?? (try? subject.asJSON()) ?? [:]
+		if let json {
+			self.json = json
+		} else {
+			self.json = (try? subject.asJSON()) ?? JSONDictionary()
+		}
 		self.isSaved = isSaved
 	}
 	
