@@ -42,7 +42,7 @@ public final class SpotDocument<Record: SpotRecord>: Equatable, ObservableObject
 	var isSaved = true
 	
 	public func hash(into hasher: inout Hasher) {
-		hasher.combine(record)
+		hasher.combine(record.id)
 	}
 	
 	public func childCollection<Element: SpotRecord>(at name: String, kind: FirebaseCollectionKind<Element>) -> SpotCollection<Element> {
